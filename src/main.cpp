@@ -84,7 +84,7 @@ std::string readConfig(const std::string &path)
 
 int main(int argc, char **argv)
 {
-    if (argc < 2)
+    if (argc < 1 + 3 /* /path/to/config.ovpn username password */)
     {
         return 1;
     }
@@ -101,7 +101,12 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    openvpn::ClientAPI::Status status = client.connect();
+    openvpn::ClientAPI::ProvideCreds credentials;
+    credentials.username = argv[2];
+    credentials.password = argv[3];
+
+    client.provide_creds(credentials);
+    client.connect();
 
     return 0;
 }
