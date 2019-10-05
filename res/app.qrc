@@ -1,0 +1,14 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/views">
+        <file alias="main">views/main.qml</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file alias="Futura_heavy">fonts/Futura PT_Heavy.ttf</file>
+        <file alias="Futura_medium">fonts/Futura PT_Medium.ttf</file>
+        <file alias="PTRoot_bold">fonts/PT Root UI_Bold.ttf</file>
+        <file alias="PTRoot_light">fonts/PT Root UI_Light.ttf</file>
+        <file alias="PTRoot_medium">fonts/PT Root UI_Medium.ttf</file>
+        <file alias="PTRoot_regular">fonts/PT Root UI_Regular.ttf</file>
+    </qresource>
+</RCC>

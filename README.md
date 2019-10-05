@@ -21,6 +21,8 @@ Client For [EraVPN](http://eravpn.com/)
    
    MBEDTLS_LIBRARY=path/to/deps/amd64/mbedtls/library/mbedtls.lib;
    LZ4_LIBRARY=path/to/deps/amd64/lz4/lib/lz4.lib
+   
+   Qt5_DIR=path/to/Qt/5.13.1/msvc2017_64/lib/cmake/Qt5
    ```
    
 3. Build application:
