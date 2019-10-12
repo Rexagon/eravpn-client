@@ -16,8 +16,13 @@ find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${_qt_bin_dir}")
 
 qt5_add_resources(RESOURCES res/app.qrc)
 
+# Specific resource files
+if (WIN32)
+    set(WIN_RESOURCE_FILE ${CMAKE_SOURCE_DIR}/res/app.rc)
+endif()
+
 # Executable
-add_executable(app ${SRC} ${RESOURCES})
+add_executable(app ${SRC} ${RESOURCES} ${WIN_RESOURCE_FILE})
 
 # Properties
 set_target_properties(app PROPERTIES
@@ -54,7 +59,8 @@ if (WIN32)
             ole32.lib
             rpcrt4.lib
             Wtsapi32.lib
-            setupapi.lib)
+            setupapi.lib
+            Dwmapi.lib)
 
     target_compile_definitions(app PRIVATE
             _CRT_SECURE_NO_WARNINGS

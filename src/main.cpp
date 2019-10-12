@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     QCoreApplication::setOrganizationDomain("eravpn.com");
 
     QGuiApplication application(argc, argv);
-    QQmlApplicationEngine viewEngine(QUrl("qrc:/views/main"));
+    QQmlApplicationEngine viewEngine(QUrl("qrc:/views/main.qml"));
 
     return QGuiApplication::exec();
 }

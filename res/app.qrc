@@ -1,14 +1,30 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-    <qresource prefix="/views">
-        <file alias="main">views/main.qml</file>
+    <qresource>
+        <file>views/main.qml</file>
+        <file>views/LoginView.qml</file>
     </qresource>
-    <qresource prefix="/fonts">
-        <file alias="Futura_heavy">fonts/Futura PT_Heavy.ttf</file>
-        <file alias="Futura_medium">fonts/Futura PT_Medium.ttf</file>
-        <file alias="PTRoot_bold">fonts/PT Root UI_Bold.ttf</file>
-        <file alias="PTRoot_light">fonts/PT Root UI_Light.ttf</file>
-        <file alias="PTRoot_medium">fonts/PT Root UI_Medium.ttf</file>
-        <file alias="PTRoot_regular">fonts/PT Root UI_Regular.ttf</file>
+    <qresource>
+        <file>components/EraButton.qml</file>
+        <file>components/EraLink.qml</file>
+        <file>components/EraPasswordField.qml</file>
+        <file>components/EraTextField.qml</file>
+        <file>components/WindowTitleBar.qml</file>
+    </qresource>
+    <qresource>
+        <file>fonts/Futura PT_Heavy.ttf</file>
+        <file>fonts/Futura PT_Medium.ttf</file>
+        <file>fonts/PT Root UI_Bold.ttf</file>
+        <file>fonts/PT Root UI_Light.ttf</file>
+        <file>fonts/PT Root UI_Medium.ttf</file>
+        <file>fonts/PT Root UI_Regular.ttf</file>
+    </qresource>
+    <qresource>
+        <file>images/icon_minimize.png</file>
+        <file>images/icon_close.png</file>
+    </qresource>
+    <qresource>
+        <file>images/logo_small.png</file>
+        <file>images/map.png</file>
     </qresource>
 </RCC>
