@@ -5,12 +5,15 @@ import "../components"
 
 Item {
     signal switchToRegistration
+    signal switchToMain
 
     id: view
 
     function loginAction() {
-        console.log('login');
+        switchToMain()
     }
+
+    Component.onCompleted: windowTitleText = "Вход в аккаунт"
 
     EraBackgroundMap {}
 

@@ -1,8 +1,11 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
     <qresource>
-        <file>views/main.qml</file>
+        <file>main.qml</file>
+    </qresource>
+    <qresource>
         <file>views/LoginView.qml</file>
+        <file>views/MainView.qml</file>
         <file>views/RegistrationView.qml</file>
     </qresource>
     <qresource>
@@ -13,6 +16,7 @@
         <file>components/EraLogo.qml</file>
         <file>components/EraPasswordField.qml</file>
         <file>components/EraTextField.qml</file>
+        <file>components/MainSideBar.qml</file>
         <file>components/WindowTitleBar.qml</file>
     </qresource>
     <qresource>
@@ -24,6 +28,8 @@
         <file>fonts/PT Root UI_Regular.ttf</file>
     </qresource>
     <qresource>
+        <file>images/icon_alert.png</file>
+        <file>images/icon_crown.png</file>
         <file>images/icon_minimize.png</file>
         <file>images/icon_close.png</file>
         <file>images/icon_email.png</file>

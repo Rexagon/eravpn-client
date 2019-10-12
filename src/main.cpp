@@ -9,11 +9,11 @@ int main(int argc, char **argv)
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setOrganizationName("EraVPN");
-    QCoreApplication::setOrganizationDomain("eravpn.com");
+    QCoreApplication::setOrganizationDomain("com.eravpn");
 
     QGuiApplication application(argc, argv);
 
-    QQmlApplicationEngine viewEngine(QUrl("qrc:/views/main.qml"));
+    QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
 
     return QGuiApplication::exec();
 }

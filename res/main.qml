@@ -1,20 +1,22 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
-import "../components"
-import "../views"
+import "components"
+import "views"
 
 ApplicationWindow
 {
-    readonly property FontLoader futuraHeavyFont: FontLoader { source: "../fonts/Futura PT_Heavy.ttf" }
-    readonly property FontLoader futuraMediumFont: FontLoader { source: "../fonts/Futura PT_Medium.ttf" }
-    readonly property FontLoader rootUiFontBold: FontLoader { source: "../fonts/PT Root UI_Bold.ttf" }
-    readonly property FontLoader rootUiFontLight: FontLoader { source: "../fonts/PT Root UI_Light.ttf" }
-    readonly property FontLoader rootUiFontMedium: FontLoader { source: "../fonts/PT Root UI_Medium.ttf" }
-    readonly property FontLoader rootUiFontRegular: FontLoader { source: "../fonts/PT Root UI_Regular.ttf" }
+    readonly property FontLoader futuraHeavyFont: FontLoader { source: "fonts/Futura PT_Heavy.ttf" }
+    readonly property FontLoader futuraMediumFont: FontLoader { source: "fonts/Futura PT_Medium.ttf" }
+    readonly property FontLoader rootUiFontBold: FontLoader { source: "fonts/PT Root UI_Bold.ttf" }
+    readonly property FontLoader rootUiFontLight: FontLoader { source: "fonts/PT Root UI_Light.ttf" }
+    readonly property FontLoader rootUiFontMedium: FontLoader { source: "fonts/PT Root UI_Medium.ttf" }
+    readonly property FontLoader rootUiFontRegular: FontLoader { source: "fonts/PT Root UI_Regular.ttf" }
 
     property int previousMousePositionX
     property int previousMousePositionY
+
+    property string windowTitleText: ""
 
     id: window
     visible: true
@@ -35,11 +37,10 @@ ApplicationWindow
 
     ColumnLayout {
         anchors.fill: parent
+        spacing: 0
 
         WindowTitleBar {
             Layout.fillWidth: true
-
-            title: "Вход в аккаунт"
 
             onTitleBarPressed: {
                 previousMousePositionX = x;
@@ -61,7 +62,7 @@ ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            initialItem: loginView
+            initialItem: mainView // loginView
         }
 
         Component {
@@ -69,6 +70,7 @@ ApplicationWindow
 
             LoginView {
                 onSwitchToRegistration: viewsContainer.replace(registrationView, StackView.PopTransition)
+                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
             }
         }
 
@@ -77,6 +79,15 @@ ApplicationWindow
 
             RegistrationView {
                 onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
+                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
+            }
+        }
+
+        Component {
+            id: mainView
+
+            MainView {
+
             }
         }
     }

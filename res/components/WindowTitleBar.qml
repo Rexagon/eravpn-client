@@ -7,8 +7,6 @@ Rectangle {
     readonly property string closeButtonHoverColor: "#040A1F"
     readonly property string minimizeButtonHoverColor: "#040A1F"
 
-    property string title: ""
-
     signal titleBarPressed(int x, int y)
     signal titleBarMoved(int x, int y)
 
@@ -95,7 +93,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 
-        text: title
+        text: windowTitleText
 
         color: "white"
 

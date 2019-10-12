@@ -5,14 +5,17 @@ import "../components"
 
 Item {
     signal switchToLogin
+    signal switchToMain
 
     property bool isAnonymous: false
 
     id: view
 
     function formAction() {
-
+        switchToMain()
     }
+
+    Component.onCompleted: windowTitleText = "Регистрация"
 
     EraBackgroundMap {}
 
