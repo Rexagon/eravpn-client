@@ -2,8 +2,6 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 
 Button {
-    readonly property FontLoader rootUiFontMedium: FontLoader { source: "../fonts/PT Root UI_Medium.ttf" }
-
     readonly property string lightColor: "#23a2f8"
     readonly property string darkColor: "#1463f6"
 
@@ -78,5 +76,11 @@ Button {
     }
     onFocusChanged: {
         controlBackground.border.width = focus ? 1 : 0;
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onPressed: mouse.accepted = false
     }
 }

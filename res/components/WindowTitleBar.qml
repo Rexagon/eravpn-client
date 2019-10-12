@@ -3,8 +3,6 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
 Rectangle {
-    readonly property FontLoader futuraMediumFont: FontLoader { source: "../fonts/Futura PT_Medium.ttf" }
-
     readonly property string mainColor: "#081640"
     readonly property string closeButtonHoverColor: "#040A1F"
     readonly property string minimizeButtonHoverColor: "#040A1F"

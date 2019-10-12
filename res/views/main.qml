@@ -55,10 +55,29 @@ ApplicationWindow
             onCloseRequested: window.close()
         }
 
-        LoginView {
-            width: 285
+        StackView {
+            id: viewsContainer
+
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true
+
+            initialItem: loginView
+        }
+
+        Component {
+            id: loginView
+
+            LoginView {
+                onSwitchToRegistration: viewsContainer.replace(registrationView, StackView.PopTransition)
+            }
+        }
+
+        Component {
+            id: registrationView
+
+            RegistrationView {
+                onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
+            }
         }
     }
 }

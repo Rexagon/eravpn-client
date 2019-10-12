@@ -2,8 +2,6 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 
 TextField {
-    readonly property FontLoader rootUiFontRegular: FontLoader { source: "../fonts/PT Root UI_Regular.ttf" }
-
     height: 44
 
     font.family: rootUiFontRegular.name

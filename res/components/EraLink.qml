@@ -1,17 +1,12 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 
-Text {
-    readonly property FontLoader rootUiFontRegular: FontLoader { source: "../fonts/PT Root UI_Regular.ttf" }
-
+EraLabel {
     signal clicked
 
     id: link
 
-    font.family: rootUiFontRegular.name
-    font.pointSize: 12
-
-    color: "#a4acca"
+    color: "#2fa4ff"
 
     MouseArea {
         anchors.fill: parent
