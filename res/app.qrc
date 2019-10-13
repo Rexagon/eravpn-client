@@ -9,13 +9,17 @@
         <file>views/RegistrationView.qml</file>
     </qresource>
     <qresource>
-        <file>components/EraBackgroundMap.qml</file>
-        <file>components/EraButton.qml</file>
-        <file>components/EraLabel.qml</file>
-        <file>components/EraLink.qml</file>
-        <file>components/EraLogo.qml</file>
-        <file>components/EraPasswordField.qml</file>
-        <file>components/EraTextField.qml</file>
+        <file>components/era/EraButton.qml</file>
+        <file>components/era/EraLabel.qml</file>
+        <file>components/era/EraLink.qml</file>
+        <file>components/era/EraPasswordField.qml</file>
+        <file>components/era/EraTextField.qml</file>
+        <file>components/sidebar/ConnectionInfo.qml</file>
+        <file>components/sidebar/PremiumActivation.qml</file>
+        <file>components/sidebar/ServerActivationButton.qml</file>
+        <file>components/sidebar/ServerListView.qml</file>
+        <file>components/BackgroundMap.qml</file>
+        <file>components/Logo.qml</file>
         <file>components/MainSideBar.qml</file>
         <file>components/WindowTitleBar.qml</file>
     </qresource>
@@ -26,6 +30,12 @@
         <file>fonts/PT Root UI_Light.ttf</file>
         <file>fonts/PT Root UI_Medium.ttf</file>
         <file>fonts/PT Root UI_Regular.ttf</file>
+    </qresource>
+    <qresource>
+        <file>images/flag_sweden.png</file>
+    </qresource>
+    <qresource>
+        <file>models/ServerListModel.qml</file>
     </qresource>
     <qresource>
         <file>images/icon_alert.png</file>

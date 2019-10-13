@@ -1,6 +1,8 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
+
+import "../components/era"
 import "../components"
 
 Item {
@@ -15,7 +17,7 @@ Item {
 
     Component.onCompleted: windowTitleText = "Вход в аккаунт"
 
-    EraBackgroundMap {}
+    BackgroundMap {}
 
     Item {
         width: 285
@@ -29,7 +31,7 @@ Item {
             anchors.bottom: parent.verticalCenter
             anchors.bottomMargin: 40
 
-            EraLogo {
+            Logo {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: logoText.top
                 anchors.bottomMargin: 5

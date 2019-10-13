@@ -2,88 +2,49 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
-Rectangle {
+import "era"
+import "sidebar"
+import "../models"
+
+Item {
     readonly property string lightBackgroundColor: "#4f6699"
     readonly property string backgroundColor: "#173878"
+    readonly property string semiDarkBackgroundColor: "#122b5e"
     readonly property string darkBackgroundColor: "#0f1444"
     readonly property string redColor: "#ff4747"
 
-    id: component
+    property string currentServersList: "free"
 
-    color: lightBackgroundColor
+    id: component
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 1
+        spacing: 0
 
-        Rectangle {
+        PremiumActivation {
             Layout.fillWidth: true
             Layout.minimumHeight: 100
 
             color: backgroundColor
-
-            EraButton {
-                anchors.fill: parent
-                anchors.margins: 28
-
-                contentItem: RowLayout {
-                    Item {
-                        Layout.fillWidth: true
-                    }
-
-                    Image {
-                        source: "../images/icon_crown.png"
-                    }
-
-                    Text {
-                        text: "Активировать премиум"
-
-                        color: "white"
-
-                        font.family: futuraHeavyFont.name
-                        font.pointSize: 12
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-                }
-            }
         }
 
         Rectangle {
             Layout.fillWidth: true
+            Layout.minimumHeight: 1
+            color: lightBackgroundColor
+        }
+
+        ConnectionInfo {
+            Layout.fillWidth: true
             Layout.minimumHeight: 150
 
             color: darkBackgroundColor
+        }
 
-            ColumnLayout {
-                anchors.fill: parent
-                anchors.leftMargin: 40
-                anchors.topMargin: 35
-                anchors.bottomMargin: 35
-
-                RowLayout {
-                    Image {
-                        source: "../images/icon_alert.png"
-                    }
-
-                    EraLabel {
-                        text: "Соединение не защищено"
-                        color: redColor
-                    }
-                }
-
-                EraLabel {
-                    text: "Ваш IP: 198.166.0.2"
-                    color: "white"
-                }
-
-                EraLabel {
-                    text: "Местоположение: Москва"
-                    color: "white"
-                }
-            }
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.minimumHeight: 1
+            color: lightBackgroundColor
         }
 
         Rectangle {
@@ -91,6 +52,80 @@ Rectangle {
             Layout.fillHeight: true
 
             color: backgroundColor
+
+            TabBar {
+                id: tabBar
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+
+                height: 50
+                spacing: 0
+
+                TabButton {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+
+                    background: Rectangle {
+                        color: tabBar.currentIndex === 0 ? backgroundColor : semiDarkBackgroundColor
+                    }
+
+                    contentItem: EraLabel {
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+
+                        text: "Бесплатные серверы"
+                        font.pointSize: 11
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onPressed: mouse.accepted = false
+                    }
+                }
+
+                TabButton {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+
+                    background: Rectangle {
+                        color: tabBar.currentIndex === 0 ? semiDarkBackgroundColor : backgroundColor
+                    }
+
+                    contentItem: EraLabel {
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+
+                        text: "Премиум-доступ"
+                        font.pointSize: 11
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onPressed: mouse.accepted = false
+                    }
+                }
+            }
+
+            StackLayout {
+                currentIndex: tabBar.currentIndex
+
+                clip: true
+
+                anchors.fill: parent
+                anchors.topMargin: 50
+
+                ServerListView {
+                    model: ServerListModel {}
+                }
+
+                ServerListView {
+                    model: ServerListModel {}
+                }
+            }
         }
     }
 }

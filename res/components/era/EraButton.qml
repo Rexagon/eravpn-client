@@ -10,6 +10,8 @@ Button {
     height: 44
 
     contentItem: Text {
+        id: contentText
+
         text: control.text
         font.family: rootUiFontMedium.name
         font.pointSize: 12
@@ -27,6 +29,8 @@ Button {
         border.color: darkColor
 
         gradient: Gradient {
+            id: controlBackgroundGradient
+
             orientation: Gradient.Horizontal
             GradientStop { id: buttonGradientLeft; position: 0.0; color: lightColor }
             GradientStop { id: buttonGradientRight; position: 1.0; color: darkColor }
@@ -34,6 +38,23 @@ Button {
     }
 
     states: [
+        State {
+            name: "disabled"
+
+            PropertyChanges {
+                target: controlBackground
+                border.width: 1
+                border.color: "#485083"
+            }
+            PropertyChanges {
+                target: buttonGradientLeft
+                color: "transparent"
+            }
+            PropertyChanges {
+                target: buttonGradientRight
+                color: "transparent"
+            }
+        },
         State {
             name: "hovered"
             PropertyChanges {
@@ -66,16 +87,35 @@ Button {
         }
     }
 
-    onPressed: control.state = "pressed"
-    onReleased: control.state = hovered ? "hovered" : ""
+    onPressed: {
+        if (enabled) {
+            state = "pressed"
+        }
+    }
+
+    onReleased: {
+        state = enabled && hovered ? "hovered" : ""
+    }
+
     onHoveredChanged: {
-        if (control.pressed) {
+        if (!enabled) {
+            state = "";
             return;
         }
-        control.state = hovered ? "hovered" : ""
+
+        if (pressed) {
+            return;
+        }
+
+        state = hovered ? "hovered" : ""
     }
+
     onFocusChanged: {
         controlBackground.border.width = focus ? 1 : 0;
+    }
+
+    onEnabledChanged: {
+        state = enabled ? (pressed ? "pressed" : (hovered ? "hovered" : "")) : "disabled"
     }
 
     MouseArea {

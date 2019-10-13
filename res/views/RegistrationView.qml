@@ -1,7 +1,9 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
+
 import "../components"
+import "../components/era"
 
 Item {
     signal switchToLogin
@@ -17,7 +19,7 @@ Item {
 
     Component.onCompleted: windowTitleText = "Регистрация"
 
-    EraBackgroundMap {}
+    BackgroundMap {}
 
     Item {
         width: 285
@@ -25,7 +27,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
-        EraLogo {
+        Logo {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.verticalCenter
             anchors.bottomMargin: 150
