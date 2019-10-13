@@ -2,18 +2,22 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import "titlebar"
+
 Rectangle {
     readonly property string mainColor: "#081640"
-    readonly property string closeButtonHoverColor: "#040A1F"
-    readonly property string minimizeButtonHoverColor: "#040A1F"
+    readonly property string darkColor: "#040a1f"
 
     signal titleBarPressed(int x, int y)
     signal titleBarMoved(int x, int y)
 
+    signal openProfile
+    signal openSettings
+
     signal closeRequested
     signal minimizeRequested
 
-    id: windowTitleBar
+    id: component
 
     height: 40
 
@@ -21,58 +25,49 @@ Rectangle {
 
     z: 100
 
+    states: [
+        State {
+            name: "profile_opened"
+            PropertyChanges {
+                target: profileButton
+                activated: true
+            }
+        },
+        State {
+            name: "settings_opened"
+            PropertyChanges {
+                target: settingsButton
+                activated: true
+            }
+        }
+    ]
+
     RowLayout {
         anchors.fill: parent
 
         spacing: 1
 
-        Rectangle {
+        TitleBarButton {
             id: profileButton
 
-            Layout.minimumWidth: 50
-            Layout.fillHeight: true
-
-            color: mainColor
-
-            Image {
-                source: "../images/icon_profile.png"
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-
-                onEntered: profileButton.color = minimizeButtonHoverColor
-                onExited: profileButton.color = mainColor
-                //onClicked: windowTitleBar.minimizeRequested()
+            iconSource: "../../images/icon_profile.png"
+            onClicked: {
+                if (component.state !== "profile_opened") {
+                    component.state = "profile_opened";
+                    component.openProfile();
+                }
             }
         }
 
-        Rectangle {
+        TitleBarButton {
             id: settingsButton
 
-            Layout.minimumWidth: 50
-            Layout.fillHeight: true
-
-            color: mainColor
-
-            Image {
-                source: "../images/icon_settings.png"
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-
-                onEntered: settingsButton.color = minimizeButtonHoverColor
-                onExited: settingsButton.color = mainColor
-                //onClicked: windowTitleBar.minimizeRequested()
+            iconSource: "../../images/icon_settings.png"
+            onClicked: {
+                if (component.state !== "settings_opened") {
+                    component.state = "settings_opened";
+                    component.openSettings();
+                }
             }
         }
 
@@ -85,59 +80,23 @@ Rectangle {
 
                 hoverEnabled: false
 
-                onPressed: windowTitleBar.titleBarPressed(mouseX, mouseY)
-                onPositionChanged: windowTitleBar.titleBarMoved(mouseX, mouseY)
+                onPressed: component.titleBarPressed(mouseX, mouseY)
+                onPositionChanged: component.titleBarMoved(mouseX, mouseY)
             }
         }
 
-        Rectangle {
+        TitleBarButton  {
             id: minimizeButton
 
-            Layout.minimumWidth: 50
-            Layout.fillHeight: true
-
-            color: mainColor
-
-            Image {
-                source: "../images/icon_minimize.png"
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-
-                onEntered: minimizeButton.color = minimizeButtonHoverColor
-                onExited: minimizeButton.color = mainColor
-                onClicked: windowTitleBar.minimizeRequested()
-            }
+            iconSource: "../../images/icon_minimize.png"
+            onClicked: component.minimizeRequested()
         }
 
-        Rectangle {
+        TitleBarButton {
             id: closeButton
 
-            Layout.minimumWidth: 50
-            Layout.fillHeight: true
-
-            color: mainColor
-
-            Image {
-                source: "../images/icon_close.png"
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-
-                onEntered: closeButton.color = closeButtonHoverColor
-                onExited: closeButton.color = mainColor
-                onClicked: windowTitleBar.closeRequested()
-            }
+            iconSource: "../../images/icon_close.png"
+            onClicked: component.closeRequested()
         }
     }
 

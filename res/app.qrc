@@ -7,6 +7,8 @@
         <file>views/LoginView.qml</file>
         <file>views/MainView.qml</file>
         <file>views/RegistrationView.qml</file>
+        <file>views/ProfileView.qml</file>
+        <file>views/SettingsView.qml</file>
     </qresource>
     <qresource>
         <file>components/era/EraButton.qml</file>
@@ -20,6 +22,7 @@
         <file>components/sidebar/PremiumActivation.qml</file>
         <file>components/sidebar/ServerActivationButton.qml</file>
         <file>components/sidebar/ServerListView.qml</file>
+        <file>components/titlebar/TitleBarButton.qml</file>
         <file>components/BackgroundMap.qml</file>
         <file>components/Logo.qml</file>
         <file>components/MainSideBar.qml</file>

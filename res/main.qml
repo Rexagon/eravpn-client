@@ -41,6 +41,8 @@ ApplicationWindow
         spacing: 0
 
         WindowTitleBar {
+            id: windowTitleBar
+
             Layout.fillWidth: true
 
             onTitleBarPressed: {
@@ -51,6 +53,22 @@ ApplicationWindow
             onTitleBarMoved: {
                 window.setX(window.x + (x - previousMousePositionX));
                 window.setY(window.y + (y - previousMousePositionY));
+            }
+
+            onOpenProfile: {
+                if (viewsContainer.depth === 1) {
+                    viewsContainer.push(profileView)
+                } else {
+                    viewsContainer.replace(profileView)
+                }
+            }
+
+            onOpenSettings: {
+                if (viewsContainer.depth === 1) {
+                    viewsContainer.push(settingsView)
+                } else {
+                    viewsContainer.replace(settingsView)
+                }
             }
 
             onMinimizeRequested: window.visibility = ApplicationWindow.Minimized
@@ -89,6 +107,28 @@ ApplicationWindow
 
             MainView {
 
+            }
+        }
+
+        Component {
+            id: profileView
+
+            ProfileView {
+                onCloseView: {
+                    windowTitleBar.state = "";
+                    viewsContainer.pop();
+                }
+            }
+        }
+
+        Component {
+            id: settingsView
+
+            SettingsView {
+                onCloseView: {
+                    windowTitleBar.state = "";
+                    viewsContainer.pop();
+                }
             }
         }
     }
