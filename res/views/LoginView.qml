@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "../components/era"
 import "../components"
 
@@ -12,7 +14,9 @@ Item {
     id: view
 
     function loginAction() {
-        switchToMain()
+        //switchToMain()
+
+        BackEnd.sendQuery();
     }
 
     Component.onCompleted: windowTitleText = "Вход в аккаунт"

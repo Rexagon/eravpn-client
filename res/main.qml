@@ -81,7 +81,7 @@ ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            initialItem: mainView // loginView
+            initialItem: loginView // mainView
         }
 
         Component {

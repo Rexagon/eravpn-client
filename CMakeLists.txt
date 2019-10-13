@@ -3,13 +3,20 @@ project(eravpn-client)
 
 set(BUILD_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/build)
 
-set(SRC src/main.cpp)
+set(SRC
+        src/Core/BackEnd.cpp
+        src/Core/Connection.cpp
+        src/main.cpp)
+
+set(SRC_MOC
+        src/Core/BackEnd.hpp
+        src/Core/Connection.hpp)
 
 # Qt settings
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick Network REQUIRED)
 get_target_property(_qmake_executable Qt5::qmake IMPORTED_LOCATION)
 get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${_qt_bin_dir}")
@@ -19,10 +26,10 @@ qt5_add_resources(RESOURCES res/app.qrc)
 # Specific resource files
 if (WIN32)
     set(WIN_RESOURCE_FILE ${CMAKE_SOURCE_DIR}/res/app.rc)
-endif()
+endif ()
 
 # Executable
-add_executable(app ${SRC} ${RESOURCES} ${WIN_RESOURCE_FILE})
+add_executable(app ${SRC} ${SRC_MOC} ${RESOURCES} ${WIN_RESOURCE_FILE})
 
 # Properties
 set_target_properties(app PROPERTIES
@@ -30,7 +37,16 @@ set_target_properties(app PROPERTIES
         CXX_EXTENSIONS OFF
         RUNTIME_OUTPUT_DIRECTORY ${BUILD_OUTPUT_DIR})
 
-target_link_libraries(app PRIVATE Qt5::Core Qt5::Quick)
+target_link_libraries(app PRIVATE Qt5::Core Qt5::Quick Qt5::Network)
+
+# nlohmann json
+find_package(nlohmann_json REQUIRED)
+
+target_link_libraries(app PRIVATE nlohmann_json::nlohmann_json)
+
+# inject properties
+
+target_compile_definitions(app PRIVATE API_URL="$ENV{API_URL}")
 
 if (WIN32)
     set(OPENVPN_INCLUDE_DIRS
