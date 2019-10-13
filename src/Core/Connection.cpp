@@ -8,39 +8,6 @@
 namespace
 {
 constexpr auto QUERY_CONTAINER = R"({"query":"%1","variables":{},"operationName":null})";
-
-QString escaped(const QString &string)
-{
-    static std::unordered_map<char, QString> const escapes = {
-        {'\a', "\\a"},  //  7, ^G, alert (bell)
-        {'\b', "\\b"},  //  8, ^H, backspace
-        {'\t', "\\t"},  //  9, ^I, tab
-        {'\n', "\\n"},  // 10, ^J, newline / linefeed
-        {'\v', "\\v"},  // 11, ^K, vertical tab
-        {'\f', "\\f"},  // 12, ^L, formfeed
-        {'\r', "\\r"},  // 13, ^M, carriage return
-        {'"', "\\\""},  // double quotes
-        {'\\', "\\\\"}  // backslash
-    };
-
-    QString result;
-    result.reserve(string.size() * 2);
-
-    for (const auto &symbol : string)
-    {
-        auto const it = escapes.find(symbol.toLatin1());
-        if (it == escapes.end())
-        {
-            result += symbol;
-        }
-        else
-        {
-            result += it->second;
-        }
-    }
-
-    return result;
-}
 }  // namespace
 
 
@@ -73,6 +40,20 @@ void Connection::sendQuery(const QString &query, const Callback &callback)
             std::cout << "Ssl error: " << error.errorString().toStdString() << std::endl;
         }
     });
+}
+
+
+void Connection::setAuthorizationData(const Connection::AuthorizationData &data)
+{
+    m_authorizationData = data;
+    m_baseRequest.setRawHeader("AccessToken", data.accessToken.toUtf8());
+}
+
+
+void Connection::resetAuthorizationData()
+{
+    m_authorizationData.reset();
+    m_baseRequest.setRawHeader("AccessToken", "");
 }
 
 }  // namespace app

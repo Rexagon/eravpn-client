@@ -18,36 +18,14 @@ QObject *BackEnd::singletonProvider(QQmlEngine *qmlEngine, QJSEngine *scriptEngi
 BackEnd::BackEnd(QObject *parent)
     : QObject{parent}
     , m_connection{API_URL, this}
+    , m_authController{m_connection}
 {
 }
 
 
-void BackEnd::sendQuery()
+AuthController *BackEnd::authController()
 {
-    const auto query = R"({
-  country {
-    list(isPremium: true, hasVpn: true, hasProxy: true) {
-      ... on CountryCollection {
-        data {
-          id
-          title
-          description
-        }
-      }
-    }
-  }
-})";
-
-    m_connection.sendQuery(query, [this](QNetworkReply &reply) {
-        if (reply.error() == QNetworkReply::NoError)
-        {
-            std::cout << reply.readAll().toStdString() << std::endl;
-        }
-        else
-        {
-            std::cout << "Error(" << reply.error() << "): " << reply.errorString().toStdString() << std::endl;
-        }
-    });
+    return &m_authController;
 }
 
 }  // namespace app

@@ -16,7 +16,7 @@ Item {
     function loginAction() {
         //switchToMain()
 
-        BackEnd.sendQuery();
+        BackEnd.authController.auth(emailInput.text, passwordInput.text);
     }
 
     Component.onCompleted: windowTitleText = "Вход в аккаунт"

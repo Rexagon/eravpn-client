@@ -4,11 +4,14 @@ project(eravpn-client)
 set(BUILD_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/build)
 
 set(SRC
+        src/Core/AuthController.cpp
         src/Core/BackEnd.cpp
         src/Core/Connection.cpp
+        src/Stuff/StringHelpers.cpp
         src/main.cpp)
 
 set(SRC_MOC
+        src/Core/AuthController.hpp
         src/Core/BackEnd.hpp
         src/Core/Connection.hpp)
 
