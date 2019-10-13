@@ -14,6 +14,8 @@
         <file>components/era/EraLink.qml</file>
         <file>components/era/EraPasswordField.qml</file>
         <file>components/era/EraTextField.qml</file>
+        <file>components/mainview/ConnectionInfo.qml</file>
+        <file>components/mainview/PowerButton.qml</file>
         <file>components/sidebar/ConnectionInfo.qml</file>
         <file>components/sidebar/PremiumActivation.qml</file>
         <file>components/sidebar/ServerActivationButton.qml</file>
@@ -41,6 +43,10 @@
         <file>images/icon_alert.png</file>
         <file>images/icon_crown.png</file>
         <file>images/icon_minimize.png</file>
+        <file>images/icon_power_off.png</file>
+        <file>images/icon_power_on.png</file>
+        <file>images/icon_profile.png</file>
+        <file>images/icon_settings.png</file>
         <file>images/icon_close.png</file>
         <file>images/icon_email.png</file>
         <file>images/icon_email_dark.png</file>

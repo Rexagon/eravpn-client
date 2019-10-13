@@ -19,10 +19,62 @@ Rectangle {
 
     color: mainColor
 
+    z: 100
+
     RowLayout {
         anchors.fill: parent
 
         spacing: 1
+
+        Rectangle {
+            id: profileButton
+
+            Layout.minimumWidth: 50
+            Layout.fillHeight: true
+
+            color: mainColor
+
+            Image {
+                source: "../images/icon_profile.png"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+
+                onEntered: profileButton.color = minimizeButtonHoverColor
+                onExited: profileButton.color = mainColor
+                //onClicked: windowTitleBar.minimizeRequested()
+            }
+        }
+
+        Rectangle {
+            id: settingsButton
+
+            Layout.minimumWidth: 50
+            Layout.fillHeight: true
+
+            color: mainColor
+
+            Image {
+                source: "../images/icon_settings.png"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+
+                onEntered: settingsButton.color = minimizeButtonHoverColor
+                onExited: settingsButton.color = mainColor
+                //onClicked: windowTitleBar.minimizeRequested()
+            }
+        }
 
         Item {
             Layout.fillWidth: true

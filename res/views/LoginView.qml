@@ -17,7 +17,10 @@ Item {
 
     Component.onCompleted: windowTitleText = "Вход в аккаунт"
 
-    BackgroundMap {}
+    BackgroundMap {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+    }
 
     Item {
         width: 285

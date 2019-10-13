@@ -19,7 +19,10 @@ Item {
 
     Component.onCompleted: windowTitleText = "Регистрация"
 
-    BackgroundMap {}
+    BackgroundMap {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+    }
 
     Item {
         width: 285
