@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "../components"
 import "../components/era"
 import "../components/mainview"
@@ -9,7 +11,23 @@ import "../components/mainview"
 Item {
     id: view
 
-    Component.onCompleted: windowTitleText = "EraVPN"
+    Component.onCompleted: {
+        windowTitleText = "EraVPN"
+        windowTitleButtonsVisible = true
+
+        console.log(BackEnd.premiumServersList);
+
+        BackEnd.countriesController.refreshCountries(false);
+        BackEnd.countriesController.refreshCountries(true);
+    }
+
+    Connections {
+        target: BackEnd.countriesController
+
+        onCountriesRequestError: {
+            notificationArea.notify("Countries request error. IsPremium: ", isPremium);
+        }
+    }
 
     RowLayout {
         anchors.fill: parent

@@ -94,7 +94,9 @@ Button {
     }
 
     onReleased: {
-        state = enabled && hovered ? "hovered" : ""
+        if (enabled) {
+            state = hovered ? "hovered" : "";
+        }
     }
 
     onHoveredChanged: {
@@ -115,7 +117,7 @@ Button {
     }
 
     onEnabledChanged: {
-        state = enabled ? (pressed ? "pressed" : (hovered ? "hovered" : "")) : "disabled"
+        state = enabled ? "" : "disabled"
     }
 
     MouseArea {

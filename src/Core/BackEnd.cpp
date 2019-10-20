@@ -3,29 +3,45 @@
 
 #include "BackEnd.hpp"
 
-#include <iostream>
-
 namespace app
 {
-QObject *BackEnd::singletonProvider(QQmlEngine *qmlEngine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(qmlEngine);
-    Q_UNUSED(scriptEngine);
-
-    return new BackEnd();
-}
-
-BackEnd::BackEnd(QObject *parent)
-    : QObject{parent}
+BackEnd::BackEnd()
+    : QObject{nullptr}
     , m_connection{API_URL, this}
     , m_authController{m_connection}
+    , m_countriesController{m_connection, m_freeServersList, m_premiumServersList}
 {
+}
+
+
+BackEnd &BackEnd::instance()
+{
+    static BackEnd backEnd;
+    return backEnd;
 }
 
 
 AuthController *BackEnd::authController()
 {
     return &m_authController;
+}
+
+
+CountriesController *BackEnd::countriesController()
+{
+    return &m_countriesController;
+}
+
+
+CountryListModel *BackEnd::freeServersList()
+{
+    return &m_freeServersList;
+}
+
+
+CountryListModel *BackEnd::premiumServersList()
+{
+    return &m_premiumServersList;
 }
 
 }  // namespace app

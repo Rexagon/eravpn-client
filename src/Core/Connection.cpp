@@ -22,16 +22,36 @@ Connection::Connection(const QString &url, QObject *parent)
 }
 
 
-void Connection::sendQuery(const QString &query, const Callback &callback)
+void Connection::sendQuery(const QString &query,
+                           const SuccessCallback &successCallback,
+                           const std::optional<ErrorCallback> &errorCallback)
 {
     const auto escapedQuery = QString{QUERY_CONTAINER}.arg(escaped(query));
     const auto bytes = escapedQuery.toUtf8();
 
     auto *reply = m_networkManager.post(m_baseRequest, bytes);
+    std::cout << "POST request sent" << std::endl;
+    std::cout << query.toStdString() << std::endl;
 
-    connect(reply, &QNetworkReply::finished, [reply, callback]() {
-        std::cout << "Request finished" << std::endl;
-        callback(*reply);
+    connect(reply, &QNetworkReply::finished, [reply, successCallback, errorCallback]() {
+        std::cout << "POST response received" << std::endl;
+
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            const auto data = QJsonDocument::fromJson(reply->readAll());
+            std::cout << data.toJson().toStdString() << std::endl;
+
+            successCallback(data);
+        }
+        else
+        {
+            std::cout << "Error(" << reply->error() << "): " << reply->errorString().toStdString() << std::endl;
+
+            if (errorCallback)
+            {
+                (*errorCallback)(*reply);
+            }
+        }
     });
 
     connect(reply, &QNetworkReply::sslErrors, [](const QList<QSslError> &errors) {

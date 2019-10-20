@@ -8,18 +8,73 @@ import "../components/era"
 import "../components"
 
 Item {
+    readonly property Item loadingSpinner: Item {
+        anchors.fill: parent
+
+        Image {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
+            width: 30
+            height: 30
+
+            source: "../images/loading.svg"
+
+            RotationAnimation on rotation {
+                loops: Animation.Infinite
+                duration: 1000
+                from: 0
+                to: 360
+            }
+        }
+    }
+
     signal switchToRegistration
     signal switchToMain
 
     id: view
 
     function loginAction() {
-        //switchToMain()
-
-        BackEnd.authController.auth(emailInput.text, passwordInput.text);
+        view.state = "loading";
+        BackEnd.authController.authorize(identificatorInput.text, passwordInput.text);
     }
 
-    Component.onCompleted: windowTitleText = "Вход в аккаунт"
+    Component.onCompleted: {
+        windowTitleText = "Вход в аккаунт"
+        windowTitleButtonsVisible = false
+    }
+
+    Connections {
+        target: BackEnd.authController
+        onAuthorized: {
+            console.log("Authorization success handler");
+            view.switchToMain()
+        }
+        onAuthorizationError: {
+            notificationArea.notify("Неправильный логин или пароль");
+            view.state = "";
+        }
+    }
+
+    states: [
+        State {
+            name: "loading"
+            PropertyChanges {
+                target: emailInput
+                enabled: false
+            }
+            PropertyChanges {
+                target: passwordInput
+                enabled: false
+            }
+            PropertyChanges {
+                target: loginButton
+                enabled: false
+                //contentItem: loadingSpinner
+            }
+        }
+
+    ]
 
     BackgroundMap {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -70,7 +125,7 @@ Item {
                 text: "EraVPN – это, пожалуй, самый быстрый\nи безопасный способ подключения к сети"
                 textFormat: Text.PlainText
 
-            font.family: futuraMediumFont.name
+                font.family: futuraMediumFont.name
                 font.pointSize: 10
 
                 color: "#a4acca"
@@ -90,12 +145,19 @@ Item {
                 }
             }
 
+            property bool isInputValid: {
+                const password = passwordInput.text;
+
+                return identificatorInput.text.length > 0 &&
+                        password.length > 0 && password.length <= 16;
+            }
+
             EraTextField {
-                id: emailInput
+                id: identificatorInput
 
                 focus: true
 
-                placeholderText: "Введите email"
+                placeholderText: "Введите логин или email"
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
@@ -114,6 +176,8 @@ Item {
                 id: loginButton
 
                 text: "Вход"
+
+                enabled: parent.isInputValid
 
                 onClicked: loginAction()
 

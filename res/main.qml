@@ -18,6 +18,7 @@ ApplicationWindow
     property int previousMousePositionY
 
     property string windowTitleText: ""
+    property bool windowTitleButtonsVisible: false
 
     id: window
     visible: true
@@ -34,6 +35,20 @@ ApplicationWindow
             GradientStop { position: 0.0; color: "#16295e" }
             GradientStop { position: 1.0; color: "#0f1444" }
         }
+    }
+
+    NotificationArea {
+        id: notificationArea
+
+        z: 1000
+
+        width: 300
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+
+        anchors.topMargin: 50
+        anchors.rightMargin: 20
     }
 
     ColumnLayout {
@@ -81,7 +96,7 @@ ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            initialItem: loginView // mainView
+            initialItem: mainView
         }
 
         Component {

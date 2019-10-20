@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+//import com.eravpn.backend 1.0
+
 import "../components"
 import "../components/era"
 
@@ -14,10 +16,29 @@ Item {
     id: view
 
     function formAction() {
-        switchToMain()
+        BackEnd.authController.createUser(isAnonymous, identificatorInput.text, passwordInput.text, promoCodeInput.text);
     }
 
-    Component.onCompleted: windowTitleText = "Регистрация"
+    Component.onCompleted: {
+        windowTitleText = "Регистрация"
+        windowTitleButtonsVisible = false
+    }
+
+    Connections {
+        target: BackEnd.authController
+        onRegisteredWithEmail: {
+            console.log("Registered with email");
+            view.switchToMain()
+        }
+        onRegisteredWithLogin: {
+            console.log("Registration with login. Auth key:");
+            console.log(authKey);
+        }
+        onRegistrationError: {
+            console.log("Registration error handler");
+            //view.state = "";
+        }
+    }
 
     BackgroundMap {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -123,6 +144,14 @@ Item {
                 }
             }
 
+            property bool isInputValid: {
+                const password = passwordInput.text;
+
+                return identificatorInput.text.length > 0 &&
+                        password.length >= 6 && password.length <= 16 &&
+                        passwordInput.text === passwordRepeatInput.text;
+            }
+
             EraTextField {
                 id: identificatorInput
 
@@ -165,6 +194,8 @@ Item {
                 id: registrationButton
 
                 text: isAnonymous ? "Сгенерировать код-пароль" : "Зарегистрироваться"
+
+                enabled: parent.isInputValid
 
                 onClicked: formAction()
 

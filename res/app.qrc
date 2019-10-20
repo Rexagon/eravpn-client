@@ -26,6 +26,8 @@
         <file>components/BackgroundMap.qml</file>
         <file>components/Logo.qml</file>
         <file>components/MainSideBar.qml</file>
+        <file>components/Notification.qml</file>
+        <file>components/NotificationArea.qml</file>
         <file>components/WindowTitleBar.qml</file>
     </qresource>
     <qresource>
@@ -37,10 +39,7 @@
         <file>fonts/PT Root UI_Regular.ttf</file>
     </qresource>
     <qresource>
-        <file>images/flag_sweden.png</file>
-    </qresource>
-    <qresource>
-        <file>models/ServerListModel.qml</file>
+        <file>images/flags/nld.png</file>
     </qresource>
     <qresource>
         <file>images/icon_alert.png</file>
@@ -55,6 +54,7 @@
         <file>images/icon_email_dark.png</file>
         <file>images/icon_fraud.png</file>
         <file>images/icon_fraud_dark.png</file>
+        <file>images/loading.svg</file>
     </qresource>
     <qresource>
         <file>images/logo_small.png</file>

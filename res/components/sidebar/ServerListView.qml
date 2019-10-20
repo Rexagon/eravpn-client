@@ -20,10 +20,11 @@ ListView {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 8
-            width: 31
-            height: 21
 
-            source: "../../images/flag_sweden.png"
+            width: 31
+            height: 31
+
+            source: "../../images/flags/" + countryCode + ".png"
         }
 
         ColumnLayout {
@@ -41,7 +42,7 @@ ListView {
             }
 
             EraLabel {
-                text: country
+                text: countryTitle
                 font.family: futuraMediumFont.name
                 color: "white"
             }
@@ -57,7 +58,9 @@ ListView {
 
             width: 100
 
-            onClicked: activated = !activated
+            onClicked: {
+                notificationArea.notify(countryId);
+            }
 
             Component.onCompleted: {
                 enabled = active

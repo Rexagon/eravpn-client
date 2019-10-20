@@ -10,7 +10,10 @@ Item {
 
     id: view
 
-    Component.onCompleted: windowTitleText = "Настройки"
+    Component.onCompleted: {
+        windowTitleText = "Настройки"
+        windowTitleButtonsVisible = true
+    }
 
     MouseArea {
         anchors.fill: parent

@@ -3,6 +3,7 @@
 #include <functional>
 #include <optional>
 
+#include <QJsonDocument>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QString>
@@ -22,11 +23,14 @@ public:
         QString refreshToken;
     };
 
-    using Callback = std::function<void(QNetworkReply &)>;
+    using SuccessCallback = std::function<void(const QJsonDocument &)>;
+    using ErrorCallback = std::function<void(const QNetworkReply &)>;
 
     explicit Connection(const QString &apiUrl, QObject *parent);
 
-    void sendQuery(const QString &query, const Callback &callback);
+    void sendQuery(const QString &query,
+                   const SuccessCallback &successCallback,
+                   const std::optional<ErrorCallback> &errorCallback = std::nullopt);
 
     void setAuthorizationData(const AuthorizationData &data);
     void resetAuthorizationData();

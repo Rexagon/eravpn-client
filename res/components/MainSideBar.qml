@@ -2,9 +2,10 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "era"
 import "sidebar"
-import "../models"
 
 Item {
     readonly property string lightBackgroundColor: "#4f6699"
@@ -119,11 +120,11 @@ Item {
                 anchors.topMargin: 50
 
                 ServerListView {
-                    model: ServerListModel {}
+                    model: BackEnd.freeServersList
                 }
 
                 ServerListView {
-                    model: ServerListModel {}
+                    model: BackEnd.premiumServersList
                 }
             }
         }

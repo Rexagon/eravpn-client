@@ -50,6 +50,8 @@ Rectangle {
         TitleBarButton {
             id: profileButton
 
+            visible: windowTitleButtonsVisible
+
             iconSource: "../../images/icon_profile.png"
             onClicked: {
                 if (component.state !== "profile_opened") {
@@ -61,6 +63,8 @@ Rectangle {
 
         TitleBarButton {
             id: settingsButton
+
+            visible: windowTitleButtonsVisible
 
             iconSource: "../../images/icon_settings.png"
             onClicked: {

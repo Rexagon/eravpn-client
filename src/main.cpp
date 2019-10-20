@@ -7,6 +7,16 @@
 
 #include "Core/BackEnd.hpp"
 
+using namespace app;
+
+namespace
+{
+constexpr auto BASE_MODULE_NAME = "com.eravpn.backend";
+constexpr auto BASE_VERSION_MAJOR = 1;
+constexpr auto BASE_VERSION_MINOR = 0;
+
+}  // namespace
+
 int main(int argc, char **argv)
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -15,7 +25,9 @@ int main(int argc, char **argv)
 
     QGuiApplication application(argc, argv);
 
-    qmlRegisterSingletonType<app::BackEnd>("com.eravpn.backend", 1, 0, "BackEnd", &app::BackEnd::singletonProvider);
+    qmlRegisterSingletonType<BackEnd>(
+        BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "BackEnd",
+        [](QQmlEngine *, QJSEngine *) { return static_cast<QObject *>(&BackEnd::instance()); });
 
     QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
 
