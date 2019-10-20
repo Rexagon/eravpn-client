@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "../era"
 
 ListView {
@@ -59,11 +61,17 @@ ListView {
             width: 100
 
             onClicked: {
+                activated = !activated;
+
                 notificationArea.notify(countryId);
             }
 
-            Component.onCompleted: {
-                enabled = active
+            onActivatedChanged: {
+                if (activated) {
+                    BackEnd.vpnConnection.connectUsingConfig("temp.ovpn");
+                } else {
+                    BackEnd.vpnConnection.disconnect();
+                }
             }
         }
 

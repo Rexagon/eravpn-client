@@ -96,7 +96,7 @@ ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            initialItem: mainView
+            initialItem: loginView
         }
 
         Component {

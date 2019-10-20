@@ -6,8 +6,10 @@ set(BUILD_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/build)
 set(SRC
         src/Core/Controllers/AuthController.cpp
         src/Core/Controllers/CountriesController.cpp
+        src/Core/Controllers/VpnController.cpp
         src/Core/Models/Country.cpp
         src/Core/Models/CountryListModel.cpp
+        src/Core/Models/VpnConnection.cpp
         src/Core/BackEnd.cpp
         src/Core/Connection.cpp
         src/Stuff/StringHelpers.cpp
@@ -16,8 +18,9 @@ set(SRC
 set(SRC_MOC
         src/Core/Controllers/AuthController.hpp
         src/Core/Controllers/CountriesController.hpp
-        src/Core/Models/Country.hpp
+        src/Core/Controllers/VpnController.hpp
         src/Core/Models/CountryListModel.hpp
+        src/Core/Models/VpnConnection.hpp
         src/Core/BackEnd.hpp
         src/Core/Connection.hpp)
 
@@ -34,7 +37,7 @@ qt5_add_resources(RESOURCES res/app.qrc)
 
 # Specific resource files
 if (WIN32)
-    set(WIN_RESOURCE_FILE ${CMAKE_SOURCE_DIR}/res/app.rc)
+    set(WIN_RESOURCE_FILE ${CMAKE_SOURCE_DIR}/res/app.rc ${CMAKE_SOURCE_DIR}/res/app.exe.manifest)
 endif ()
 
 # Executable
@@ -89,6 +92,7 @@ if (WIN32)
 
     target_compile_definitions(app PRIVATE
             _CRT_SECURE_NO_WARNINGS
+            WIN32_LEAN_AND_MEAN
             NOMINMAX
             _WIN32_WINNT=0x0600
             USE_ASIO
@@ -96,6 +100,8 @@ if (WIN32)
             USE_MBEDTLS
             HAVE_LZ4
             TAP_WIN_COMPONENT_ID=tap0901)
+
+    set(CMAKE_EXE_LINKER_FLAGS "/MANIFEST:NO")
 
     add_custom_command(TARGET app POST_BUILD
             COMMAND "${CMAKE_COMMAND}" -E

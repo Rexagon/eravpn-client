@@ -10,6 +10,7 @@ BackEnd::BackEnd()
     , m_connection{API_URL, this}
     , m_authController{m_connection}
     , m_countriesController{m_connection, m_freeServersList, m_premiumServersList}
+    , m_vpnController{m_connection}
 {
 }
 
@@ -33,6 +34,12 @@ CountriesController *BackEnd::countriesController()
 }
 
 
+VpnController *BackEnd::vpnController()
+{
+    return &m_vpnController;
+}
+
+
 CountryListModel *BackEnd::freeServersList()
 {
     return &m_freeServersList;
@@ -42,6 +49,12 @@ CountryListModel *BackEnd::freeServersList()
 CountryListModel *BackEnd::premiumServersList()
 {
     return &m_premiumServersList;
+}
+
+
+VpnConnection *BackEnd::vpnConnection()
+{
+    return &m_vpnConnection;
 }
 
 }  // namespace app
