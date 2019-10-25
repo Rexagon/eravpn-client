@@ -12,7 +12,7 @@ namespace vpn
 class Client;
 }
 
-class VpnConnection : public QObject
+class VpnConnection final : public QObject
 {
     Q_OBJECT
 
@@ -20,6 +20,7 @@ class VpnConnection : public QObject
 
 public:
     explicit VpnConnection();
+    ~VpnConnection() final;
 
     Q_INVOKABLE void connectUsingConfig(const QString &config);
     Q_INVOKABLE void disconnect();
@@ -27,12 +28,13 @@ public:
     bool connected() const;
 
 signals:
-    void connectedChanged(bool);
+    void connectedChanged();
     void connectionError();
 
 private:
-    std::shared_ptr<vpn::Client> m_client{};
+    std::unique_ptr<vpn::Client> m_client{};
     std::unique_ptr<std::thread> m_vpnThread{};
+    bool m_isRunning;
 };
 
 }  // namespace app

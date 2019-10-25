@@ -104,7 +104,7 @@ ApplicationWindow
 
             LoginView {
                 onSwitchToRegistration: viewsContainer.replace(registrationView, StackView.PopTransition)
-                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
+                onSwitchToMain: viewsContainer.replace(mainViewComponent, StackView.PushTransition)
             }
         }
 
@@ -113,15 +113,15 @@ ApplicationWindow
 
             RegistrationView {
                 onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
-                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
+                onSwitchToMain: viewsContainer.replace(mainViewComponent, StackView.PushTransition)
             }
         }
 
         Component {
-            id: mainView
+            id: mainViewComponent
 
             MainView {
-
+                id: mainView
             }
         }
 
@@ -131,6 +131,7 @@ ApplicationWindow
             ProfileView {
                 onCloseView: {
                     windowTitleBar.state = "";
+                    mainView.updateTitle();
                     viewsContainer.pop();
                 }
             }
@@ -142,6 +143,7 @@ ApplicationWindow
             SettingsView {
                 onCloseView: {
                     windowTitleBar.state = "";
+                    mainView.updateTitle();
                     viewsContainer.pop();
                 }
             }

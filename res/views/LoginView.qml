@@ -35,22 +35,28 @@ Item {
     id: view
 
     function loginAction() {
-        view.state = "loading";
-        BackEnd.authController.authorize(identificatorInput.text, passwordInput.text);
+        BackEnd.profileController.signIn(identificatorInput.text, passwordInput.text);
     }
 
     Component.onCompleted: {
         windowTitleText = "Вход в аккаунт"
         windowTitleButtonsVisible = false
+
+        BackEnd.profileController.signInRemembered();
     }
 
     Connections {
-        target: BackEnd.authController
-        onAuthorized: {
-            console.log("Authorization success handler");
-            view.switchToMain()
+        target: BackEnd.profile
+        onSignInStarted: {
+            view.state = "loading";
         }
-        onAuthorizationError: {
+        onAuthorizedChanged: {
+            if (BackEnd.profile.authorized) {
+                console.log("Authorization success handler");
+                view.switchToMain()
+            }
+        }
+        onSignInErrorOccured: {
             notificationArea.notify("Неправильный логин или пароль");
             view.state = "";
         }
@@ -60,7 +66,7 @@ Item {
         State {
             name: "loading"
             PropertyChanges {
-                target: emailInput
+                target: identificatorInput
                 enabled: false
             }
             PropertyChanges {

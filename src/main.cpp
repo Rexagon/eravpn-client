@@ -22,6 +22,7 @@ int main(int argc, char **argv)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setOrganizationName("EraVPN");
     QCoreApplication::setOrganizationDomain("com.eravpn");
+    QCoreApplication::setApplicationName("EraVPN Client");
 
     QGuiApplication application(argc, argv);
 

@@ -7,10 +7,10 @@ namespace app
 {
 BackEnd::BackEnd()
     : QObject{nullptr}
-    , m_connection{API_URL, this}
-    , m_authController{m_connection}
+    , m_connection{API_URL}
+    , m_authController{m_connection, m_profile}
     , m_countriesController{m_connection, m_freeServersList, m_premiumServersList}
-    , m_vpnController{m_connection}
+    , m_vpnController{m_connection, m_profile, m_vpnConnection}
 {
 }
 
@@ -22,7 +22,7 @@ BackEnd &BackEnd::instance()
 }
 
 
-AuthController *BackEnd::authController()
+ProfileController *BackEnd::profileController()
 {
     return &m_authController;
 }
@@ -55,6 +55,12 @@ CountryListModel *BackEnd::premiumServersList()
 VpnConnection *BackEnd::vpnConnection()
 {
     return &m_vpnConnection;
+}
+
+
+Profile *BackEnd::profile()
+{
+    return &m_profile;
 }
 
 }  // namespace app

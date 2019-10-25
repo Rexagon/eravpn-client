@@ -3,26 +3,7 @@
 
 #include "VpnConnection.hpp"
 
-#include <QFile>
-
-#include "../../Vpn/Vpn.hpp"
-
-namespace
-{
-QString readConfig(const QString &path)
-{
-    QFile file{path};
-
-    file.open(QIODevice::ReadOnly | QIODevice::ExistingOnly);
-
-    const auto result = file.readAll();
-
-    std::cout << result.toStdString() << std::endl;
-
-    return result;
-}
-
-}  // namespace
+#include "../../Vpn/Client.hpp"
 
 namespace app
 {
@@ -32,6 +13,11 @@ VpnConnection::VpnConnection()
 }
 
 
+VpnConnection::~VpnConnection()
+{
+    disconnect();
+}
+
 void VpnConnection::connectUsingConfig(const QString &config)
 {
     if (connected())
@@ -39,16 +25,12 @@ void VpnConnection::connectUsingConfig(const QString &config)
         return;
     }
 
-    // TEMP
+    auto client = std::make_unique<vpn::Client>();
 
+    openvpn::ClientAPI::Config ovpnConfig;
+    ovpnConfig.content = config.toUtf8().data();
 
-    ClientAPI::Config ovpnConfig;
-    ovpnConfig.content = readConfig(config).toUtf8().data();
-
-    m_client = std::make_shared<vpn::Client>();
-    std::cout << "ASD" << std::endl;
-
-    openvpn::ClientAPI::EvalConfig eval = m_client->eval_config(ovpnConfig);
+    openvpn::ClientAPI::EvalConfig eval = client->eval_config(ovpnConfig);
 
     if (eval.error)
     {
@@ -57,6 +39,7 @@ void VpnConnection::connectUsingConfig(const QString &config)
         return;
     }
 
+    m_client = std::move(client);
     m_vpnThread = std::make_unique<std::thread>([this]() {
         try
         {
@@ -81,7 +64,7 @@ void VpnConnection::connectUsingConfig(const QString &config)
         std::cout << "Thread finished" << std::endl;
     });
 
-    emit connectedChanged(true);
+    emit connectedChanged();
 }
 
 
@@ -93,16 +76,22 @@ void VpnConnection::disconnect()
     }
 
     m_client->stop();
-    m_vpnThread->join();
+
+    if (m_vpnThread->joinable())
+    {
+        m_vpnThread->join();
+    }
 
     m_client.reset();
     m_vpnThread.reset();
+
+    emit connectedChanged();
 }
 
 
 bool VpnConnection::connected() const
 {
-    return m_vpnThread != nullptr && m_client != nullptr;
+    return m_client != nullptr && m_vpnThread != nullptr;
 }
 
 }  // namespace app

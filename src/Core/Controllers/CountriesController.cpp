@@ -35,7 +35,7 @@ void CountriesController::refreshCountries(bool isPremium)
   }
 })"};
 
-    m_connection.sendQuery(query.arg(isPremium ? "true" : "false"), [this, isPremium](const QJsonDocument &reply) {
+    m_connection.post(query.arg(isPremium ? "true" : "false"), [this, isPremium](const QJsonDocument &reply) {
         const auto countriesData = reply["data"]["country"]["list"]["data"];
 
         if (!countriesData.isArray())

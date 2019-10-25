@@ -11,8 +11,11 @@ import "../components/mainview"
 Item {
     id: view
 
-    Component.onCompleted: {
+    function updateTitle() {
         windowTitleText = "EraVPN"
+    }
+
+    Component.onCompleted: {
         windowTitleButtonsVisible = true
 
         console.log(BackEnd.premiumServersList);

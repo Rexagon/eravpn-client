@@ -23,21 +23,25 @@ public:
         QString refreshToken;
     };
 
-    using SuccessCallback = std::function<void(const QJsonDocument &)>;
-    using ErrorCallback = std::function<void(const QNetworkReply &)>;
+    using RawCallback = std::function<void(QNetworkReply &)>;
+    using JsonCallback = std::function<void(const QJsonDocument &)>;
 
-    explicit Connection(const QString &apiUrl, QObject *parent);
+    explicit Connection(const QString &apiUrl);
 
-    void sendQuery(const QString &query,
-                   const SuccessCallback &successCallback,
-                   const std::optional<ErrorCallback> &errorCallback = std::nullopt);
+    void post(const QString &query,
+                   const JsonCallback &successCallback,
+                   const std::optional<RawCallback> &errorCallback = std::nullopt);
+
+    void get(const QString &url,
+             const RawCallback &successCallback,
+             const std::optional<RawCallback> &errorCallback = std::nullopt);
 
     void setAuthorizationData(const AuthorizationData &data);
     void resetAuthorizationData();
 
 private:
     QNetworkRequest m_baseRequest;
-    std::optional<AuthorizationData> m_authorizationData;
+    std::optional<AuthorizationData> m_authorizationData{};
 
     QNetworkAccessManager m_networkManager{};
 };

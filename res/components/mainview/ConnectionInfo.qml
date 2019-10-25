@@ -27,18 +27,6 @@ ColumnLayout {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
 
-        text: "00:15:34"
-        color: "white"
-        font.family: rootUiFontRegular.name
-        font.pointSize: 12
-    }
-
-    Text {
-        Layout.fillWidth: true
-
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-
         text: "Местоположение"
         color: darkBlueColor
         font.family: futuraMediumFont.name

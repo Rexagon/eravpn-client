@@ -2,7 +2,7 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
-//import com.eravpn.backend 1.0
+import com.eravpn.backend 1.0
 
 import "../components"
 import "../components/era"
@@ -16,7 +16,7 @@ Item {
     id: view
 
     function formAction() {
-        BackEnd.authController.createUser(isAnonymous, identificatorInput.text, passwordInput.text, promoCodeInput.text);
+        BackEnd.authController.signUp(isAnonymous, identificatorInput.text, passwordInput.text, promoCodeInput.text);
     }
 
     Component.onCompleted: {

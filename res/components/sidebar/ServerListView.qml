@@ -62,13 +62,11 @@ ListView {
 
             onClicked: {
                 activated = !activated;
-
-                notificationArea.notify(countryId);
             }
 
             onActivatedChanged: {
                 if (activated) {
-                    BackEnd.vpnConnection.connectUsingConfig("temp.ovpn");
+                    BackEnd.vpnController.enableVpn(countryId);
                 } else {
                     BackEnd.vpnConnection.disconnect();
                 }
