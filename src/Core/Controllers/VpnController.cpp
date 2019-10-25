@@ -64,7 +64,7 @@ void VpnController::enableVpn(const QString &countryId)
 
         if (file.open(QIODevice::ReadOnly | QIODevice::ExistingOnly))
         {
-            m_vpnConnection.connectUsingConfig(file.readAll());
+            m_vpnConnection.start(file.readAll());
             return;
         }
     }
@@ -111,7 +111,7 @@ void VpnController::enableVpn(const QString &countryId)
 
             Settings::instance().setCountryCertificatePath(countryId, file.fileName());
 
-            m_vpnConnection.connectUsingConfig(data);
+            m_vpnConnection.start(data);
         };
     };
 

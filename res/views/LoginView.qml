@@ -35,6 +35,7 @@ Item {
     id: view
 
     function loginAction() {
+        view.state = "loading";
         BackEnd.profileController.signIn(identificatorInput.text, passwordInput.text);
     }
 
@@ -45,9 +46,6 @@ Item {
 
     Connections {
         target: BackEnd.profile
-        onSignInStarted: {
-            view.state = "loading";
-        }
         onAuthorizedChanged: {
             if (BackEnd.profile.authorized) {
                 console.log("Authorization success handler");

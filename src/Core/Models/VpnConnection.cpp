@@ -15,15 +15,18 @@ VpnConnection::VpnConnection()
 
 VpnConnection::~VpnConnection()
 {
-    disconnect();
+    reset();
 }
 
-void VpnConnection::connectUsingConfig(const QString &config)
+void VpnConnection::start(const QString &config)
 {
-    if (connected())
+    std::unique_lock<std::mutex> lock{m_connectionMutex};
+    if (m_isConnected)
     {
         return;
     }
+
+    reset();
 
     auto client = std::make_unique<vpn::Client>();
 
@@ -39,8 +42,10 @@ void VpnConnection::connectUsingConfig(const QString &config)
         return;
     }
 
+    m_isConnected = true;
+
     m_client = std::move(client);
-    m_vpnThread = std::make_unique<std::thread>([this]() {
+    m_connectionThread = std::make_unique<std::thread>([this] {
         try
         {
             std::cout << "Thread starting..." << std::endl;
@@ -61,37 +66,41 @@ void VpnConnection::connectUsingConfig(const QString &config)
             std::cout << "Connect thread exception: " << e.what() << std::endl;
         }
 
+        std::unique_lock<std::mutex> lock{m_connectionMutex};
+        m_isConnected = false;
+        m_client.reset();
+
         std::cout << "Thread finished" << std::endl;
+        emit connectedChanged();
     });
 
     emit connectedChanged();
 }
 
 
-void VpnConnection::disconnect()
+void VpnConnection::stop()
 {
-    if (!connected())
+    if (m_client != nullptr)
     {
-        return;
+        m_client->stop();
     }
-
-    m_client->stop();
-
-    if (m_vpnThread->joinable())
-    {
-        m_vpnThread->join();
-    }
-
-    m_client.reset();
-    m_vpnThread.reset();
-
-    emit connectedChanged();
 }
 
 
 bool VpnConnection::connected() const
 {
-    return m_client != nullptr && m_vpnThread != nullptr;
+    return m_isConnected;
+}
+
+
+void VpnConnection::reset()
+{
+    stop();
+
+    if (m_connectionThread != nullptr && m_connectionThread->joinable())
+    {
+        m_connectionThread->join();
+    }
 }
 
 }  // namespace app

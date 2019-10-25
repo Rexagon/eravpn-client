@@ -31,8 +31,6 @@ void ProfileController::signInRemembered()
     }
 })"};
 
-    emit m_profile.signInStarted();
-
     m_connection.post(
         query,
         [this](const QJsonDocument &reply) {

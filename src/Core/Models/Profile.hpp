@@ -44,7 +44,6 @@ public:
     QString currentIp() const;
 
 signals:
-    void signInStarted();
     void signInErrorOccured();
 
     void signUpErrorOccured();

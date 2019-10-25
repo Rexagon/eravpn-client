@@ -47,9 +47,6 @@ ApplicationWindow
 
     Connections {
         target: BackEnd.profile
-        onSignInStarted: {
-
-        }
         onAuthorizedChanged: {
             if (BackEnd.profile.authorized && !attemptedToSignIn) {
                 attemptedToSignIn = true;

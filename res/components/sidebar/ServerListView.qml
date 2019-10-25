@@ -68,7 +68,7 @@ ListView {
                 if (activated) {
                     BackEnd.vpnController.enableVpn(countryId);
                 } else {
-                    BackEnd.vpnConnection.disconnect();
+                    BackEnd.vpnConnection.stop();
                 }
             }
         }

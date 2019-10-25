@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <mutex>
 #include <thread>
 
 #include <QObject>
@@ -22,8 +23,8 @@ public:
     explicit VpnConnection();
     ~VpnConnection() final;
 
-    Q_INVOKABLE void connectUsingConfig(const QString &config);
-    Q_INVOKABLE void disconnect();
+    Q_INVOKABLE void start(const QString &config);
+    Q_INVOKABLE void stop();
 
     bool connected() const;
 
@@ -32,9 +33,13 @@ signals:
     void connectionError();
 
 private:
+    void reset();
+
     std::unique_ptr<vpn::Client> m_client{};
-    std::unique_ptr<std::thread> m_vpnThread{};
-    bool m_isRunning;
+    std::unique_ptr<std::thread> m_connectionThread{};
+
+    std::mutex m_connectionMutex{};
+    bool m_isConnected{};
 };
 
 }  // namespace app
