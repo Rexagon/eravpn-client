@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "components"
 import "views"
 
@@ -20,6 +22,8 @@ ApplicationWindow
     property string windowTitleText: ""
     property bool windowTitleButtonsVisible: false
 
+    property bool attemptedToSignIn: false
+
     id: window
     visible: true
     width: 900
@@ -34,6 +38,29 @@ ApplicationWindow
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#16295e" }
             GradientStop { position: 1.0; color: "#0f1444" }
+        }
+    }
+
+    Component.onCompleted: {
+        BackEnd.profileController.signInRemembered();
+    }
+
+    Connections {
+        target: BackEnd.profile
+        onSignInStarted: {
+
+        }
+        onAuthorizedChanged: {
+            if (BackEnd.profile.authorized && !attemptedToSignIn) {
+                attemptedToSignIn = true;
+                viewsContainer.clear();
+                viewsContainer.push(mainViewComponent)
+            }
+        }
+        onSignInErrorOccured: {
+            attemptedToSignIn = true;
+            viewsContainer.clear();
+            viewsContainer.push(loginView)
         }
     }
 
@@ -96,7 +123,7 @@ ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            initialItem: loginView
+            initialItem: loaderStubView
         }
 
         Component {
@@ -145,6 +172,31 @@ ApplicationWindow
                     windowTitleBar.state = "";
                     mainView.updateTitle();
                     viewsContainer.pop();
+                }
+            }
+        }
+
+        Component {
+            id: loaderStubView
+
+            Item {
+                anchors.fill: parent
+
+                Image {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    width: 30
+                    height: 30
+
+                    source: "../images/loading.svg"
+
+                    RotationAnimation on rotation {
+                        loops: Animation.Infinite
+                        duration: 1000
+                        from: 0
+                        to: 360
+                    }
                 }
             }
         }

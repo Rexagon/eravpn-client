@@ -2,7 +2,9 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
 
-Rectangle {
+import com.eravpn.backend 1.0
+
+Item {
     readonly property string inactiveSecondaryColor: "#173878"
     readonly property string inactivePrimaryColor: "#24488c"
 
@@ -15,20 +17,34 @@ Rectangle {
 
     width: 140
     height: width
-    radius: width * 2
 
-    color: inactiveSecondaryColor
+    state: BackEnd.vpnConnection.connected ? "active" : ""
 
-    state: "active"
+    Rectangle {
+        id: componentShadow
 
-    layer.enabled: true
-    layer.effect: DropShadow {
-        //cached: true
-        color: "#3786ff"
-        opacity: 0.58
-        radius: 30
-        samples: 17
-        transparentBorder: true
+        anchors.fill: parent
+        radius: width * 2
+
+        opacity: 0
+
+        layer.enabled: true
+        layer.effect: DropShadow {
+            //cached: true
+            color: "#3786ff"
+            radius: 30
+            samples: 17
+            transparentBorder: true
+        }
+    }
+
+    Rectangle {
+        id: outerCircle
+
+        anchors.fill: parent
+        radius: width * 2
+
+        color: inactiveSecondaryColor
     }
 
     Rectangle {
@@ -57,7 +73,11 @@ Rectangle {
         State {
             name: "active"
             PropertyChanges {
-                target: component
+                target: componentShadow
+                opacity: 0.58
+            }
+            PropertyChanges {
+                target: outerCircle
                 color: activeSecondaryColor
             }
             PropertyChanges {
@@ -70,6 +90,11 @@ Rectangle {
             }
         }
     ]
+
+    transitions: Transition {
+        ColorAnimation { duration: 1000 }
+        NumberAnimation { properties: "opacity"; duration: 1000 }
+    }
 
     onActivatedChanged: state = activated ? "activated" : ""
 }

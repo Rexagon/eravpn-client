@@ -41,8 +41,6 @@ Item {
     Component.onCompleted: {
         windowTitleText = "Вход в аккаунт"
         windowTitleButtonsVisible = false
-
-        BackEnd.profileController.signInRemembered();
     }
 
     Connections {
