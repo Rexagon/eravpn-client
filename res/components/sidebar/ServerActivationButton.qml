@@ -94,18 +94,28 @@ Button {
     }
 
     onPressed: {
+        if (!enabled) {
+            state = "disabled";
+            return;
+        }
+
         if (enabled) {
             state = "pressed"
         }
     }
 
     onReleased: {
-        state = enabled && hovered ? "hovered" : ""
+        if (!enabled) {
+            state = "disabled";
+            return;
+        }
+
+        state = hovered ? "hovered" : ""
     }
 
     onHoveredChanged: {
         if (!enabled) {
-            state = "";
+            state = "disabled";
             return;
         }
 
@@ -121,6 +131,7 @@ Button {
     }
 
     onEnabledChanged: {
+        console.log(enabled);
         state = enabled ? (pressed ? "pressed" : (hovered ? "hovered" : "")) : "disabled"
     }
 

@@ -9,6 +9,12 @@ using namespace openvpn;
 
 namespace app::vpn
 {
+Client::Client(const EventCallback &eventHandler)
+    : m_eventHandler{eventHandler}
+{
+}
+
+
 void Client::event(const ClientAPI::Event &event)
 {
     std::cout << date_time() << " EVENT: " << event.name;
@@ -28,6 +34,8 @@ void Client::event(const ClientAPI::Event &event)
     }
 
     std::cout << std::endl;
+
+    m_eventHandler(Event{event.name, event.info, event.error, event.fatal});
 }
 
 

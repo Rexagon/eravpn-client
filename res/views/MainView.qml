@@ -18,10 +18,16 @@ Item {
     Component.onCompleted: {
         windowTitleButtonsVisible = true
 
-        console.log(BackEnd.premiumServersList);
+        BackEnd.locationController.updateCurrentLocation();
 
         BackEnd.countriesController.refreshCountries(false);
         BackEnd.countriesController.refreshCountries(true);
+    }
+
+    Timer {
+        id: locationRefreshTimer
+        interval: 10000; running: false; repeat: false
+        onTriggered: BackEnd.locationController.updateCurrentLocation()
     }
 
     Connections {
@@ -29,6 +35,14 @@ Item {
 
         onCountriesRequestError: {
             notificationArea.notify("Countries request error. IsPremium: ", isPremium);
+        }
+    }
+
+    Connections {
+        target: BackEnd.vpnConnection
+
+        onConnectedChanged: {
+            locationRefreshTimer.start()
         }
     }
 

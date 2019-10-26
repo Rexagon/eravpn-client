@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "../era"
 
 Rectangle {
@@ -23,12 +25,12 @@ Rectangle {
         }
 
         EraLabel {
-            text: "Ваш IP: 198.166.0.2"
+            text: "Ваш IP: " + BackEnd.location.ip
             color: "white"
         }
 
         EraLabel {
-            text: "Местоположение: Москва"
+            text: "Местоположение: " + BackEnd.location.regionName
             color: "white"
         }
     }

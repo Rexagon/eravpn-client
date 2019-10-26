@@ -1,6 +1,8 @@
 import QtQuick 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "../era"
 
 ColumnLayout {
@@ -39,7 +41,7 @@ ColumnLayout {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
 
-        text: "Исландия"
+        text: BackEnd.location.countryName
         color: "white"
         font.family: futuraMediumFont.name
         font.pointSize: 16

@@ -5,10 +5,9 @@
 
 #include "Connection.hpp"
 #include "Controllers/CountriesController.hpp"
+#include "Controllers/LocationController.hpp"
 #include "Controllers/ProfileController.hpp"
 #include "Controllers/VpnController.hpp"
-
-#include "Models/VpnConnection.hpp"
 
 namespace app
 {
@@ -19,13 +18,16 @@ class BackEnd : public QObject
     Q_OBJECT
 
     Q_PROPERTY(ProfileController *profileController READ profileController CONSTANT)
+    Q_PROPERTY(LocationController *locationController READ locationController CONSTANT)
     Q_PROPERTY(CountriesController *countriesController READ countriesController CONSTANT)
     Q_PROPERTY(VpnController *vpnController READ vpnController CONSTANT)
 
     Q_PROPERTY(CountryListModel *freeServersList READ freeServersList CONSTANT)
     Q_PROPERTY(CountryListModel *premiumServersList READ premiumServersList CONSTANT)
+
     Q_PROPERTY(VpnConnection *vpnConnection READ vpnConnection CONSTANT)
     Q_PROPERTY(Profile *profile READ profile CONSTANT)
+    Q_PROPERTY(Location *location READ location CONSTANT)
 
     explicit BackEnd();
 
@@ -38,6 +40,7 @@ public:
     BackEnd &operator=(BackEnd &&) = delete;
 
     ProfileController *profileController();
+    LocationController *locationController();
     CountriesController *countriesController();
     VpnController *vpnController();
 
@@ -46,6 +49,7 @@ public:
 
     VpnConnection *vpnConnection();
     Profile *profile();
+    Location *location();
 
 private:
     Connection m_connection;
@@ -55,9 +59,11 @@ private:
 
     VpnConnection m_vpnConnection{};
     Profile m_profile{};
+    Location m_location{};
 
-    ProfileController m_authController;
     CountriesController m_countriesController;
+    LocationController m_locationController;
+    ProfileController m_profileController;
     VpnController m_vpnController;
 };
 

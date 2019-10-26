@@ -172,7 +172,7 @@ void ProfileController::fillProfile(const QJsonObject &clientData,
 
     m_connection.setAuthorizationData(Connection::AuthorizationData{accessToken, refreshToken});
 
-    m_profile.setData(Profile::ClientData{
+    m_profile.setData(Profile::Data{
         clientData["id"].toString(""),
         clientData["username"].toString(""),
         clientData["email"].toString(""),

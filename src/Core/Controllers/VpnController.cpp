@@ -143,29 +143,4 @@ void VpnController::enableVpn(const QString &countryId)
     m_connection.post(query.arg(escaped(countryId)), configsRequestHandler, errorHandler);
 }
 
-
-void VpnController::updateCurrentIp()
-{
-    const auto query = QString{R"(query {
-  client {
-    getData {
-      ... on ClientResult {
-        client {
-          currentIp
-        }
-      }
-    }
-  }
-})"};
-
-    m_connection.post(query, [this](const QJsonDocument &reply) {
-        const auto currentIpData = reply["data"]["client"]["getData"]["client"]["currentIp"];
-
-        if (currentIpData.isString())
-        {
-            m_profile.setCurrentIp(currentIpData.toString());
-        }
-    });
-}
-
 }  // namespace app

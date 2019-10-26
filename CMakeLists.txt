@@ -5,10 +5,12 @@ set(BUILD_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/build)
 
 set(SRC
         src/Core/Controllers/ProfileController.cpp
+        src/Core/Controllers/LocationController.cpp
         src/Core/Controllers/CountriesController.cpp
         src/Core/Controllers/VpnController.cpp
         src/Core/Models/Country.cpp
         src/Core/Models/CountryListModel.cpp
+        src/Core/Models/Location.cpp
         src/Core/Models/Profile.cpp
         src/Core/Models/VpnConnection.cpp
         src/Core/BackEnd.cpp
@@ -17,13 +19,16 @@ set(SRC
         src/Stuff/Settings.cpp
         src/Vpn/Client.cpp
         src/Vpn/ClientBase.cpp
+        src/Vpn/Event.cpp
         src/main.cpp)
 
 set(SRC_MOC
-        src/Core/Controllers/ProfileController.hpp
         src/Core/Controllers/CountriesController.hpp
+        src/Core/Controllers/LocationController.hpp
+        src/Core/Controllers/ProfileController.hpp
         src/Core/Controllers/VpnController.hpp
         src/Core/Models/CountryListModel.hpp
+        src/Core/Models/Location.hpp
         src/Core/Models/Profile.hpp
         src/Core/Models/VpnConnection.hpp
         src/Core/BackEnd.hpp
@@ -63,7 +68,7 @@ target_link_libraries(app PRIVATE nlohmann_json::nlohmann_json)
 
 # inject properties
 
-target_compile_definitions(app PRIVATE API_URL="$ENV{API_URL}")
+target_compile_definitions(app PRIVATE API_URL="$ENV{API_URL}" IPSTACK_KEY="$ENV{IPSTACK_KEY}")
 
 if (WIN32)
     set(OPENVPN_INCLUDE_DIRS

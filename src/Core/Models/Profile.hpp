@@ -17,10 +17,8 @@ class Profile : public QObject
     Q_PROPERTY(QString userName READ userName NOTIFY dataChanged)
     Q_PROPERTY(QString email READ email NOTIFY dataChanged)
 
-    Q_PROPERTY(QString currentIp READ currentIp NOTIFY currentIpChanged)
-
 public:
-    struct ClientData
+    struct Data
     {
         QString id;
         QString userName;
@@ -34,14 +32,11 @@ public:
 
     bool authorized() const;
 
-    void setData(const ClientData &clientData);
+    void setData(const Data &data);
 
     QString id() const;
     QString userName() const;
     QString email() const;
-
-    void setCurrentIp(const QString &ip);
-    QString currentIp() const;
 
 signals:
     void signInErrorOccured();
@@ -52,14 +47,11 @@ signals:
 
     void authorizedChanged();
     void dataChanged();
-    void currentIpChanged();
 
 private:
     bool m_authorized{};
 
-    std::optional<ClientData> m_clientData{};
-
-    QString m_currentIp{};
+    std::optional<Data> m_data{};
 };
 
 }  // namespace app

@@ -17,11 +17,7 @@ public:
 
     Q_INVOKABLE void enableVpn(const QString &countryId);
 
-    Q_INVOKABLE void updateCurrentIp();
-
 private:
-    void startConfig(const QString &path);
-
     Connection &m_connection;
     Profile &m_profile;
     VpnConnection &m_vpnConnection;

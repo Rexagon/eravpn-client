@@ -31,41 +31,28 @@ bool Profile::authorized() const
 }
 
 
-void Profile::setData(const ClientData &clientData)
+void Profile::setData(const Data &data)
 {
-    m_clientData = clientData;
+    m_data = data;
     emit dataChanged();
 }
 
 
 QString Profile::id() const
 {
-    return m_clientData.has_value() ? m_clientData->id : "";
+    return m_data.has_value() ? m_data->id : "";
 }
 
 
 QString Profile::userName() const
 {
-    return m_clientData.has_value() ? m_clientData->userName : "";
+    return m_data.has_value() ? m_data->userName : "";
 }
 
 
 QString Profile::email() const
 {
-    return m_clientData.has_value() ? m_clientData->email : "";
-}
-
-
-void Profile::setCurrentIp(const QString &ip)
-{
-    m_currentIp = ip;
-    emit currentIpChanged();
-}
-
-
-QString Profile::currentIp() const
-{
-    return m_currentIp;
+    return m_data.has_value() ? m_data->email : "";
 }
 
 }  // namespace app

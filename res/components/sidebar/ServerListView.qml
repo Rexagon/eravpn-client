@@ -60,6 +60,8 @@ ListView {
 
             width: 100
 
+            enabled: !BackEnd.vpnConnection.busy
+
             onClicked: {
                 activated = !activated;
             }

@@ -21,14 +21,14 @@ VpnConnection::~VpnConnection()
 void VpnConnection::start(const QString &config)
 {
     std::unique_lock<std::mutex> lock{m_connectionMutex};
-    if (m_isConnected)
+    if (m_isRunning)
     {
         return;
     }
 
     reset();
 
-    auto client = std::make_unique<vpn::Client>();
+    auto client = std::make_unique<vpn::Client>([this](const vpn::Event &event) { handleEvent(event); });
 
     openvpn::ClientAPI::Config ovpnConfig;
     ovpnConfig.content = config.toUtf8().data();
@@ -42,7 +42,7 @@ void VpnConnection::start(const QString &config)
         return;
     }
 
-    m_isConnected = true;
+    m_isRunning = true;
 
     m_client = std::move(client);
     m_connectionThread = std::make_unique<std::thread>([this] {
@@ -64,17 +64,20 @@ void VpnConnection::start(const QString &config)
         catch (const std::exception &e)
         {
             std::cout << "Connect thread exception: " << e.what() << std::endl;
+            emit runtimeError();
         }
 
         std::unique_lock<std::mutex> lock{m_connectionMutex};
-        m_isConnected = false;
+        m_isRunning = false;
+        m_disconnectRequested = false;
         m_client.reset();
 
         std::cout << "Thread finished" << std::endl;
-        emit connectedChanged();
+        emit busyChanged();
+        emit runningChanged();
     });
 
-    emit connectedChanged();
+    emit runningChanged();
 }
 
 
@@ -82,14 +85,60 @@ void VpnConnection::stop()
 {
     if (m_client != nullptr)
     {
+        m_disconnectRequested = true;
+        emit busyChanged();
+
         m_client->stop();
     }
+}
+
+
+bool VpnConnection::running() const
+{
+    return m_isRunning;
 }
 
 
 bool VpnConnection::connected() const
 {
     return m_isConnected;
+}
+
+
+bool VpnConnection::busy() const
+{
+    return m_isRunning != m_isConnected || m_disconnectRequested;
+}
+
+
+void VpnConnection::handleEvent(const vpn::Event &event)
+{
+    std::unique_lock<std::mutex> lock{m_connectionMutex};
+
+    if (event.fatal)
+    {
+        emit runtimeError();
+        stop();
+        return;
+    }
+
+    const auto type = vpn::parse(event.name);
+    switch (type)
+    {
+        case vpn::Event::Type::Connected:
+            m_isConnected = true;
+            emit connectedChanged();
+            emit busyChanged();
+            return;
+
+        case vpn::Event::Type::Disconnected:
+            m_isConnected = false;
+            emit connectedChanged();
+            return;
+
+        default:
+            return;
+    }
 }
 
 
