@@ -45,10 +45,10 @@ void ProfileController::signInRemembered()
             else
             {
                 m_connection.resetAuthorizationData();
-                emit m_profile.signInErrorOccured();
+                emit m_profile.signInErrorOccurred();
             }
         },
-        [this](const QNetworkReply &) { emit m_profile.signInErrorOccured(); });
+        [this](const QNetworkReply &) { emit m_profile.signInErrorOccurred(); });
 }
 
 
@@ -82,7 +82,7 @@ void ProfileController::signIn(const QString &login, const QString &password)
 
             if (!accessTokenData.isString() || !refreshTokenData.isString() || !clientData.isObject())
             {
-                emit m_profile.signInErrorOccured();
+                emit m_profile.signInErrorOccurred();
                 return;
             }
 
@@ -90,7 +90,7 @@ void ProfileController::signIn(const QString &login, const QString &password)
 
             m_profile.signIn();
         },
-        [this](const QNetworkReply &) { emit m_profile.signInErrorOccured(); });
+        [this](const QNetworkReply &) { emit m_profile.signInErrorOccurred(); });
 }
 
 
@@ -136,7 +136,7 @@ void ProfileController::signUp(bool isAnonymous,
             if (!accessTokenData.isString() || !refreshTokenData.isString() || !clientData.isObject() ||
                 (isAnonymous && !authKeyData.isString()))
             {
-                emit m_profile.signUpErrorOccured();
+                emit m_profile.signUpErrorOccurred();
                 return;
             }
 
@@ -151,7 +151,7 @@ void ProfileController::signUp(bool isAnonymous,
                 emit m_profile.emailVerificationRequested();
             }
         },
-        [this](const QNetworkReply &) { emit m_profile.signUpErrorOccured(); });
+        [this](const QNetworkReply &) { emit m_profile.signUpErrorOccurred(); });
 }
 
 

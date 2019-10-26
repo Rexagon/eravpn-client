@@ -43,6 +43,7 @@ void VpnConnection::start(const QString &config)
     }
 
     m_isRunning = true;
+    m_isConnected = false;
 
     m_client = std::move(client);
     m_connectionThread = std::make_unique<std::thread>([this] {
@@ -78,6 +79,7 @@ void VpnConnection::start(const QString &config)
     });
 
     emit runningChanged();
+    emit busyChanged();
 }
 
 

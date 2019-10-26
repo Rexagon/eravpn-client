@@ -52,8 +52,9 @@ Item {
                 view.switchToMain()
             }
         }
-        onSignInErrorOccured: {
+        onSignInErrorOccurred: {
             notificationArea.notify("Неправильный логин или пароль");
+            console.log("Error");
             view.state = "";
         }
     }

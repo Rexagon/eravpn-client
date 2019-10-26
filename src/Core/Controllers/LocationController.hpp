@@ -1,28 +1,40 @@
 #pragma once
 
+#include <mutex>
+
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QObject>
+#include <QTimer>
 
 #include "../Models/Location.hpp"
 
 namespace app
 {
-class LocationController : public QObject
+class LocationController final : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit LocationController(const QString &ipstackKey, Location &location);
+    explicit LocationController(const QString &ipStackKey, Location &location);
+    ~LocationController();
 
     Q_INVOKABLE void updateCurrentLocation();
 
 private:
+    void replyHandler(QNetworkReply *reply);
+    void requestLocation();
+
     Location &m_location;
 
-    QString m_ipstackKey;
+    QString m_ipStackKey;
 
-    QNetworkAccessManager m_networkManager{};
+    std::mutex m_networkManagerMutex{};
+    bool m_isInProcess{};
+    size_t m_attemptCount{};
+    std::unique_ptr<QNetworkAccessManager> m_networkManager{};
+
+    QTimer m_reconnectionTimer{};
 };
 
 }  // namespace app

@@ -39,9 +39,9 @@ public:
     QString email() const;
 
 signals:
-    void signInErrorOccured();
+    void signInErrorOccurred();
 
-    void signUpErrorOccured();
+    void signUpErrorOccurred();
     void emailVerificationRequested();
     void authKeyCopyRequested(const QString &authKey);
 

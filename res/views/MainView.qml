@@ -26,7 +26,7 @@ Item {
 
     Timer {
         id: locationRefreshTimer
-        interval: 10000; running: false; repeat: false
+        interval: 500; running: false; repeat: false
         onTriggered: BackEnd.locationController.updateCurrentLocation()
     }
 

@@ -54,7 +54,11 @@ ApplicationWindow
                 viewsContainer.push(mainViewComponent)
             }
         }
-        onSignInErrorOccured: {
+        onSignInErrorOccurred: {
+            if (attemptedToSignIn) {
+                return;
+            }
+
             attemptedToSignIn = true;
             viewsContainer.clear();
             viewsContainer.push(loginView)
