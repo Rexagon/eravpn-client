@@ -35,8 +35,10 @@ public:
     void setRefreshToken(const std::optional<QString> &refreshToken);
     std::optional<QString> refreshToken() const;
 
-    void setCountryCertificate(const QString &countryId, const std::optional<CertificateData> &certificateData);
-    std::optional<CertificateData> countryCertificate(const QString &countryId) const;
+    void setCountryCertificate(const QString &userId,
+                               const QString &countryId,
+                               const std::optional<CertificateData> &certificateData);
+    std::optional<CertificateData> countryCertificate(const QString &userId, const QString &countryId) const;
 
 private:
     QSettings m_settings{};

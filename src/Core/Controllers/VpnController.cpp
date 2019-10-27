@@ -58,7 +58,7 @@ void VpnController::start(const QString &countryId)
 {
     auto &settings = Settings::instance();
 
-    auto certificateData = settings.countryCertificate(countryId);
+    auto certificateData = settings.countryCertificate(m_profile.id(), countryId);
     if (certificateData.has_value())
     {
         QFile file{certificateData->path};
@@ -110,7 +110,8 @@ void VpnController::start(const QString &countryId)
             file.write(data);
             file.close();
 
-            Settings::instance().setCountryCertificate(countryId, Settings::CertificateData{id, file.fileName()});
+            Settings::instance().setCountryCertificate(m_profile.id(), countryId,
+                                                       Settings::CertificateData{id, file.fileName()});
 
             m_vpnConnection.start(data);
         };
