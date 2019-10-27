@@ -39,6 +39,15 @@ ApplicationWindow
         }
     }
 
+    Connections {
+        target: BackEnd.profile
+        onAuthorizedChanged: {
+            if (!BackEnd.profile.authorized) {
+                viewsContainer.replace(loginView, StackView.PopTransition);
+            }
+        }
+    }
+
     NotificationArea {
         id: notificationArea
 
@@ -122,12 +131,12 @@ ApplicationWindow
             RegistrationView {
                 onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
                 onSwitchToAuthKey: {
-                    viewsContainer.replace({
-                        item: authKeyView,
-                        properties: {
+                    viewsContainer.replace([
+                        authKeyView,
+                        {
                             authKey
                         }
-                    }, StackView.PushTransition);
+                    ], StackView.PushTransition);
                 }
             }
         }

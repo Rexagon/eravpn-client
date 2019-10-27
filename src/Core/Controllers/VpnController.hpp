@@ -15,7 +15,8 @@ public:
 
     Q_INVOKABLE void updateCertificateList();
 
-    Q_INVOKABLE void enableVpn(const QString &countryId);
+    Q_INVOKABLE void start(const QString &countryId);
+    Q_INVOKABLE void stop();
 
 private:
     Connection &m_connection;

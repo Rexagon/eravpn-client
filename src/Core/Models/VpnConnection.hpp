@@ -39,8 +39,8 @@ public:
     explicit VpnConnection();
     ~VpnConnection() final;
 
-    Q_INVOKABLE void start(const QString &config);
-    Q_INVOKABLE void stop();
+    void start(const QString &config);
+    void stop();
 
     bool running() const;
     bool connected() const;

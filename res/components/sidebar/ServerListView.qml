@@ -61,16 +61,13 @@ ListView {
             width: 100
 
             enabled: !BackEnd.vpnConnection.busy
+            activated: BackEnd.vpnConnection.running
 
             onClicked: {
-                activated = !activated;
-            }
-
-            onActivatedChanged: {
-                if (activated) {
-                    BackEnd.vpnController.enableVpn(countryId);
+                if (BackEnd.vpnConnection.running) {
+                    BackEnd.vpnController.stop();
                 } else {
-                    BackEnd.vpnConnection.stop();
+                    BackEnd.vpnController.start(countryId);
                 }
             }
         }

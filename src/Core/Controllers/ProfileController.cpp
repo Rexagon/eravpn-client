@@ -160,7 +160,12 @@ void ProfileController::signUp(bool isAnonymous,
 
 void ProfileController::signOut()
 {
+    auto &settings = Settings::instance();
+    settings.setAccessToken(std::nullopt);
+    settings.setRefreshToken(std::nullopt);
+
     m_connection.resetAuthorizationData();
+
     m_profile.signOut();
 }
 

@@ -54,7 +54,7 @@ void VpnController::updateCertificateList()
 }
 
 
-void VpnController::enableVpn(const QString &countryId)
+void VpnController::start(const QString &countryId)
 {
     auto &settings = Settings::instance();
 
@@ -142,6 +142,12 @@ void VpnController::enableVpn(const QString &countryId)
     };
 
     m_connection.post(query.arg(escaped(countryId)), configsRequestHandler, errorHandler);
+}
+
+
+void VpnController::stop()
+{
+    m_vpnConnection.stop();
 }
 
 }  // namespace app

@@ -23,6 +23,10 @@ Item {
         windowTitleButtonsVisible = true
     }
 
+    Component.onDestruction: {
+        BackEnd.vpnController.stop();
+    }
+
     Timer {
         id: locationRefreshTimer
         interval: 500; running: false; repeat: false
@@ -90,7 +94,7 @@ Item {
                 }
             }
 
-            Item {
+            /*Item {
                 Layout.fillWidth: true
                 Layout.minimumHeight: 30
 
@@ -100,7 +104,7 @@ Item {
 
                     text: "3651 человек онлайн на 350 серверах"
                 }
-            }
+            }*/
         }
     }
 }

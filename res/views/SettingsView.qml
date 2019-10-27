@@ -154,16 +154,7 @@ Item {
                 Layout.minimumWidth: 120
                 Layout.minimumHeight: 40
 
-                contentItem: Text {
-                    text: "Сохранить"
-                    color: "white"
-
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-
-                    font.family: rootUiFontRegular.name
-                    font.pointSize: 12
-                }
+                text: "Сохранить"
             }
 
             Separator {
