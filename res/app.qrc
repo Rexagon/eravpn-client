@@ -13,21 +13,27 @@
         <file>views/SettingsView.qml</file>
     </qresource>
     <qresource>
+        <file>components/era/EraBackButton.qml</file>
         <file>components/era/EraButton.qml</file>
         <file>components/era/EraLabel.qml</file>
         <file>components/era/EraLink.qml</file>
         <file>components/era/EraPasswordField.qml</file>
         <file>components/era/EraSwitch.qml</file>
         <file>components/era/EraTextField.qml</file>
+
         <file>components/mainview/ConnectionInfo.qml</file>
         <file>components/mainview/PowerButton.qml</file>
+
         <file>components/settings/SettingsGroup.qml</file>
         <file>components/settings/Separator.qml</file>
+
         <file>components/sidebar/ConnectionInfo.qml</file>
         <file>components/sidebar/PremiumActivation.qml</file>
         <file>components/sidebar/ServerActivationButton.qml</file>
         <file>components/sidebar/ServerListView.qml</file>
+
         <file>components/titlebar/TitleBarButton.qml</file>
+
         <file>components/BackgroundMap.qml</file>
         <file>components/Logo.qml</file>
         <file>components/MainSideBar.qml</file>
@@ -47,6 +53,7 @@
         <file>images/flags/nld.png</file>
     </qresource>
     <qresource>
+        <file>images/icon_arrow_left.png</file>
         <file>images/icon_alert.png</file>
         <file>images/icon_house.png</file>
         <file>images/icon_download.png</file>

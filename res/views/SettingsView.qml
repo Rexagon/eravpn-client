@@ -27,6 +27,7 @@ Item {
 
     ScrollView {
         anchors.fill: parent
+        anchors.topMargin: 16
         anchors.leftMargin: 56
         anchors.rightMargin: 16
 
@@ -79,9 +80,26 @@ Item {
             anchors.bottom: parent.bottom
             width: window.width - 56 * 2
 
-            SettingsGroup {
-                z: 100
+            EraBackButton {
+                Layout.alignment: Qt.AlignLeft
 
+                onClicked: view.closeView()
+            }
+
+            Text {
+                text: "Настройки"
+
+                color: "white"
+
+                font.family: futuraHeavyFont.name
+                font.pointSize: 20
+            }
+
+            Item {
+                implicitHeight: 20
+            }
+
+            SettingsGroup {
                 Layout.fillWidth: true
                 Layout.minimumHeight: 100
 
@@ -96,8 +114,6 @@ Item {
             }
 
             SettingsGroup {
-                z: 100
-
                 Layout.fillWidth: true
                 Layout.minimumHeight: 100
 
@@ -120,8 +136,6 @@ Item {
             }
 
             TextArea {
-                z: 100
-
                 Layout.fillWidth: true
                 Layout.minimumHeight: 100
 
@@ -136,8 +150,6 @@ Item {
             }
 
             EraButton {
-                z: 100
-
                 Layout.alignment: Qt.AlignRight
                 Layout.minimumWidth: 120
                 Layout.minimumHeight: 40

@@ -21,6 +21,8 @@ private:
     Connection &m_connection;
     Profile &m_profile;
     VpnConnection &m_vpnConnection;
+
+    QString m_configDirectory;
 };
 
 }  // namespace app

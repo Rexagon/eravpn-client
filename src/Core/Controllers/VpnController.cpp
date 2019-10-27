@@ -9,13 +9,13 @@
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QStandardPaths>
 #include <QSysInfo>
 
 #include "../../Stuff/Settings.hpp"
 
 namespace
 {
-constexpr auto CONFIGS_DIR = "./configs/";
 constexpr auto CONFIG_FILE = "/%1.ovpn";
 
 }  // namespace
@@ -27,6 +27,7 @@ VpnController::VpnController(Connection &connection, Profile &profile, VpnConnec
     , m_connection{connection}
     , m_profile{profile}
     , m_vpnConnection{vpnConnection}
+    , m_configDirectory{QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)}
 {
 }
 
@@ -96,8 +97,8 @@ void VpnController::enableVpn(const QString &countryId)
 
     const auto downloadedConfigHandlerFactory = [this, countryId](const QString &id) {
         return [this, id, countryId](QNetworkReply &reply) {
-            QFile file{QString{CONFIGS_DIR} + QString{CONFIG_FILE}.arg(id)};
-            QDir::current().mkpath(CONFIGS_DIR);
+            QFile file{QString{m_configDirectory} + QString{CONFIG_FILE}.arg(id)};
+            QDir::current().mkpath(m_configDirectory);
 
             if (!file.open(QIODevice::WriteOnly))
             {
