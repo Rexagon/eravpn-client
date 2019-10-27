@@ -34,7 +34,7 @@ Item {
         target: BackEnd.countriesController
 
         onCountriesRequestError: {
-            notificationArea.notify("Countries request error. IsPremium: ", isPremium);
+            notificationArea.notify("Невозможно обновить список стран");
         }
     }
 
@@ -43,6 +43,10 @@ Item {
 
         onConnectedChanged: {
             locationRefreshTimer.start()
+        }
+
+        onRuntimeErrorOccurred: {
+            notificationArea.notify("Ошибка во время работы VPN");
         }
     }
 

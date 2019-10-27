@@ -51,7 +51,7 @@ ApplicationWindow
             if (BackEnd.profile.authorized && !attemptedToSignIn) {
                 attemptedToSignIn = true;
                 viewsContainer.clear();
-                viewsContainer.push(mainViewComponent)
+                viewsContainer.push(mainView)
             }
         }
         onSignInErrorOccurred: {
@@ -132,7 +132,7 @@ ApplicationWindow
 
             LoginView {
                 onSwitchToRegistration: viewsContainer.replace(registrationView, StackView.PopTransition)
-                onSwitchToMain: viewsContainer.replace(mainViewComponent, StackView.PushTransition)
+                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
             }
         }
 
@@ -141,15 +141,15 @@ ApplicationWindow
 
             RegistrationView {
                 onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
-                onSwitchToMain: viewsContainer.replace(mainViewComponent, StackView.PushTransition)
+                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
             }
         }
 
         Component {
-            id: mainViewComponent
+            id: mainView
 
             MainView {
-                id: mainView
+                id: mainViewContent
             }
         }
 
@@ -159,7 +159,6 @@ ApplicationWindow
             ProfileView {
                 onCloseView: {
                     windowTitleBar.state = "";
-                    mainView.updateTitle();
                     viewsContainer.pop();
                 }
             }
@@ -171,7 +170,6 @@ ApplicationWindow
             SettingsView {
                 onCloseView: {
                     windowTitleBar.state = "";
-                    mainView.updateTitle();
                     viewsContainer.pop();
                 }
             }

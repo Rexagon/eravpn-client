@@ -28,6 +28,7 @@ LocationController::LocationController(const QString &ipStackKey, Location &loca
     m_reconnectionTimer.setSingleShot(true);
 
     connect(&m_reconnectionTimer, &QTimer::timeout, this, &LocationController::requestLocation);
+    connect(this, &LocationController::tryReconnect, [this] { m_reconnectionTimer.start(); });
 }
 
 
@@ -56,14 +57,11 @@ void LocationController::replyHandler(QNetworkReply *reply)
     if (hasError && m_attemptCount++ < MAX_ATTEMPT_COUNT)
     {
         std::cout << "Attempt to reconnect" << std::endl;
-        m_reconnectionTimer.start();
+        emit tryReconnect();
         return;
     }
 
-    std::cout << "Before mutex" << std::endl;
     std::unique_lock<std::mutex> lock{m_networkManagerMutex};
-    std::cout << "After mutex" << std::endl;
-
     m_isInProcess = false;
     m_attemptCount = 0;
 

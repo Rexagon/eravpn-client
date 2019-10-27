@@ -10,11 +10,17 @@ namespace app
 VpnConnection::VpnConnection()
     : QObject{nullptr}
 {
+    m_statisticsTimer.setInterval(1000);
+    m_statisticsTimer.setSingleShot(false);
+
+    connect(&m_statisticsTimer, &QTimer::timeout, this, &VpnConnection::updateStatistics);
+    connect(this, &VpnConnection::connectedChanged, this, &VpnConnection::updateStatisticsTimer);
 }
 
 
 VpnConnection::~VpnConnection()
 {
+    m_statisticsTimer.stop();
     reset();
 }
 
@@ -38,7 +44,7 @@ void VpnConnection::start(const QString &config)
     if (eval.error)
     {
         std::cerr << "Eval error: " << eval.message << std::endl;
-        emit connectionError();
+        emit connectionErrorOccurred();
         return;
     }
 
@@ -65,7 +71,7 @@ void VpnConnection::start(const QString &config)
         catch (const std::exception &e)
         {
             std::cout << "Connect thread exception: " << e.what() << std::endl;
-            emit runtimeError();
+            emit runtimeErrorOccurred();
         }
 
         std::unique_lock<std::mutex> lock{m_connectionMutex};
@@ -85,13 +91,15 @@ void VpnConnection::start(const QString &config)
 
 void VpnConnection::stop()
 {
-    if (m_client != nullptr)
+    if (m_client == nullptr)
     {
-        m_disconnectRequested = true;
-        emit busyChanged();
-
-        m_client->stop();
+        return;
     }
+
+    m_disconnectRequested = true;
+    emit busyChanged();
+
+    m_client->stop();
 }
 
 
@@ -113,13 +121,50 @@ bool VpnConnection::busy() const
 }
 
 
+quint64 VpnConnection::bytesIn() const
+{
+    return m_statistics.bytesIn;
+}
+
+
+quint64 VpnConnection::bytesInDelta() const
+{
+    return m_deltaStatistics.bytesIn;
+}
+
+
+quint64 VpnConnection::bytesOut() const
+{
+    return m_statistics.bytesOut;
+}
+
+
+quint64 VpnConnection::bytesOutDelta() const
+{
+    return m_deltaStatistics.bytesOut;
+}
+
+
+void VpnConnection::updateStatisticsTimer()
+{
+    if (connected())
+    {
+        m_statisticsTimer.start();
+    }
+    else
+    {
+        m_statisticsTimer.stop();
+    }
+}
+
+
 void VpnConnection::handleEvent(const vpn::Event &event)
 {
     std::unique_lock<std::mutex> lock{m_connectionMutex};
 
     if (event.fatal)
     {
-        emit runtimeError();
+        emit runtimeErrorOccurred();
         stop();
         return;
     }
@@ -134,8 +179,12 @@ void VpnConnection::handleEvent(const vpn::Event &event)
             return;
 
         case vpn::Event::Type::Disconnected:
+            m_statistics = Statistics{};
+            m_deltaStatistics = Statistics{};
+
             m_isConnected = false;
             emit connectedChanged();
+            emit statisticsChanged();
             return;
 
         default:
@@ -152,6 +201,24 @@ void VpnConnection::reset()
     {
         m_connectionThread->join();
     }
+}
+
+
+void VpnConnection::updateStatistics()
+{
+    if (!connected() || m_client == nullptr)
+    {
+        return;
+    }
+
+    const auto info = m_client->transport_stats();
+    const auto &in = static_cast<quint64>(info.bytesIn);
+    const auto &out = static_cast<quint64>(info.bytesOut);
+
+    m_deltaStatistics = Statistics{in - m_statistics.bytesIn, out - m_statistics.bytesOut};
+    m_statistics = Statistics{in, out};
+
+    emit statisticsChanged();
 }
 
 }  // namespace app

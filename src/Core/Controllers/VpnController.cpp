@@ -91,7 +91,7 @@ void VpnController::enableVpn(const QString &countryId)
 
     const auto errorHandler = [this](const QNetworkReply &) {
         std::cout << "NETWORK ERROR" << std::endl;
-        emit m_vpnConnection.connectionError();
+        emit m_vpnConnection.connectionErrorOccurred();
     };
 
     const auto downloadedConfigHandlerFactory = [this, countryId](const QString &id) {
@@ -101,7 +101,7 @@ void VpnController::enableVpn(const QString &countryId)
 
             if (!file.open(QIODevice::WriteOnly))
             {
-                emit m_vpnConnection.connectionError();
+                emit m_vpnConnection.connectionErrorOccurred();
                 return;
             }
 
@@ -121,14 +121,14 @@ void VpnController::enableVpn(const QString &countryId)
         if (!ovpnConfigFilesData.isArray())
         {
             std::cout << "RESULT IS NOT ARRAY" << std::endl;
-            emit m_vpnConnection.connectionError();
+            emit m_vpnConnection.connectionErrorOccurred();
             return;
         }
 
         const auto ovpnConfigFiles = ovpnConfigFilesData.toArray();
         if (ovpnConfigFiles.empty())
         {
-            emit m_vpnConnection.connectionError();
+            emit m_vpnConnection.connectionErrorOccurred();
             return;
         }
 

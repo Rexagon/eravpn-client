@@ -13,6 +13,7 @@ Item {
     readonly property string semiDarkBackgroundColor: "#122b5e"
     readonly property string darkBackgroundColor: "#0f1444"
     readonly property string redColor: "#ff4747"
+    readonly property string blueColor: "#00d2f4"
 
     property string currentServersList: "free"
 

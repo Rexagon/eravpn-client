@@ -43,6 +43,9 @@
     </qresource>
     <qresource>
         <file>images/icon_alert.png</file>
+        <file>images/icon_house.png</file>
+        <file>images/icon_download.png</file>
+        <file>images/icon_upload.png</file>
         <file>images/icon_crown.png</file>
         <file>images/icon_minimize.png</file>
         <file>images/icon_power_off.png</file>

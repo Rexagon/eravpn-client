@@ -6,10 +6,17 @@ import com.eravpn.backend 1.0
 import "../era"
 
 ColumnLayout {
-    readonly property string lightBlueColor: "#00c5f0"
+    id: connectionInfo
+
+    readonly property string blueColor: "#00c5f0"
+    readonly property string redColor: "#ff4747"
     readonly property string darkBlueColor: "#0062f7"
 
     spacing: 0
+
+    property bool connected: {
+        return BackEnd.vpnConnection.connected
+    }
 
     Text {
         Layout.fillWidth: true
@@ -17,8 +24,8 @@ ColumnLayout {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
 
-        text: "Подключено"
-        color: lightBlueColor
+        text: connectionInfo.connected ? "Подключено" : "Не подключено"
+        color: connectionInfo.connected ? blueColor : redColor
         font.family: futuraMediumFont.name
         font.pointSize: 16
     }

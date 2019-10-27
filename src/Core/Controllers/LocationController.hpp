@@ -17,9 +17,12 @@ class LocationController final : public QObject
 
 public:
     explicit LocationController(const QString &ipStackKey, Location &location);
-    ~LocationController();
+    ~LocationController() override;
 
     Q_INVOKABLE void updateCurrentLocation();
+
+signals:
+    void tryReconnect();
 
 private:
     void replyHandler(QNetworkReply *reply);
