@@ -39,6 +39,13 @@ Item {
         BackEnd.profileController.signIn(identificatorInput.text, passwordInput.text);
     }
 
+    property bool isInputValid: {
+        const password = passwordInput.text;
+
+        return identificatorInput.text.length > 0 &&
+                password.length > 0 && password.length <= 16;
+    }
+
     StackView.onActivating: {
         windowTitleText = "Вход в аккаунт"
         windowTitleButtonsVisible = false
@@ -48,7 +55,6 @@ Item {
         target: BackEnd.profile
         onAuthorizedChanged: {
             if (BackEnd.profile.authorized) {
-                console.log("Authorization success handler");
                 view.switchToMain()
             }
         }
@@ -72,7 +78,6 @@ Item {
             PropertyChanges {
                 target: loginButton
                 enabled: false
-                //contentItem: loadingSpinner
             }
         }
     ]
@@ -146,13 +151,6 @@ Item {
                 }
             }
 
-            property bool isInputValid: {
-                const password = passwordInput.text;
-
-                return identificatorInput.text.length > 0 &&
-                        password.length > 0 && password.length <= 16;
-            }
-
             EraTextField {
                 id: identificatorInput
 
@@ -178,7 +176,7 @@ Item {
 
                 text: "Вход"
 
-                enabled: view.state === "" && parent.isInputValid
+                enabled: view.isInputValid
 
                 onClicked: formAction()
 

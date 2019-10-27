@@ -18,7 +18,7 @@ Item {
         BackEnd.countriesController.refreshCountries(true);
     }
 
-    StackView.onActivated: {
+    StackView.onActivating: {
         windowTitleText = "EraVPN"
         windowTitleButtonsVisible = true
     }

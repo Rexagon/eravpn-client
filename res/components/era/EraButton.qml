@@ -88,24 +88,31 @@ Button {
     }
 
     onPressed: {
-        if (enabled) {
-            state = "pressed"
+        if (!enabled) {
+            state = "disabled";
+            return;
         }
+
+        state = "pressed";
     }
 
     onReleased: {
-        if (enabled) {
-            state = hovered ? "hovered" : "";
+        if (!enabled) {
+            state = "disabled";
+            return;
         }
+
+        state = hovered ? "hovered" : "";
     }
 
     onHoveredChanged: {
         if (!enabled) {
-            state = "";
+            state = "disabled";
             return;
         }
 
         if (pressed) {
+            state = "pressed";
             return;
         }
 

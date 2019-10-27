@@ -58,7 +58,7 @@ Item {
             view.switchToAuthKey(authKey);
         }
         onSignUpErrorOccurred: {
-            //view.state = "";
+            view.state = "";
             notificationArea.notify("Ошибка регистрации");
         }
     }

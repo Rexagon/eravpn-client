@@ -45,8 +45,9 @@ ApplicationWindow
         z: 1000
 
         width: 300
+        height: 0
+
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
         anchors.top: parent.top
 
         anchors.topMargin: 50

@@ -46,4 +46,17 @@ ListView {
             }
         }
     }
+
+    MouseArea {
+        anchors.fill: parent
+        enabled: false
+        propagateComposedEvents: true
+        hoverEnabled: false
+
+        onClicked: mouse.accepted = false
+        onReleased: mouse.accepted = false
+        onEntered: mouse.accepted = false
+        onExited:  mouse.accepted = false
+        onWheel:  mouse.accepted = false
+    }
 }

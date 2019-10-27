@@ -17,9 +17,12 @@
         <file>components/era/EraLabel.qml</file>
         <file>components/era/EraLink.qml</file>
         <file>components/era/EraPasswordField.qml</file>
+        <file>components/era/EraSwitch.qml</file>
         <file>components/era/EraTextField.qml</file>
         <file>components/mainview/ConnectionInfo.qml</file>
         <file>components/mainview/PowerButton.qml</file>
+        <file>components/settings/SettingsGroup.qml</file>
+        <file>components/settings/Separator.qml</file>
         <file>components/sidebar/ConnectionInfo.qml</file>
         <file>components/sidebar/PremiumActivation.qml</file>
         <file>components/sidebar/ServerActivationButton.qml</file>
