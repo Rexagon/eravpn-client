@@ -11,6 +11,12 @@ class Settings
     explicit Settings() = default;
 
 public:
+    struct CertificateData
+    {
+        QString id;
+        QString path;
+    };
+
     static Settings &instance();
 
     Settings(const Settings &) = delete;
@@ -29,8 +35,8 @@ public:
     void setRefreshToken(const std::optional<QString> &refreshToken);
     std::optional<QString> refreshToken() const;
 
-    void setCountryCertificatePath(const QString &countryId, const std::optional<QString> &path);
-    std::optional<QString> countryCertificatePath(const QString &countryId) const;
+    void setCountryCertificate(const QString &countryId, const std::optional<CertificateData> &certificateData);
+    std::optional<CertificateData> countryCertificate(const QString &countryId) const;
 
 private:
     QSettings m_settings{};

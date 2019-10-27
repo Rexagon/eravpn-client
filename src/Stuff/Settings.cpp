@@ -9,7 +9,8 @@ constexpr auto USER_IDENTIFIER = "user/identifier";
 constexpr auto ACCESS_TOKEN = "user/accessToken";
 constexpr auto REFRESH_TOKEN = "user/refreshToken";
 
-constexpr auto COUNTRY_CERTIFICATE = "vpn/certificate/%1";
+constexpr auto COUNTRY_CERTIFICATE_ID = "vpn/certificate/%1/id";
+constexpr auto COUNTRY_CERTIFICATE_PATH = "vpn/certificate/%1/path";
 
 template <typename T>
 void set(QSettings &settings, const QString &key, const std::optional<T> &value)
@@ -90,15 +91,27 @@ std::optional<QString> Settings::refreshToken() const
 }
 
 
-void Settings::setCountryCertificatePath(const QString &countryId, const std::optional<QString> &path)
+void Settings::setCountryCertificate(const QString &countryId, const std::optional<CertificateData> &certificateData)
 {
-    set(m_settings, QString{COUNTRY_CERTIFICATE}.arg(countryId), path);
+    set(m_settings, QString{COUNTRY_CERTIFICATE_ID}.arg(countryId),
+        certificateData.has_value() ? std::optional{certificateData->id} : std::nullopt);
+
+    set(m_settings, QString{COUNTRY_CERTIFICATE_PATH}.arg(countryId),
+        certificateData.has_value() ? std::optional{certificateData->path} : std::nullopt);
 }
 
 
-std::optional<QString> Settings::countryCertificatePath(const QString &countryId) const
+std::optional<Settings::CertificateData> Settings::countryCertificate(const QString &countryId) const
 {
-    return get<QString>(m_settings, QString{COUNTRY_CERTIFICATE}.arg(countryId));
+    const auto idData = get<QString>(m_settings, QString{COUNTRY_CERTIFICATE_ID}.arg(countryId));
+    const auto pathData = get<QString>(m_settings, QString{COUNTRY_CERTIFICATE_PATH}.arg(countryId));
+
+    if (!idData.has_value() || !pathData.has_value())
+    {
+        return std::nullopt;
+    }
+
+    return CertificateData{*idData, *pathData};
 }
 
 }  // namespace app

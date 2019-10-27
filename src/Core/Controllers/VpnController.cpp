@@ -58,10 +58,10 @@ void VpnController::enableVpn(const QString &countryId)
 {
     auto &settings = Settings::instance();
 
-    auto certificatePath = settings.countryCertificatePath(countryId);
-    if (certificatePath.has_value())
+    auto certificateData = settings.countryCertificate(countryId);
+    if (certificateData.has_value())
     {
-        QFile file{*certificatePath};
+        QFile file{certificateData->path};
 
         if (file.open(QIODevice::ReadOnly | QIODevice::ExistingOnly))
         {
@@ -110,7 +110,7 @@ void VpnController::enableVpn(const QString &countryId)
             file.write(data);
             file.close();
 
-            Settings::instance().setCountryCertificatePath(countryId, file.fileName());
+            Settings::instance().setCountryCertificate(countryId, Settings::CertificateData{id, file.fileName()});
 
             m_vpnConnection.start(data);
         };
