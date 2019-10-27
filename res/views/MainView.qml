@@ -11,17 +11,16 @@ import "../components/mainview"
 Item {
     id: view
 
-    function updateTitle() {
-        windowTitleText = "EraVPN"
-    }
-
     Component.onCompleted: {
-        windowTitleButtonsVisible = true
-
         BackEnd.locationController.updateCurrentLocation();
 
         BackEnd.countriesController.refreshCountries(false);
         BackEnd.countriesController.refreshCountries(true);
+    }
+
+    StackView.onActivated: {
+        windowTitleText = "EraVPN"
+        windowTitleButtonsVisible = true
     }
 
     Timer {

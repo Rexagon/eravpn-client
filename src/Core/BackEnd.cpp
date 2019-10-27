@@ -23,6 +23,12 @@ BackEnd &BackEnd::instance()
 }
 
 
+ClipboardController *BackEnd::clipboardController()
+{
+    return &m_clipboardController;
+}
+
+
 CountriesController *BackEnd::countriesController()
 {
     return &m_countriesController;

@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include "Connection.hpp"
+#include "Controllers/ClipboardController.hpp"
 #include "Controllers/CountriesController.hpp"
 #include "Controllers/LocationController.hpp"
 #include "Controllers/ProfileController.hpp"
@@ -17,6 +18,7 @@ class BackEnd : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(ClipboardController *clipboardController READ clipboardController CONSTANT)
     Q_PROPERTY(ProfileController *profileController READ profileController CONSTANT)
     Q_PROPERTY(LocationController *locationController READ locationController CONSTANT)
     Q_PROPERTY(CountriesController *countriesController READ countriesController CONSTANT)
@@ -39,6 +41,7 @@ public:
     BackEnd(BackEnd &&) = delete;
     BackEnd &operator=(BackEnd &&) = delete;
 
+    ClipboardController *clipboardController();
     ProfileController *profileController();
     LocationController *locationController();
     CountriesController *countriesController();
@@ -61,6 +64,7 @@ private:
     Profile m_profile{};
     Location m_location{};
 
+    ClipboardController m_clipboardController{};
     CountriesController m_countriesController;
     LocationController m_locationController;
     ProfileController m_profileController;

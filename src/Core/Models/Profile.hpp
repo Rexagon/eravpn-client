@@ -16,13 +16,23 @@ class Profile : public QObject
     Q_PROPERTY(QString id READ id NOTIFY dataChanged)
     Q_PROPERTY(QString userName READ userName NOTIFY dataChanged)
     Q_PROPERTY(QString email READ email NOTIFY dataChanged)
+    Q_PROPERTY(Status status READ status NOTIFY dataChanged)
 
 public:
+    enum class Status
+    {
+        Unknown,
+        New,
+        Active
+    };
+    Q_ENUM(Status)
+
     struct Data
     {
         QString id;
         QString userName;
         QString email;
+        Status status;
     };
 
     explicit Profile();
@@ -37,12 +47,12 @@ public:
     QString id() const;
     QString userName() const;
     QString email() const;
+    Status status() const;
 
 signals:
     void signInErrorOccurred();
 
     void signUpErrorOccurred();
-    void emailVerificationRequested();
     void authKeyCopyRequested(const QString &authKey);
 
     void authorizedChanged();

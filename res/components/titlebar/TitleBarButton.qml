@@ -59,9 +59,7 @@ Rectangle {
         }
 
         onClicked: {
-            if (!component.activated) {
-                component.clicked()
-            }
+            component.clicked()
         }
     }
 }

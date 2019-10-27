@@ -22,8 +22,6 @@ ApplicationWindow
     property string windowTitleText: ""
     property bool windowTitleButtonsVisible: false
 
-    property bool attemptedToSignIn: false
-
     id: window
     visible: true
     width: 900
@@ -38,30 +36,6 @@ ApplicationWindow
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#16295e" }
             GradientStop { position: 1.0; color: "#0f1444" }
-        }
-    }
-
-    Component.onCompleted: {
-        BackEnd.profileController.signInRemembered();
-    }
-
-    Connections {
-        target: BackEnd.profile
-        onAuthorizedChanged: {
-            if (BackEnd.profile.authorized && !attemptedToSignIn) {
-                attemptedToSignIn = true;
-                viewsContainer.clear();
-                viewsContainer.push(mainView)
-            }
-        }
-        onSignInErrorOccurred: {
-            if (attemptedToSignIn) {
-                return;
-            }
-
-            attemptedToSignIn = true;
-            viewsContainer.clear();
-            viewsContainer.push(loginView)
         }
     }
 
@@ -114,6 +88,11 @@ ApplicationWindow
                 }
             }
 
+            onBackToMain: {
+                windowTitleBar.state = "";
+                viewsContainer.pop();
+            }
+
             onMinimizeRequested: window.visibility = ApplicationWindow.Minimized
             onCloseRequested: window.close()
         }
@@ -141,6 +120,21 @@ ApplicationWindow
 
             RegistrationView {
                 onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
+                onSwitchToAuthKey: {
+                    viewsContainer.replace({
+                        item: authKeyView,
+                        properties: {
+                            authKey
+                        }
+                    }, StackView.PushTransition);
+                }
+            }
+        }
+
+        Component {
+            id: authKeyView
+
+            AuthKeyView {
                 onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
             }
         }
@@ -149,7 +143,6 @@ ApplicationWindow
             id: mainView
 
             MainView {
-                id: mainViewContent
             }
         }
 
@@ -178,25 +171,9 @@ ApplicationWindow
         Component {
             id: loaderStubView
 
-            Item {
-                anchors.fill: parent
-
-                Image {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    width: 30
-                    height: 30
-
-                    source: "../images/loading.svg"
-
-                    RotationAnimation on rotation {
-                        loops: Animation.Infinite
-                        duration: 1000
-                        from: 0
-                        to: 360
-                    }
-                }
+            RememberedSignInView {
+                onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
+                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
             }
         }
     }

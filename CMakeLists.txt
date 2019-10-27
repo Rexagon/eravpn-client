@@ -4,6 +4,7 @@ project(eravpn-client)
 set(BUILD_OUTPUT_DIR ${CMAKE_SOURCE_DIR}/build)
 
 set(SRC
+        src/Core/Controllers/ClipboardController.cpp
         src/Core/Controllers/ProfileController.cpp
         src/Core/Controllers/LocationController.cpp
         src/Core/Controllers/CountriesController.cpp
@@ -23,6 +24,7 @@ set(SRC
         src/main.cpp)
 
 set(SRC_MOC
+        src/Core/Controllers/ClipboardController.hpp
         src/Core/Controllers/CountriesController.hpp
         src/Core/Controllers/LocationController.hpp
         src/Core/Controllers/ProfileController.hpp

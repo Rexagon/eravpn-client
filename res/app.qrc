@@ -4,10 +4,12 @@
         <file>main.qml</file>
     </qresource>
     <qresource>
+        <file>views/AuthKeyView.qml</file>
         <file>views/LoginView.qml</file>
         <file>views/MainView.qml</file>
         <file>views/RegistrationView.qml</file>
         <file>views/ProfileView.qml</file>
+        <file>views/RememberedSignInView.qml</file>
         <file>views/SettingsView.qml</file>
     </qresource>
     <qresource>

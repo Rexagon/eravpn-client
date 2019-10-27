@@ -59,9 +59,10 @@ void ProfileController::signIn(const QString &login, const QString &password)
     login(login: "%1", password: "%2") {
       ... on ClientLogin {
         client {
-            id
-            username
-            email
+          id
+          status
+          username
+          email
         }
         accessToken
         refreshToken
@@ -78,6 +79,7 @@ void ProfileController::signIn(const QString &login, const QString &password)
 
             const auto accessTokenData = loginData["accessToken"];
             const auto refreshTokenData = loginData["refreshToken"];
+
             const auto clientData = loginData["client"];
 
             if (!accessTokenData.isString() || !refreshTokenData.isString() || !clientData.isObject())
@@ -105,6 +107,7 @@ void ProfileController::signUp(bool isAnonymous,
       ... on ClientRegistration {
         client {
           id
+          status
           username
           email
           authKey
@@ -132,9 +135,10 @@ void ProfileController::signUp(bool isAnonymous,
 
             const auto clientData = registrationData["client"];
             const auto authKeyData = clientData["authKey"];
+            const auto statusData = clientData["status"];
 
             if (!accessTokenData.isString() || !refreshTokenData.isString() || !clientData.isObject() ||
-                (isAnonymous && !authKeyData.isString()))
+                (isAnonymous && !authKeyData.isString()) || !statusData.isString())
             {
                 emit m_profile.signUpErrorOccurred();
                 return;
@@ -145,11 +149,10 @@ void ProfileController::signUp(bool isAnonymous,
             if (isAnonymous)
             {
                 emit m_profile.authKeyCopyRequested(authKeyData.toString());
+                return;
             }
-            else
-            {
-                emit m_profile.emailVerificationRequested();
-            }
+
+            m_profile.signIn();
         },
         [this](const QNetworkReply &) { emit m_profile.signUpErrorOccurred(); });
 }
@@ -172,10 +175,22 @@ void ProfileController::fillProfile(const QJsonObject &clientData,
 
     m_connection.setAuthorizationData(Connection::AuthorizationData{accessToken, refreshToken});
 
+    const auto statusData = clientData["status"].toString();
+    auto clientStatus = Profile::Status::Unknown;
+    if (statusData == "new")
+    {
+        clientStatus = Profile::Status::New;
+    }
+    else if (statusData == "active")
+    {
+        clientStatus = Profile::Status::Active;
+    }
+
     m_profile.setData(Profile::Data{
-        clientData["id"].toString(""),
-        clientData["username"].toString(""),
-        clientData["email"].toString(""),
+        clientData["id"].toString(""),        //
+        clientData["username"].toString(""),  //
+        clientData["email"].toString(""),     //
+        clientStatus                          //
     });
 }
 

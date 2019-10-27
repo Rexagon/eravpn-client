@@ -9,34 +9,57 @@ import "../components/era"
 
 Item {
     signal switchToLogin
-    signal switchToMain
+    signal switchToAuthKey(string authKey)
 
     property bool isAnonymous: false
 
     id: view
 
     function formAction() {
-        BackEnd.authController.signUp(isAnonymous, identificatorInput.text, passwordInput.text, promoCodeInput.text);
+        view.state = "loading";
+        BackEnd.profileController.signUp(isAnonymous, identificatorInput.text, passwordInput.text, promoCodeInput.text);
     }
 
-    Component.onCompleted: {
+    StackView.onActivating: {
         windowTitleText = "Регистрация"
         windowTitleButtonsVisible = false
     }
 
+    states: [
+        State {
+            name: "loading"
+            PropertyChanges {
+                target: identificatorInput
+                enabled: false
+            }
+            PropertyChanges {
+                target: passwordInput
+                enabled: false
+            }
+            PropertyChanges {
+                target: passwordRepeatInput
+                enabled: false
+            }
+            PropertyChanges {
+                target: promoCodeInput
+                enabled: false
+            }
+            PropertyChanges {
+                target: registrationButton
+                enabled: false
+                //contentItem: loadingSpinner
+            }
+        }
+    ]
+
     Connections {
-        target: BackEnd.authController
-        onRegisteredWithEmail: {
-            console.log("Registered with email");
-            view.switchToMain()
+        target: BackEnd.profile
+        onAuthKeyCopyRequested: {
+            view.switchToAuthKey(authKey);
         }
-        onRegisteredWithLogin: {
-            console.log("Registration with login. Auth key:");
-            console.log(authKey);
-        }
-        onRegistrationError: {
-            console.log("Registration error handler");
+        onSignUpErrorOccurred: {
             //view.state = "";
+            notificationArea.notify("Ошибка регистрации");
         }
     }
 
@@ -90,6 +113,10 @@ Item {
                     onEntered: emailMethodSelectionLabel.font.underline = isAnonymous
                     onExited: emailMethodSelectionLabel.font.underline = false
                     onPressed: {
+                        if (view.state != "") {
+                            return;
+                        }
+
                         emailMethodSelectionLabel.font.underline = false
                         isAnonymous = false
                     }
@@ -123,6 +150,10 @@ Item {
                     onEntered: anonymousMethodSelectionLabel.font.underline = !isAnonymous
                     onExited: anonymousMethodSelectionLabel.font.underline = false
                     onPressed: {
+                        if (view.state != "") {
+                            return;
+                        }
+
                         anonymousMethodSelectionLabel.font.underline = false
                         isAnonymous = true
                     }
@@ -139,8 +170,8 @@ Item {
             spacing: 10
 
             Keys.onPressed: {
-                if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
-                    view.loginAction();
+                if (isInputValid && (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)) {
+                    view.formAction();
                 }
             }
 
@@ -195,7 +226,7 @@ Item {
 
                 text: isAnonymous ? "Сгенерировать код-пароль" : "Зарегистрироваться"
 
-                enabled: parent.isInputValid
+                enabled: view.state === "" && parent.isInputValid
 
                 onClicked: formAction()
 

@@ -13,6 +13,7 @@ Rectangle {
 
     signal openProfile
     signal openSettings
+    signal backToMain
 
     signal closeRequested
     signal minimizeRequested
@@ -54,7 +55,9 @@ Rectangle {
 
             iconSource: "../../images/icon_profile.png"
             onClicked: {
-                if (component.state !== "profile_opened") {
+                if (component.state === "profile_opened") {
+                    component.backToMain();
+                } else {
                     component.state = "profile_opened";
                     component.openProfile();
                 }
@@ -68,7 +71,9 @@ Rectangle {
 
             iconSource: "../../images/icon_settings.png"
             onClicked: {
-                if (component.state !== "settings_opened") {
+                if (component.state === "settings_opened") {
+                    component.backToMain();
+                } else {
                     component.state = "settings_opened";
                     component.openSettings();
                 }

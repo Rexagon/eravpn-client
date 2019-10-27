@@ -55,4 +55,10 @@ QString Profile::email() const
     return m_data.has_value() ? m_data->email : "";
 }
 
+
+Profile::Status Profile::status() const
+{
+    return m_data.has_value() ? m_data->status : Status::Unknown;
+}
+
 }  // namespace app

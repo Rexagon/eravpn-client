@@ -10,7 +10,7 @@ Item {
 
     id: view
 
-    Component.onCompleted: {
+    StackView.onActivating: {
         windowTitleText = "Настройки"
         windowTitleButtonsVisible = true
     }

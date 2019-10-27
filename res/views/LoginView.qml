@@ -34,12 +34,12 @@ Item {
 
     id: view
 
-    function loginAction() {
+    function formAction() {
         view.state = "loading";
         BackEnd.profileController.signIn(identificatorInput.text, passwordInput.text);
     }
 
-    Component.onCompleted: {
+    StackView.onActivating: {
         windowTitleText = "Вход в аккаунт"
         windowTitleButtonsVisible = false
     }
@@ -75,7 +75,6 @@ Item {
                 //contentItem: loadingSpinner
             }
         }
-
     ]
 
     BackgroundMap {
@@ -142,8 +141,8 @@ Item {
             spacing: 10
 
             Keys.onPressed: {
-                if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
-                    view.loginAction();
+                if (isInputValid && (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)) {
+                    view.formAction();
                 }
             }
 
@@ -179,9 +178,9 @@ Item {
 
                 text: "Вход"
 
-                enabled: parent.isInputValid
+                enabled: view.state === "" && parent.isInputValid
 
-                onClicked: loginAction()
+                onClicked: formAction()
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
