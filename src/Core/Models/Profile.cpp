@@ -61,4 +61,10 @@ Profile::Status Profile::status() const
     return m_data.has_value() ? m_data->status : Status::Unknown;
 }
 
+
+QString Profile::ovpnConfigPassword() const
+{
+    return m_data.has_value() ? m_data->ovpnConfigPassword : "";
+}
+
 }  // namespace app

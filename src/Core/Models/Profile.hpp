@@ -32,6 +32,7 @@ public:
         QString id;
         QString userName;
         QString email;
+        QString ovpnConfigPassword;
         Status status;
     };
 
@@ -47,6 +48,7 @@ public:
     QString id() const;
     QString userName() const;
     QString email() const;
+    QString ovpnConfigPassword() const;
     Status status() const;
 
 signals:

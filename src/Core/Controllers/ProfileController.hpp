@@ -24,7 +24,8 @@ public:
     Q_INVOKABLE void signOut();
 
 private:
-    void fillProfile(const QJsonObject &clientData, const QString &accessToken, const QString &refreshToken);
+    void setAuthData(const QString &accessToken, const QString &refreshToken);
+    void setProfileData(const QJsonObject &profileData);
 
     Connection &m_connection;
     Profile &m_profile;

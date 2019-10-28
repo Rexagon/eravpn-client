@@ -5,7 +5,6 @@
 
 namespace
 {
-constexpr auto USER_IDENTIFIER = "user/identifier";
 constexpr auto ACCESS_TOKEN = "user/accessToken";
 constexpr auto REFRESH_TOKEN = "user/refreshToken";
 
@@ -52,18 +51,6 @@ Settings &Settings::instance()
 void Settings::reset()
 {
     m_settings.clear();
-}
-
-
-void Settings::setUserIdentifier(const std::optional<QString> &identifier)
-{
-    set(m_settings, USER_IDENTIFIER, identifier);
-}
-
-
-std::optional<QString> Settings::userIdentifier() const
-{
-    return get<QString>(m_settings, USER_IDENTIFIER);
 }
 
 

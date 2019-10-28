@@ -31,24 +31,57 @@ void ProfileController::signInRemembered()
     }
 })"};
 
+    const auto clientQuery = QString{R"(query {
+  client {
+    getData {
+      ... on ClientResult {
+        client {
+          id
+          status
+          username
+          email
+          authKey
+          ovpnConfigPassword
+        }
+      }
+    }
+  }
+})"};
+
+    const auto emitConnectionError = [this] {
+        m_connection.resetAuthorizationData();
+        emit m_profile.signInErrorOccurred();
+    };
+
+    const auto errorHandler = [emitConnectionError](const QNetworkReply &) { emitConnectionError(); };
+
+    const auto clientDataHandler = [this, clientQuery, emitConnectionError](const QJsonDocument &reply) {
+        const auto clientData = reply["data"]["client"]["getData"]["client"];
+
+        if (!clientData.isObject())
+        {
+            emitConnectionError();
+        }
+
+        setProfileData(clientData.toObject());
+        m_profile.signIn();
+    };
+
     m_connection.post(
         query,
-        [this](const QJsonDocument &reply) {
+        [this, emitConnectionError, clientQuery, clientDataHandler, errorHandler](const QJsonDocument &reply) {
             const auto resultData = reply["data"]["accessToken"]["checkAccessToken"];
+            const auto success = resultData["success"].toBool(false);
 
-            const auto successData = resultData["success"];
+            if (!success)
+            {
+                emitConnectionError();
+                return;
+            }
 
-            if (successData.toBool(false))
-            {
-                m_profile.signIn();
-            }
-            else
-            {
-                m_connection.resetAuthorizationData();
-                emit m_profile.signInErrorOccurred();
-            }
+            m_connection.post(clientQuery, clientDataHandler, errorHandler);
         },
-        [this](const QNetworkReply &) { emit m_profile.signInErrorOccurred(); });
+        errorHandler);
 }
 
 
@@ -63,6 +96,7 @@ void ProfileController::signIn(const QString &login, const QString &password)
           status
           username
           email
+          ovpnConfigPassword
         }
         accessToken
         refreshToken
@@ -88,7 +122,8 @@ void ProfileController::signIn(const QString &login, const QString &password)
                 return;
             }
 
-            fillProfile(clientData.toObject(), accessTokenData.toString(), refreshTokenData.toString());
+            setAuthData(accessTokenData.toString(), refreshTokenData.toString());
+            setProfileData(clientData.toObject());
 
             m_profile.signIn();
         },
@@ -111,6 +146,7 @@ void ProfileController::signUp(bool isAnonymous,
           username
           email
           authKey
+          ovpnConfigPassword
         }
         accessToken
         refreshToken
@@ -144,7 +180,8 @@ void ProfileController::signUp(bool isAnonymous,
                 return;
             }
 
-            fillProfile(clientData.toObject(), accessTokenData.toString(), refreshTokenData.toString());
+            setAuthData(accessTokenData.toString(), refreshTokenData.toString());
+            setProfileData(clientData.toObject());
 
             if (isAnonymous)
             {
@@ -170,17 +207,19 @@ void ProfileController::signOut()
 }
 
 
-void ProfileController::fillProfile(const QJsonObject &clientData,
-                                    const QString &accessToken,
-                                    const QString &refreshToken)
+void ProfileController::setAuthData(const QString &accessToken, const QString &refreshToken)
 {
     auto &settings = Settings::instance();
     settings.setAccessToken(accessToken);
     settings.setRefreshToken(refreshToken);
 
     m_connection.setAuthorizationData(Connection::AuthorizationData{accessToken, refreshToken});
+}
 
-    const auto statusData = clientData["status"].toString();
+
+void ProfileController::setProfileData(const QJsonObject &profileData)
+{
+    const auto statusData = profileData["status"].toString();
     auto clientStatus = Profile::Status::Unknown;
     if (statusData == "new")
     {
@@ -192,10 +231,11 @@ void ProfileController::fillProfile(const QJsonObject &clientData,
     }
 
     m_profile.setData(Profile::Data{
-        clientData["id"].toString(""),        //
-        clientData["username"].toString(""),  //
-        clientData["email"].toString(""),     //
-        clientStatus                          //
+        profileData["id"].toString(""),                //
+        profileData["username"].toString(""),          //
+        profileData["email"].toString(""),             //
+        profileData["ovpnConfigPassword"].toString(),  //
+        clientStatus                                   //
     });
 }
 

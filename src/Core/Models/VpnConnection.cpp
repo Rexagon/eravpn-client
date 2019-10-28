@@ -24,7 +24,7 @@ VpnConnection::~VpnConnection()
     reset();
 }
 
-void VpnConnection::start(const QString &config)
+void VpnConnection::start(const QString &config, const QString &password)
 {
     std::unique_lock<std::mutex> lock{m_connectionMutex};
     if (m_isRunning)
@@ -38,6 +38,7 @@ void VpnConnection::start(const QString &config)
 
     openvpn::ClientAPI::Config ovpnConfig;
     ovpnConfig.content = config.toUtf8().data();
+    ovpnConfig.privateKeyPassword = password.toStdString();
 
     openvpn::ClientAPI::EvalConfig eval = client->eval_config(ovpnConfig);
 

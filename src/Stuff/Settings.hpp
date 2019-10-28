@@ -26,9 +26,6 @@ public:
 
     void reset();
 
-    void setUserIdentifier(const std::optional<QString> &identifier);
-    std::optional<QString> userIdentifier() const;
-
     void setAccessToken(const std::optional<QString> &accessToken);
     std::optional<QString> accessToken() const;
 

@@ -39,7 +39,7 @@ public:
     explicit VpnConnection();
     ~VpnConnection() final;
 
-    void start(const QString &config);
+    void start(const QString &config, const QString &password);
     void stop();
 
     bool running() const;
