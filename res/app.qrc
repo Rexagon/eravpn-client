@@ -51,6 +51,7 @@
     </qresource>
     <qresource>
         <file>images/flags/nld.png</file>
+        <file>images/flags/usa.png</file>
     </qresource>
     <qresource>
         <file>images/icon_arrow_left.png</file>

@@ -61,7 +61,7 @@ void CountriesController::refreshCountries(bool isPremium)
                 serversCountData.isDouble())
             {
                 countries.append(Country{idData.toString(), titleData.toString(), descriptionData.toString(),
-                                         codeData.toString(), serversCountData.toInt()});
+                                         codeData.toString().toLower(), serversCountData.toInt()});
             }
             else
             {
