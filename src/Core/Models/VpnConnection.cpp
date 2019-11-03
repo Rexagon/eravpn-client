@@ -24,7 +24,7 @@ VpnConnection::~VpnConnection()
     reset();
 }
 
-void VpnConnection::start(const QString &config, const QString &password)
+void VpnConnection::start(const QString &countryId, const QString &password, const QString &config)
 {
     std::unique_lock<std::mutex> lock{m_connectionMutex};
     if (m_isRunning)
@@ -48,6 +48,8 @@ void VpnConnection::start(const QString &config, const QString &password)
         emit connectionErrorOccurred();
         return;
     }
+
+    m_countryId = countryId;
 
     m_isRunning = true;
     m_isConnected = false;
@@ -76,6 +78,9 @@ void VpnConnection::start(const QString &config, const QString &password)
         }
 
         std::unique_lock<std::mutex> lock{m_connectionMutex};
+
+        m_countryId.reset();
+
         m_isRunning = false;
         m_disconnectRequested = false;
         m_client.reset();
@@ -119,6 +124,12 @@ bool VpnConnection::connected() const
 bool VpnConnection::busy() const
 {
     return m_isRunning != m_isConnected || m_disconnectRequested;
+}
+
+
+QString VpnConnection::currentCountryId() const
+{
+    return m_countryId.value_or("");
 }
 
 

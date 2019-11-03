@@ -12,11 +12,15 @@ ListView {
     clip: true
 
     delegate: Item {
+        id: button
+
         height: 60
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.leftMargin: 15
         anchors.rightMargin: 15
+
+        property bool isCurrent: BackEnd.vpnConnection.currentCountryId === countryId
 
         Image {
             anchors.verticalCenter: parent.verticalCenter
@@ -60,8 +64,17 @@ ListView {
 
             width: 100
 
-            enabled: !BackEnd.vpnConnection.busy
-            activated: BackEnd.vpnConnection.running
+            enabled: {
+                const running = BackEnd.vpnConnection.running;
+
+                if (running && button.isCurrent) {
+                    return !BackEnd.vpnConnection.busy;
+                } else {
+                    return !running;
+                }
+            }
+
+            activated: button.isCurrent && BackEnd.vpnConnection.running
 
             onClicked: {
                 if (BackEnd.vpnConnection.running) {

@@ -131,7 +131,6 @@ Button {
     }
 
     onEnabledChanged: {
-        console.log(enabled);
         state = enabled ? (pressed ? "pressed" : (hovered ? "hovered" : "")) : "disabled"
     }
 

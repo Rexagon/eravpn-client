@@ -2,12 +2,14 @@
 
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <thread>
 
 #include <QObject>
 #include <QTimer>
 
 #include "../../Vpn/Event.hpp"
+#include "Country.hpp"
 
 namespace app
 {
@@ -24,6 +26,8 @@ class VpnConnection final : public QObject
     Q_PROPERTY(bool connected READ connected NOTIFY connectedChanged)
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
 
+    Q_PROPERTY(QString currentCountryId READ currentCountryId NOTIFY runningChanged)
+
     Q_PROPERTY(quint64 bytesIn READ bytesIn NOTIFY statisticsChanged)
     Q_PROPERTY(quint64 bytesInDelta READ bytesInDelta NOTIFY statisticsChanged)
     Q_PROPERTY(quint64 bytesOut READ bytesOut NOTIFY statisticsChanged)
@@ -39,12 +43,14 @@ public:
     explicit VpnConnection();
     ~VpnConnection() final;
 
-    void start(const QString &config, const QString &password);
+    void start(const QString &countryId, const QString &password, const QString &config);
     void stop();
 
     bool running() const;
     bool connected() const;
     bool busy() const;
+
+    QString currentCountryId() const;
 
     quint64 bytesIn() const;
     quint64 bytesInDelta() const;
@@ -78,6 +84,8 @@ private:
     bool m_isConnected{};
 
     bool m_disconnectRequested{};
+
+    std::optional<QString> m_countryId{};
 
     Statistics m_statistics{};
     Statistics m_deltaStatistics{};
