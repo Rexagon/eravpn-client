@@ -21,6 +21,16 @@ void CertificateListModel::updateCertificates(const QVector<Certificate> &certif
 }
 
 
+void CertificateListModel::appendCertificate(const Certificate &certificate)
+{
+    emit layoutAboutToBeChanged();
+
+    m_certificates.append(certificate);
+
+    emit layoutChanged();
+}
+
+
 int CertificateListModel::rowCount(const QModelIndex &) const
 {
     return m_certificates.size();

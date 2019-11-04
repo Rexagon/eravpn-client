@@ -41,7 +41,9 @@ CountriesController::CountriesController(app::Connection &connection,
 
 void CountriesController::refreshCountries(bool isPremium)
 {
-    m_connection.post(query::countriesList.prepare(isPremium), [this, isPremium](const QJsonDocument &reply) {
+    const auto errorHandler = [this, isPremium](const QNetworkReply &) { emit countriesRequestError(isPremium); };
+
+    const auto successHandler = [this, isPremium](const QJsonDocument &reply) {
         const auto countriesData = reply["data"]["country"]["list"]["data"];
 
         if (!countriesData.isArray())
@@ -84,7 +86,9 @@ void CountriesController::refreshCountries(bool isPremium)
         {
             m_freeServersList.updateCountries(countries);
         }
-    });
+    };
+
+    m_connection.post(query::countriesList.prepare(isPremium), successHandler, errorHandler);
 }
 
 }  // namespace app

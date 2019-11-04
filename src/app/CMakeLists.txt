@@ -6,6 +6,7 @@ set(SRC
         BackEnd.cpp
         Connection.cpp
 
+        Controllers/CertificateController.cpp
         Controllers/ClipboardController.cpp
         Controllers/ProfileController.cpp
         Controllers/LocationController.cpp
@@ -29,6 +30,7 @@ set(SRC_MOC
         BackEnd.hpp
         Connection.hpp
 
+        Controllers/CertificateController.hpp
         Controllers/ClipboardController.hpp
         Controllers/CountriesController.hpp
         Controllers/LocationController.hpp

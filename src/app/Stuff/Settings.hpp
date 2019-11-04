@@ -8,7 +8,7 @@ namespace app
 {
 class Settings
 {
-    explicit Settings() = default;
+    explicit Settings();
 
 public:
     struct CertificateData
@@ -37,7 +37,11 @@ public:
                                const std::optional<CertificateData> &certificateData);
     std::optional<CertificateData> countryCertificate(const QString &userId, const QString &countryId) const;
 
+    QString createCertificatePath(const QString &certificateId);
+    const QString &configsDirectory() const;
+
 private:
     QSettings m_settings{};
+    QString m_configsDirectory;
 };
 }  // namespace app

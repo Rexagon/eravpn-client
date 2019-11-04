@@ -3,21 +3,12 @@
 
 #include "VpnController.hpp"
 
-#include <iostream>
-
-#include <QDir>
 #include <QFile>
 #include <QJsonArray>
 #include <QStandardPaths>
 #include <QSysInfo>
 
 #include "../Stuff/Settings.hpp"
-
-namespace
-{
-constexpr auto CONFIG_FILE = "/%1.ovpn";
-
-}  // namespace
 
 
 namespace query
@@ -49,7 +40,6 @@ VpnController::VpnController(Connection &connection, Profile &profile, VpnConnec
     , m_connection{connection}
     , m_profile{profile}
     , m_vpnConnection{vpnConnection}
-    , m_configDirectory{QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)}
 {
 }
 
@@ -70,17 +60,13 @@ void VpnController::start(const QString &countryId)
         }
     }
 
-    // QSysInfo::machineHostName()
+    const auto hostName = QSysInfo::machineHostName();
 
-    const auto errorHandler = [this](const QNetworkReply &) {
-        std::cout << "NETWORK ERROR" << std::endl;
-        emit m_vpnConnection.connectionErrorOccurred();
-    };
+    const auto errorHandler = [this](const QNetworkReply &) { emit m_vpnConnection.connectionErrorOccurred(); };
 
     const auto downloadedConfigHandlerFactory = [this, countryId](const QString &id) {
         return [this, id, countryId](QNetworkReply &reply) {
-            QFile file{QString{m_configDirectory} + QString{CONFIG_FILE}.arg(id)};
-            QDir::current().mkpath(m_configDirectory);
+            QFile file{Settings::instance().createCertificatePath(id)};
 
             if (!file.open(QIODevice::WriteOnly))
             {
@@ -92,36 +78,42 @@ void VpnController::start(const QString &countryId)
             file.write(data);
             file.close();
 
-            Settings::instance().setCountryCertificate(m_profile.id(), countryId,
-                                                       Settings::CertificateData{id, file.fileName()});
-
             m_vpnConnection.start(countryId, m_profile.ovpnConfigPassword(), data);
         };
     };
 
-    const auto configsRequestHandler = [this, downloadedConfigHandlerFactory](const QJsonDocument &reply) {
+    const auto configsRequestHandler = [this, hostName, downloadedConfigHandlerFactory](const QJsonDocument &reply) {
         const auto ovpnConfigFilesData = reply["data"]["client"]["getData"]["client"]["ovpnConfigFiles"]["data"];
 
         if (!ovpnConfigFilesData.isArray())
         {
-            std::cout << "RESULT IS NOT ARRAY" << std::endl;
             emit m_vpnConnection.connectionErrorOccurred();
             return;
         }
 
         const auto ovpnConfigFiles = ovpnConfigFilesData.toArray();
-        if (ovpnConfigFiles.empty())
+
+        for (const auto &certificateData : ovpnConfigFiles)
         {
-            emit m_vpnConnection.connectionErrorOccurred();
+            const auto configIdData = certificateData["id"];
+            const auto configLinkData = certificateData["link"];
+            const auto configCommentData = certificateData["comment"];
+
+            if (!configIdData.isString() || !configLinkData.isString() || !configCommentData.isString())
+            {
+                emit m_vpnConnection.connectionErrorOccurred();
+            }
+
+            if (configCommentData.toString() != hostName)
+            {
+                continue;
+            }
+
+            m_connection.get(configLinkData.toString(), downloadedConfigHandlerFactory(configIdData.toString()));
             return;
         }
 
-        const auto configData = ovpnConfigFiles[0].toObject();
-        const auto configIdData = configData["id"];
-        const auto configLinkData = configData["link"];
-        const auto configCommentData = configData["comment"];
-
-        m_connection.get(configLinkData.toString(), downloadedConfigHandlerFactory(configIdData.toString()));
+        emit certificateNotFound();
     };
 
     m_connection.post(query::getCountryCertificates.prepare(countryId), configsRequestHandler, errorHandler);

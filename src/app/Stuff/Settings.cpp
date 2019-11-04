@@ -3,6 +3,9 @@
 
 #include "Settings.hpp"
 
+#include <QDir>
+#include <QStandardPaths>
+
 namespace
 {
 constexpr auto ACCESS_TOKEN = "user/accessToken";
@@ -10,6 +13,8 @@ constexpr auto REFRESH_TOKEN = "user/refreshToken";
 
 constexpr auto COUNTRY_CERTIFICATE_ID = "vpn/%1/certificate/%2/id";
 constexpr auto COUNTRY_CERTIFICATE_PATH = "vpn/%1/certificate/%2/path";
+
+constexpr auto CONFIG_FILE = "/%1.ovpn";
 
 template <typename T>
 void set(QSettings &settings, const QString &key, const std::optional<T> &value)
@@ -41,6 +46,13 @@ std::optional<T> get(const QSettings &settings, const QString &key)
 
 namespace app
 {
+Settings::Settings()
+    : m_configsDirectory{QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)}
+{
+    QDir::current().mkpath(m_configsDirectory);
+}
+
+
 Settings &Settings::instance()
 {
     static Settings settings;
@@ -102,6 +114,18 @@ std::optional<Settings::CertificateData> Settings::countryCertificate(const QStr
     }
 
     return CertificateData{*idData, *pathData};
+}
+
+
+QString Settings::createCertificatePath(const QString &certificateId)
+{
+    return m_configsDirectory + QString{CONFIG_FILE}.arg(certificateId);
+}
+
+
+const QString &Settings::configsDirectory() const
+{
+    return m_configsDirectory;
 }
 
 }  // namespace app

@@ -8,6 +8,7 @@ namespace app
 BackEnd::BackEnd()
     : QObject{nullptr}
     , m_connection{API_URL}
+    , m_certificateController{m_connection, m_profile, m_certificateListModel}
     , m_countriesController{m_connection, m_freeServersList, m_premiumServersList}
     , m_locationController{IPSTACK_KEY, m_location}
     , m_profileController{m_connection, m_profile}
@@ -20,6 +21,12 @@ BackEnd &BackEnd::instance()
 {
     static BackEnd backEnd;
     return backEnd;
+}
+
+
+CertificateController *BackEnd::certificateController()
+{
+    return &m_certificateController;
 }
 
 
@@ -50,6 +57,12 @@ ProfileController *BackEnd::profileController()
 VpnController *BackEnd::vpnController()
 {
     return &m_vpnController;
+}
+
+
+CertificateListModel *BackEnd::certificateListModel()
+{
+    return &m_certificateListModel;
 }
 
 

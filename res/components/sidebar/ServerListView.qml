@@ -54,6 +54,15 @@ ListView {
             }
         }
 
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.RightButton
+
+            onClicked: {
+                BackEnd.certificateController.refreshCertificates(countryId);
+            }
+        }
+
         ServerActivationButton {
             id: serverActivationButton
 

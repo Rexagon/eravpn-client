@@ -42,6 +42,14 @@ Item {
     }
 
     Connections {
+        target: BackEnd.vpnController
+
+        onCertificateNotFound: {
+            notificationArea.notify("Сертификат не найден");
+        }
+    }
+
+    Connections {
         target: BackEnd.vpnConnection
 
         onConnectedChanged: {

@@ -21,6 +21,7 @@ public:
     explicit CertificateListModel();
 
     void updateCertificates(const QVector<Certificate> &certificates);
+    void appendCertificate(const Certificate &certificate);
 
 public:
     int rowCount(const QModelIndex &parent) const final;
