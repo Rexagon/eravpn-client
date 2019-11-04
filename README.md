@@ -23,7 +23,6 @@ Client For [EraVPN](http://eravpn.com/)
    LZ4_LIBRARY=path/to/deps/amd64/lz4/lib/lz4.lib
    
    Qt5_DIR=path/to/Qt/5.13.1/msvc2017_64/lib/cmake/Qt5
-   nlohmann_json_DIR=path/to/nlohmann_json
 
    API_URL=https://api.url/without/slash
    IPSTACK_KEY=s0meKeyFr0mthe1rWebs1te

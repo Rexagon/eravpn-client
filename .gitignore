@@ -4,7 +4,9 @@
 
 CMakeFiles
 cmake-build-*
+CMakeSettings.json
 
+out
 build
 extlibs
 

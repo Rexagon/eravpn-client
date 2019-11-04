@@ -68,8 +68,7 @@ target_link_libraries(app PRIVATE
         vpn
         Qt5::Core
         Qt5::Quick
-        Qt5::Network
-        nlohmann_json::nlohmann_json)
+        Qt5::Network)
 
 # inject properties
 
