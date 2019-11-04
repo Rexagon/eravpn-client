@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-#include "../Stuff/Settings.hpp"
+#include "Stuff/Settings.hpp"
 
 namespace
 {

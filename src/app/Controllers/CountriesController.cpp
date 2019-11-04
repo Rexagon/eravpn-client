@@ -5,6 +5,28 @@
 
 #include <QJsonArray>
 
+namespace query
+{
+using namespace app;
+
+// clang-format off
+const auto countriesList = QueryBuilder::createQuery()
+    .addObject("country")
+        .addUnion("list")
+        .withArgument("isPremium")
+        .withArgument("hasVpn", true)
+        .addUnionVariant("CountryCollection")
+            .addArray("data")
+                .addItem<QString>("id")
+                .addItem<QString>("title")
+                .addItem<QString>("description")
+                .addItem<QString>("code")
+                .addItem<int>("serversCount")
+    .build();
+
+// clang-format on
+}  // namespace query
+
 namespace app
 {
 CountriesController::CountriesController(app::Connection &connection,
@@ -19,23 +41,7 @@ CountriesController::CountriesController(app::Connection &connection,
 
 void CountriesController::refreshCountries(bool isPremium)
 {
-    const auto query = QString{R"(query {
-  country {
-    list(isPremium: %1, hasVpn: true) {
-      ... on CountryCollection {
-        data {
-          id
-          title
-          description
-          code
-          serversCount
-        }
-      }
-    }
-  }
-})"};
-
-    m_connection.post(query.arg(isPremium ? "true" : "false"), [this, isPremium](const QJsonDocument &reply) {
+    m_connection.post(query::countriesList.prepare(isPremium), [this, isPremium](const QJsonDocument &reply) {
         const auto countriesData = reply["data"]["country"]["list"]["data"];
 
         if (!countriesData.isArray())

@@ -20,13 +20,13 @@ public:
         ServersCount
     };
 
-    explicit CountryListModel(QObject *parent = nullptr);
+    explicit CountryListModel();
 
     void updateCountries(const QVector<Country> &countries);
 
 public:
-    int rowCount(const QModelIndex &parent = QModelIndex{}) const final;
-    int columnCount(const QModelIndex &parent = QModelIndex{}) const final;
+    int rowCount(const QModelIndex &parent) const final;
+    int columnCount(const QModelIndex &parent) const final;
     QVariant data(const QModelIndex &index, int role) const final;
 
     QHash<int, QByteArray> roleNames() const final;

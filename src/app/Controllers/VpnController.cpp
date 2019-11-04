@@ -8,17 +8,39 @@
 #include <QDir>
 #include <QFile>
 #include <QJsonArray>
-#include <QJsonObject>
 #include <QStandardPaths>
 #include <QSysInfo>
 
-#include "../../Stuff/Settings.hpp"
+#include "../Stuff/Settings.hpp"
 
 namespace
 {
 constexpr auto CONFIG_FILE = "/%1.ovpn";
 
 }  // namespace
+
+
+namespace query
+{
+using namespace app;
+
+// clang-format off
+const auto getCountryCertificates = QueryBuilder::createQuery()
+    .addObject("client")
+        .addUnion("getData")
+            .addUnionVariant("ClientResult")
+                .addObject("client")
+                    .addObject("ovpnConfigFiles")
+                        .withArgument("countryId")
+                        .addObject("data")
+                            .addItem<QString>("id")
+                            .addItem<QString>("link")
+                            .addItem<QString>("comment")
+    .build();
+
+// clang-format on
+}  // namespace query
+
 
 namespace app
 {
@@ -29,28 +51,6 @@ VpnController::VpnController(Connection &connection, Profile &profile, VpnConnec
     , m_vpnConnection{vpnConnection}
     , m_configDirectory{QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)}
 {
-}
-
-
-void VpnController::updateCertificateList()
-{
-    const auto query = QString{R"(query {
-  client {
-    getData {
-      ... on ClientResult {
-        client {
-          id
-          ovpnConfigFiles(page: 1, perPage: 1000) {
-            data {
-              link
-              countryId
-            }
-          }
-        }
-      }
-    }
-  }
-})"};
 }
 
 
@@ -71,24 +71,6 @@ void VpnController::start(const QString &countryId)
     }
 
     // QSysInfo::machineHostName()
-
-    const auto query = QString{R"(query {
-  client {
-    getData {
-      ... on ClientResult {
-        client {
-          ovpnConfigFiles(countryId: "%1") {
-            data {
-              id
-              link
-              comment
-            }
-          }
-        }
-      }
-    }
-  }
-})"};
 
     const auto errorHandler = [this](const QNetworkReply &) {
         std::cout << "NETWORK ERROR" << std::endl;
@@ -142,7 +124,7 @@ void VpnController::start(const QString &countryId)
         m_connection.get(configLinkData.toString(), downloadedConfigHandlerFactory(configIdData.toString()));
     };
 
-    m_connection.post(query.arg(escaped(countryId)), configsRequestHandler, errorHandler);
+    m_connection.post(query::getCountryCertificates.prepare(countryId), configsRequestHandler, errorHandler);
 }
 
 

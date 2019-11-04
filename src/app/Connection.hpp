@@ -4,11 +4,13 @@
 #include <optional>
 
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QString>
 
-#include "../Stuff/StringHelpers.hpp"
+#include "Stuff/QueryBuilder.hpp"
+#include "Stuff/StringHelpers.hpp"
 
 namespace app
 {

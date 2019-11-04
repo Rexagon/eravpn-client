@@ -13,8 +13,6 @@ class VpnController : public QObject
 public:
     explicit VpnController(Connection &connection, Profile &profile, VpnConnection &vpnConnection);
 
-    Q_INVOKABLE void updateCertificateList();
-
     Q_INVOKABLE void start(const QString &countryId);
     Q_INVOKABLE void stop();
 

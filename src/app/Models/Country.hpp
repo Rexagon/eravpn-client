@@ -20,11 +20,11 @@ public:
     int serversCount() const;
 
 private:
-    QString m_id{};
-    QString m_title{};
-    QString m_description{};
-    QString m_code{};
-    int m_serversCount{};
+    QString m_id;
+    QString m_title;
+    QString m_description;
+    QString m_code;
+    int m_serversCount;
 };
 
-}  // namespace app
+}  // namespace appW

@@ -3,12 +3,10 @@
 
 #include "CountryListModel.hpp"
 
-#include <iostream>
-
 namespace app
 {
-CountryListModel::CountryListModel(QObject *parent)
-    : QAbstractListModel{parent}
+CountryListModel::CountryListModel()
+    : QAbstractListModel{nullptr}
 {
 }
 
@@ -29,7 +27,7 @@ int CountryListModel::rowCount(const QModelIndex &) const
 }
 
 
-int CountryListModel::columnCount(const QModelIndex &parent) const
+int CountryListModel::columnCount(const QModelIndex &) const
 {
     return 1;
 }

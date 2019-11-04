@@ -3,12 +3,93 @@
 
 #include "ProfileController.hpp"
 
-#include <iostream>
-
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "../../Stuff/Settings.hpp"
+#include "../Stuff/Settings.hpp"
+
+namespace query
+{
+using namespace app;
+
+// clang-format off
+const auto checkAccessToken = QueryBuilder::createMutation()
+    .addObject("accessToken")
+        .addUnion("checkAccessToken")
+            .addUnionVariant("Result")
+                .addItem<bool>("success")
+    .build();
+
+const auto getClientData = QueryBuilder::createQuery()
+    .addObject("client")
+        .addUnion("getData")
+            .addUnionVariant("ClientResult")
+                .addObject("client")
+                    .addItem<QString>("id")
+                    .addItem<QString>("status")
+                    .addItem<QString>("username")
+                    .addItem<QString>("email")
+                    .addItem<QString>("authKey")
+                    .addItem<QString>("ovpnConfigPassword")
+    .build();
+
+const auto signIn = QueryBuilder::createMutation()
+    .addObject("auth")
+        .addUnion("login")
+        .withArgument("login")
+        .withArgument("password")
+        .addUnionVariant("ClientLogin")
+            .addObject("client")
+                .addItem<QString>("id")
+                .addItem<QString>("status")
+                .addItem<QString>("username")
+                .addItem<QString>("email")
+                .addItem<QString>("ovpnConfigPassword")
+            .endObject()
+            .addItem<QString>("accessToken")
+            .addItem<QString>("refreshToken")
+    .build();
+
+const auto signUpWithEmail = app::QueryBuilder::createMutation()
+    .addObject("auth")
+        .addUnion("registration")
+        .withArgument("email")
+        .withArgument("password")
+        .withArgument("referrerKey")
+        .addUnionVariant("ClientRegistration")
+            .addObject("client")
+                .addItem<QString>("id")
+                .addItem<QString>("status")
+                .addItem<QString>("username")
+                .addItem<QString>("email")
+                .addItem<QString>("authKey")
+                .addItem<QString>("ovpnConfigPassword")
+            .endObject()
+            .addItem<QString>("accessToken")
+            .addItem<QString>("refreshToken")
+    .build();
+
+const auto signUpWithUsername = app::QueryBuilder::createMutation()
+    .addObject("auth")
+        .addUnion("registration")
+        .withArgument("username")
+        .withArgument("password")
+        .withArgument("referrerKey")
+            .addUnionVariant("ClientRegistration")
+            .addObject("client")
+                .addItem<QString>("id")
+                .addItem<QString>("status")
+                .addItem<QString>("username")
+                .addItem<QString>("email")
+                .addItem<QString>("authKey")
+                .addItem<QString>("ovpnConfigPassword")
+            .endObject()
+            .addItem<QString>("accessToken")
+            .addItem<QString>("refreshToken")
+    .build();
+
+// clang-format on
+}  // namespace query
 
 namespace app
 {
@@ -21,33 +102,6 @@ ProfileController::ProfileController(app::Connection &connection, Profile &profi
 
 void ProfileController::signInRemembered()
 {
-    const auto query = QString{R"(mutation {
-    accessToken {
-        checkAccessToken {
-            ... on Result {
-                success
-            }
-        }
-    }
-})"};
-
-    const auto clientQuery = QString{R"(query {
-  client {
-    getData {
-      ... on ClientResult {
-        client {
-          id
-          status
-          username
-          email
-          authKey
-          ovpnConfigPassword
-        }
-      }
-    }
-  }
-})"};
-
     const auto emitConnectionError = [this] {
         m_connection.resetAuthorizationData();
         emit m_profile.signInErrorOccurred();
@@ -55,7 +109,7 @@ void ProfileController::signInRemembered()
 
     const auto errorHandler = [emitConnectionError](const QNetworkReply &) { emitConnectionError(); };
 
-    const auto clientDataHandler = [this, clientQuery, emitConnectionError](const QJsonDocument &reply) {
+    const auto clientDataHandler = [this, emitConnectionError](const QJsonDocument &reply) {
         const auto clientData = reply["data"]["client"]["getData"]["client"];
 
         if (!clientData.isObject())
@@ -68,8 +122,8 @@ void ProfileController::signInRemembered()
     };
 
     m_connection.post(
-        query,
-        [this, emitConnectionError, clientQuery, clientDataHandler, errorHandler](const QJsonDocument &reply) {
+        query::checkAccessToken.prepare(),
+        [this, emitConnectionError, clientDataHandler, errorHandler](const QJsonDocument &reply) {
             const auto resultData = reply["data"]["accessToken"]["checkAccessToken"];
             const auto success = resultData["success"].toBool(false);
 
@@ -79,7 +133,7 @@ void ProfileController::signInRemembered()
                 return;
             }
 
-            m_connection.post(clientQuery, clientDataHandler, errorHandler);
+            m_connection.post(query::getClientData.prepare(), clientDataHandler, errorHandler);
         },
         errorHandler);
 }
@@ -87,27 +141,8 @@ void ProfileController::signInRemembered()
 
 void ProfileController::signIn(const QString &login, const QString &password)
 {
-    const auto query = QString{R"(mutation {
-  auth {
-    login(login: "%1", password: "%2") {
-      ... on ClientLogin {
-        client {
-          id
-          status
-          username
-          email
-          ovpnConfigPassword
-        }
-        accessToken
-        refreshToken
-        success
-      }
-    }
-  }
-})"};
-
     m_connection.post(
-        query.arg(escaped(login)).arg(escaped(password)),
+        query::signIn.prepare(login, password),
         [this](const QJsonDocument &reply) {
             const auto loginData = reply["data"]["auth"]["login"];
 
@@ -136,33 +171,11 @@ void ProfileController::signUp(bool isAnonymous,
                                const QString &password,
                                const QString &referrerKey)
 {
-    const auto query = QString{R"(mutation {
-  auth {
-    registration(%1: "%2", password: "%3"%4) {
-      ... on ClientRegistration {
-        client {
-          id
-          status
-          username
-          email
-          authKey
-          ovpnConfigPassword
-        }
-        accessToken
-        refreshToken
-        success
-      }
-    }
-  }
-})"};
-
-    const auto identifierArgument = isAnonymous ? QString{"username"} : QString{"email"};
-
-    const auto referrerArgument =
-        referrerKey.isEmpty() ? QString{""} : QString{R"(, referrerKey: "%1")"}.arg(escaped(referrerKey));
+    const auto query = isAnonymous ? query::signUpWithUsername.prepare(identifier, password, referrerKey)
+                                   : query::signUpWithEmail.prepare(identifier, password, referrerKey);
 
     m_connection.post(
-        query.arg(identifierArgument).arg(escaped(identifier)).arg(escaped(password)).arg(referrerArgument),
+        query,
         [this, isAnonymous](const QJsonDocument &reply) {
             const auto registrationData = reply["data"]["auth"]["registration"];
 

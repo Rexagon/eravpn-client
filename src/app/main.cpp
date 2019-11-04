@@ -5,7 +5,7 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 
-#include "Core/BackEnd.hpp"
+#include "BackEnd.hpp"
 
 using namespace app;
 
