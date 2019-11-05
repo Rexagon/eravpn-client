@@ -58,7 +58,6 @@ Rectangle {
                 if (component.state === "profile_opened") {
                     component.backToMain();
                 } else {
-                    component.state = "profile_opened";
                     component.openProfile();
                 }
             }
@@ -74,7 +73,6 @@ Rectangle {
                 if (component.state === "settings_opened") {
                     component.backToMain();
                 } else {
-                    component.state = "settings_opened";
                     component.openSettings();
                 }
             }

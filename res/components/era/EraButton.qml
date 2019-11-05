@@ -5,6 +5,8 @@ Button {
     readonly property string lightColor: "#23a2f8"
     readonly property string darkColor: "#1463f6"
 
+    property bool large: false
+
     id: control
 
     height: 44
@@ -14,7 +16,7 @@ Button {
 
         text: control.text
         font.family: rootUiFontMedium.name
-        font.pointSize: 12
+        font.pointSize: control.large ? 12 : 10
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         color: "white"

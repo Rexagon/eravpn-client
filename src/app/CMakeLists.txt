@@ -56,10 +56,15 @@ if (WIN32)
     set(WIN_RESOURCES
             ${CMAKE_SOURCE_DIR}/res/app.rc
             ${CMAKE_SOURCE_DIR}/res/app.exe.manifest)
+
+    if(CMAKE_BUILD_TYPE MATCHES Release)
+        set(ADDITIONAL_EXECUTABLE_OPTIONS WIN32)
+    endif()
 endif ()
 
 # Executable
 add_executable(app
+        ${ADDITIONAL_EXECUTABLE_OPTIONS}
         ${SRC}
         ${SRC_MOC}
         ${RESOURCES}

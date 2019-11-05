@@ -26,9 +26,12 @@ int main(int argc, char **argv)
 
     QGuiApplication application(argc, argv);
 
-    qmlRegisterSingletonType<BackEnd>(
-        BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "BackEnd",
-        [](QQmlEngine *, QJSEngine *) { return static_cast<QObject *>(&BackEnd::instance()); });
+    qmlRegisterSingletonType<BackEnd>(BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "BackEnd",
+                                      [](QQmlEngine *, QJSEngine *) {
+                                          auto *object = static_cast<QObject *>(&BackEnd::instance());
+                                          QQmlEngine::setObjectOwnership(object, QQmlEngine::CppOwnership);
+                                          return object;
+                                      });
 
     QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
 

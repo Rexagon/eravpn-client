@@ -160,6 +160,8 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
+
+                large: true
             }
 
             EraPasswordField {
@@ -169,6 +171,8 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
+
+                large: true
             }
 
             EraButton {
@@ -182,6 +186,8 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
+
+                large: true
             }
 
             RowLayout {

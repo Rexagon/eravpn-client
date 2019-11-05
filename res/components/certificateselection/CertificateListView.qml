@@ -61,16 +61,7 @@ ListView {
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
 
-                contentItem: Text {
-                    text: "Выбрать"
-
-                    color: "white"
-                    font.pointSize: 10
-                    font.family: futuraMediumFont.name
-
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
+                text: "Выбрать"
 
                 onClicked: {
                     certificateSelected(certificateId);

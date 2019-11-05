@@ -5,10 +5,13 @@ import QtQuick.Layouts 1.13
 Rectangle {
     readonly property string redTextColor: "#ff5d81"
 
+    readonly property string lightProfitColor: "#dcdee2"
     readonly property string lightColor: "#f4f6fa"
     readonly property string lightTextColor: "#0e1242"
     readonly property string lightTextColorBottom: "#b1b3bf"
 
+    readonly property string darkProfitGradientLeft: "#ffb280"
+    readonly property string darkProfitGradientRight: "#ff5d81"
     readonly property string darkGradientBottom: "#173b93"
     readonly property string darkGradientTop: "#142560"
     readonly property string darkTextColor: "#f4f6fa"
@@ -82,6 +85,18 @@ Rectangle {
             PropertyChanges {
                 target: referralLabel
                 color: darkTextColorBottom
+            }
+            PropertyChanges {
+                target: profitGradientLeft
+                color: darkProfitGradientLeft
+            }
+            PropertyChanges {
+                target: profitGradientRight
+                color: darkProfitGradientRight
+            }
+            PropertyChanges {
+                target: profitInPercentLabel
+                color: darkTextColor
             }
         }
     ]
@@ -274,6 +289,39 @@ Rectangle {
         color: lightTextColorBottom
         font.family: futuraMediumFont.name
         font.pointSize: 12
+    }
+
+    Rectangle {
+        anchors.verticalCenter: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        visible: profitInPercent > 0
+
+        width: 105
+        height: 30
+
+        radius: 10
+
+        gradient: Gradient {
+            id: profitBackgroundGradient
+
+            orientation: Gradient.Horizontal
+            GradientStop { id: profitGradientLeft; position: 0.0; color: lightProfitColor }
+            GradientStop { id: profitGradientRight; position: 1.0; color: lightProfitColor }
+        }
+
+        Text {
+            id: profitInPercentLabel
+
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            text: "Выгода " + profitInPercent + "%"
+
+            color: lightTextColor
+            font.family: futuraMediumFont.name
+            font.pointSize: 10
+        }
     }
 
     MouseArea {

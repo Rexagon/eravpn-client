@@ -17,6 +17,7 @@ Item {
     StackView.onActivating: {
         windowTitleText = "Настройки"
         windowTitleButtonsVisible = true
+        windowTitleBar.state = "settings_opened";
     }
 
     Keys.onPressed: {

@@ -167,6 +167,10 @@ ApplicationWindow
                     windowTitleBar.state = "";
                     viewsContainer.pop();
                 }
+
+                onSwitchToTariffSelection: {
+                    viewsContainer.push(tariffSelectionView);
+                }
             }
         }
 

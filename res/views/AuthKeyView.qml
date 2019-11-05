@@ -127,6 +127,8 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
+
+                large: true
             }
         }
     }

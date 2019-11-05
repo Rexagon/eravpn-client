@@ -28,6 +28,7 @@
         <file>components/mainview/ConnectionInfo.qml</file>
         <file>components/mainview/PowerButton.qml</file>
 
+        <file>components/settings/Group.qml</file>
         <file>components/settings/SettingsGroup.qml</file>
         <file>components/settings/Separator.qml</file>
 
@@ -88,5 +89,6 @@
     <qresource>
         <file>images/logo_small.png</file>
         <file>images/map.png</file>
+        <file>images/payment.png</file>
     </qresource>
 </RCC>

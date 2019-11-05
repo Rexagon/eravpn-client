@@ -47,7 +47,7 @@ Item {
         }
 
         Item {
-            implicitHeight: 20
+            implicitHeight: 40
         }
 
         ListView {
@@ -68,7 +68,22 @@ Item {
 
                 onPressed: {
                     BackEnd.tariffController.buy(tariffId);
+                    view.closeView();
                 }
+            }
+        }
+
+        Item {
+            Layout.fillWidth: true
+            implicitHeight: 60
+
+            Image {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: 45
+
+                source: "../images/payment.png"
+                fillMode: Image.PreserveAspectFit
             }
         }
     }

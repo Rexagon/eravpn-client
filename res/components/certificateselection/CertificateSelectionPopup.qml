@@ -25,6 +25,18 @@ Popup {
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     contentItem: Item {
+        state: BackEnd.certificateListModel.certificateCount < 1 ? "initial" : ""
+
+        states: [
+            State {
+                name: "initial"
+                PropertyChanges {
+                    target: certificateGenerationButtonGroup
+                    anchors.bottomMargin: popup.height / 2 - 75
+                }
+            }
+        ]
+
         Text {
             id: titleLabel
 
@@ -95,6 +107,8 @@ Popup {
         }
 
         Item {
+            id: certificateGenerationButtonGroup
+
             anchors.bottom: elapsedCertificatesLabel.top
             anchors.left: parent.left
             anchors.right: parent.right
@@ -109,16 +123,9 @@ Popup {
                 anchors.topMargin: 10
                 anchors.bottomMargin: 10
 
-                contentItem: Text {
-                    text: "Сгенерировать"
+                width: 120
 
-                    color: "white"
-                    font.pointSize: 10
-                    font.family: futuraMediumFont.name
-
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
+                text: "Сгенерировать"
 
                 onClicked: {
                     BackEnd.certificateController.createNew(countryId);
