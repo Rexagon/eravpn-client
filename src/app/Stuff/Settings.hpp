@@ -34,7 +34,7 @@ public:
 
     void setCountryCertificate(const QString &userId,
                                const QString &countryId,
-                               const std::optional<CertificateData> &certificateData);
+                               const std::optional<QString> &certificateId);
     std::optional<CertificateData> countryCertificate(const QString &userId, const QString &countryId) const;
 
     QString createCertificatePath(const QString &certificateId);

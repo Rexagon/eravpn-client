@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../Connection.hpp"
-#include "../Models/Profile.hpp"
 #include "../Models/CertificateListModel.hpp"
+#include "../Models/Profile.hpp"
 
 namespace app
 {
@@ -25,7 +25,7 @@ signals:
 private:
     Connection &m_connection;
 
-    Profile & m_profile;
+    Profile &m_profile;
     CertificateListModel &m_certificateListModel;
 };
 

@@ -59,6 +59,8 @@ CertificateController::CertificateController(app::Connection &connection,
 
 void CertificateController::refreshCertificates(const QString &countryId)
 {
+    m_certificateListModel.setLoading(true);
+
     const auto errorHandler = [this](const QNetworkReply &) { emit certificatesRequestError(); };
 
     const auto successHandler = [this](const QJsonDocument &reply) {
@@ -100,6 +102,7 @@ void CertificateController::refreshCertificates(const QString &countryId)
         }
 
         m_certificateListModel.updateCertificates(certificates);
+        m_certificateListModel.setLoading(false);
     };
 
     m_connection.post(query::getCountryCertificates.prepare(countryId), successHandler, errorHandler);
@@ -108,32 +111,32 @@ void CertificateController::refreshCertificates(const QString &countryId)
 
 void CertificateController::createNew(const QString &countryId)
 {
+    m_certificateListModel.setLoading(true);
+
+    const auto now = QDateTime::currentDateTime();
+
     const auto hostName = QSysInfo::machineHostName();
 
     const auto errorHandler = [this](const QNetworkReply &) { emit certificatesRequestError(); };
 
-    const auto successHandler = [this, hostName](const QJsonDocument &reply) {
+    const auto successHandler = [this, hostName, now](const QJsonDocument &reply) {
         const auto configData = reply["data"]["vpn"]["getOvpnFileLink"]["configFile"];
 
         const auto idData = configData["id"];
         const auto linkData = configData["link"];
-        const auto createdAtData = configData["createdAt"];
 
-        bool isCreatedAtValid{};
-        const auto createdAtSecs = createdAtData.toString("").toInt(&isCreatedAtValid);
-
-        if (!idData.isString() || !linkData.isString() || !isCreatedAtValid)
+        if (!idData.isString() || !linkData.isString())
         {
             emit certificateCreationError();
             return;
         }
 
-        const auto createdAt = QDateTime::fromSecsSinceEpoch(createdAtSecs);
-        const auto certificate = Certificate{idData.toString(), hostName, createdAt, linkData.toString()};
+        const auto certificate = Certificate{idData.toString(), hostName, now, linkData.toString()};
 
         m_certificateListModel.appendCertificate(certificate);
 
         emit certificateCreated(certificate.id());
+        m_certificateListModel.setLoading(false);
     };
 
     m_connection.post(query::createCertificate.prepare(countryId, hostName), successHandler, errorHandler);
@@ -144,9 +147,7 @@ void CertificateController::setDefault(const QString &countryId, const QString &
 {
     auto &settings = Settings::instance();
 
-    settings.setCountryCertificate(
-        m_profile.id(), countryId,
-        Settings::CertificateData{certificateId, settings.createCertificatePath(certificateId)});
+    settings.setCountryCertificate(m_profile.id(), countryId, certificateId);
 }
 
 }  // namespace app

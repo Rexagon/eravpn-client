@@ -59,7 +59,7 @@ ListView {
             acceptedButtons: Qt.RightButton
 
             onClicked: {
-                BackEnd.certificateController.refreshCertificates(countryId);
+                showCertificateSelectionPopup(countryId, false);
             }
         }
 

@@ -17,7 +17,7 @@ public:
     Q_INVOKABLE void stop();
 
 signals:
-    void certificateNotFound();
+    void certificateNotFound(const QString &countryId);
 
 private:
     Connection &m_connection;

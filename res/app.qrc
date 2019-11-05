@@ -13,6 +13,9 @@
         <file>views/SettingsView.qml</file>
     </qresource>
     <qresource>
+        <file>components/certificateselection/CertificateListView.qml</file>
+        <file>components/certificateselection/CertificateSelectionPopup.qml</file>
+
         <file>components/era/EraBackButton.qml</file>
         <file>components/era/EraButton.qml</file>
         <file>components/era/EraLabel.qml</file>

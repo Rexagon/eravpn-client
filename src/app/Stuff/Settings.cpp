@@ -92,13 +92,12 @@ std::optional<QString> Settings::refreshToken() const
 
 void Settings::setCountryCertificate(const QString &userId,
                                      const QString &countryId,
-                                     const std::optional<CertificateData> &certificateData)
+                                     const std::optional<QString> &certificateId)
 {
-    set(m_settings, QString{COUNTRY_CERTIFICATE_ID}.arg(userId).arg(countryId),
-        certificateData.has_value() ? std::optional{certificateData->id} : std::nullopt);
+    set(m_settings, QString{COUNTRY_CERTIFICATE_ID}.arg(userId).arg(countryId), certificateId);
 
     set(m_settings, QString{COUNTRY_CERTIFICATE_PATH}.arg(userId).arg(countryId),
-        certificateData.has_value() ? std::optional{certificateData->path} : std::nullopt);
+        certificateId.has_value() ? std::optional{createCertificatePath(*certificateId)} : std::nullopt);
 }
 
 

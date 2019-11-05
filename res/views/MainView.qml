@@ -7,9 +7,17 @@ import com.eravpn.backend 1.0
 import "../components"
 import "../components/era"
 import "../components/mainview"
+import "../components/certificateselection"
 
 Item {
     id: view
+
+    function showCertificateSelectionPopup(countryId, startOnSelect) {
+        BackEnd.certificateController.refreshCertificates(countryId);
+        certificateSelectionPopup.countryId = countryId;
+        certificateSelectionPopup.startOnSelect = startOnSelect;
+        certificateSelectionPopup.open();
+    }
 
     Component.onCompleted: {
         BackEnd.locationController.updateCurrentLocation();
@@ -45,7 +53,7 @@ Item {
         target: BackEnd.vpnController
 
         onCertificateNotFound: {
-            notificationArea.notify("Сертификат не найден");
+            showCertificateSelectionPopup(countryId, true);
         }
     }
 
@@ -114,5 +122,9 @@ Item {
                 }
             }*/
         }
+    }
+
+    CertificateSelectionPopup {
+        id: certificateSelectionPopup
     }
 }

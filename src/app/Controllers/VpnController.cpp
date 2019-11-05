@@ -8,6 +8,8 @@
 #include <QStandardPaths>
 #include <QSysInfo>
 
+#include <iostream>
+
 #include "../Stuff/Settings.hpp"
 
 
@@ -48,10 +50,10 @@ void VpnController::start(const QString &countryId)
 {
     auto &settings = Settings::instance();
 
-    auto certificateData = settings.countryCertificate(m_profile.id(), countryId);
-    if (certificateData.has_value())
+    auto savedCertificate = settings.countryCertificate(m_profile.id(), countryId);
+    if (savedCertificate.has_value())
     {
-        QFile file{certificateData->path};
+        QFile file{savedCertificate->path};
 
         if (file.open(QIODevice::ReadOnly | QIODevice::ExistingOnly))
         {
@@ -82,7 +84,8 @@ void VpnController::start(const QString &countryId)
         };
     };
 
-    const auto configsRequestHandler = [this, hostName, downloadedConfigHandlerFactory](const QJsonDocument &reply) {
+    const auto configsRequestHandler = [this, hostName, countryId, savedCertificate,
+                                        downloadedConfigHandlerFactory](const QJsonDocument &reply) {
         const auto ovpnConfigFilesData = reply["data"]["client"]["getData"]["client"]["ovpnConfigFiles"]["data"];
 
         if (!ovpnConfigFilesData.isArray())
@@ -104,16 +107,15 @@ void VpnController::start(const QString &countryId)
                 emit m_vpnConnection.connectionErrorOccurred();
             }
 
-            if (configCommentData.toString() != hostName)
+            if ((savedCertificate.has_value() && savedCertificate->id == configIdData.toString()) ||
+                configCommentData.toString() == hostName)
             {
-                continue;
+                m_connection.get(configLinkData.toString(), downloadedConfigHandlerFactory(configIdData.toString()));
+                return;
             }
-
-            m_connection.get(configLinkData.toString(), downloadedConfigHandlerFactory(configIdData.toString()));
-            return;
         }
 
-        emit certificateNotFound();
+        emit certificateNotFound(countryId);
     };
 
     m_connection.post(query::getCountryCertificates.prepare(countryId), configsRequestHandler, errorHandler);

@@ -18,6 +18,7 @@ void CertificateListModel::updateCertificates(const QVector<Certificate> &certif
     m_certificates = certificates;
 
     emit layoutChanged();
+    emit certificateCountChanged();
 }
 
 
@@ -28,6 +29,27 @@ void CertificateListModel::appendCertificate(const Certificate &certificate)
     m_certificates.append(certificate);
 
     emit layoutChanged();
+    emit certificateCountChanged();
+}
+
+
+void CertificateListModel::setLoading(bool isLoading)
+{
+    m_isLoading = isLoading;
+
+    emit isLoadingChanged();
+}
+
+
+int CertificateListModel::certificateCount() const
+{
+    return m_certificates.size();
+}
+
+
+bool CertificateListModel::isLoading() const
+{
+    return m_isLoading;
 }
 
 
