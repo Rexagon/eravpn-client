@@ -2,6 +2,7 @@
 
 #include <optional>
 
+#include <QDateTime>
 #include <QObject>
 #include <QString>
 
@@ -18,6 +19,10 @@ class Profile : public QObject
     Q_PROPERTY(QString email READ email NOTIFY dataChanged)
     Q_PROPERTY(Status status READ status NOTIFY dataChanged)
 
+    Q_PROPERTY(bool isTariffPurchased READ isTariffPurchased NOTIFY dataChanged)
+    Q_PROPERTY(QString tariffId READ tariffId NOTIFY dataChanged)
+    Q_PROPERTY(QDateTime tariffExpiredAt READ tariffExpiredAt NOTIFY dataChanged)
+
 public:
     enum class Status
     {
@@ -27,6 +32,12 @@ public:
     };
     Q_ENUM(Status)
 
+    struct TariffData
+    {
+        QString id;
+        QDateTime expiredAt;
+    };
+
     struct Data
     {
         QString id;
@@ -34,6 +45,7 @@ public:
         QString email;
         QString ovpnConfigPassword;
         Status status;
+        std::optional<TariffData> tariffData;
     };
 
     explicit Profile();
@@ -50,6 +62,10 @@ public:
     QString email() const;
     QString ovpnConfigPassword() const;
     Status status() const;
+
+    bool isTariffPurchased() const;
+    QString tariffId() const;
+    QDateTime tariffExpiredAt() const;
 
 signals:
     void signInErrorOccurred();

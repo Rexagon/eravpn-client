@@ -67,4 +67,22 @@ QString Profile::ovpnConfigPassword() const
     return m_data.has_value() ? m_data->ovpnConfigPassword : "";
 }
 
+
+bool Profile::isTariffPurchased() const
+{
+    return m_data.has_value() && m_data->tariffData.has_value();
+}
+
+
+QString Profile::tariffId() const
+{
+    return isTariffPurchased() ? m_data->tariffData->id : "";
+}
+
+
+QDateTime Profile::tariffExpiredAt() const
+{
+    return isTariffPurchased() ? m_data->tariffData->expiredAt : QDateTime{};
+}
+
 }  // namespace app

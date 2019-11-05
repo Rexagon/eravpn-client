@@ -19,6 +19,7 @@ set(SRC
         Models/CountryListModel.cpp
         Models/Location.cpp
         Models/Profile.cpp
+        Models/TariffPlan.cpp
         Models/VpnConnection.cpp
 
         Stuff/StringHelpers.cpp

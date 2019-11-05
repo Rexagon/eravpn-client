@@ -202,6 +202,11 @@ QueryBuilder &QueryBuilder::endUnionVariant()
 
 QueryBuilder &QueryBuilder::addBlock(const QString &name, details::query::DataType type)
 {
+    if (!m_nodeStack.empty() && isPlain(m_nodeStack.back()->type))
+    {
+        m_nodeStack.pop_back();
+    }
+
     assert(canAdd(type));
 
     auto &node = m_nodes.emplace_back(name, type);

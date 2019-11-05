@@ -28,12 +28,14 @@ Item {
             Layout.minimumHeight: 100
 
             color: backgroundColor
+
+            visible: !BackEnd.profile.isTariffPurchased
         }
 
         Rectangle {
             Layout.fillWidth: true
             Layout.minimumHeight: 1
-            color: lightBackgroundColor
+            color: BackEnd.profile.isTariffPurchased ? darkBackgroundColor : lightBackgroundColor
         }
 
         ConnectionInfo {
@@ -121,10 +123,12 @@ Item {
                 anchors.topMargin: 50
 
                 ServerListView {
+                    isPremium: false
                     model: BackEnd.freeServersList
                 }
 
                 ServerListView {
+                    isPremium: true
                     model: BackEnd.premiumServersList
                 }
             }

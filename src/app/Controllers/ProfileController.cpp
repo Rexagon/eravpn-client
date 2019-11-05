@@ -3,6 +3,8 @@
 
 #include "ProfileController.hpp"
 
+#include <iostream>
+
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -31,23 +33,35 @@ const auto getClientData = QueryBuilder::createQuery()
                     .addItem<QString>("email")
                     .addItem<QString>("authKey")
                     .addItem<QString>("ovpnConfigPassword")
+                    .addObject("tariffPlan")
+                        .addItem<QString>("expiredAt")
+                            .withArgument("format", QString{"U"})
+                        .addObject("data")
+                            .addItem<QString>("id")
     .build();
 
 const auto signIn = QueryBuilder::createMutation()
     .addObject("auth")
         .addUnion("login")
-        .withArgument("login")
-        .withArgument("password")
-        .addUnionVariant("ClientLogin")
-            .addObject("client")
-                .addItem<QString>("id")
-                .addItem<QString>("status")
-                .addItem<QString>("username")
-                .addItem<QString>("email")
-                .addItem<QString>("ovpnConfigPassword")
-            .endObject()
-            .addItem<QString>("accessToken")
-            .addItem<QString>("refreshToken")
+            .withArgument("login")
+            .withArgument("password")
+            .addUnionVariant("ClientLogin")
+                .addObject("client")
+                    .addItem<QString>("id")
+                    .addItem<QString>("status")
+                    .addItem<QString>("username")
+                    .addItem<QString>("email")
+                    .addItem<QString>("ovpnConfigPassword")
+                    .addObject("tariffPlan")
+                        .addObject("data")
+                            .addItem<QString>("id")
+                        .endObject()
+                        .addItem<QString>("expiredAt")
+                            .withArgument("format", QString{"U"})
+                    .endObject()
+                .endObject()
+                .addItem<QString>("accessToken")
+                .addItem<QString>("refreshToken")
     .build();
 
 const auto signUpWithEmail = app::QueryBuilder::createMutation()
@@ -102,6 +116,8 @@ ProfileController::ProfileController(app::Connection &connection, Profile &profi
 
 void ProfileController::signInRemembered()
 {
+    std::cout << query::getClientData.prepare().toStdString() << std::endl;
+
     const auto emitConnectionError = [this] {
         m_connection.resetAuthorizationData();
         emit m_profile.signInErrorOccurred();
@@ -243,13 +259,27 @@ void ProfileController::setProfileData(const QJsonObject &profileData)
         clientStatus = Profile::Status::Active;
     }
 
-    m_profile.setData(Profile::Data{
-        profileData["id"].toString(""),                //
-        profileData["username"].toString(""),          //
-        profileData["email"].toString(""),             //
-        profileData["ovpnConfigPassword"].toString(),  //
-        clientStatus                                   //
-    });
+    std::optional<Profile::TariffData> tariffData{};
+    if (const auto tariffPlanData = profileData["tariffPlan"]; tariffPlanData.isObject())
+    {
+        const auto tariffId = tariffPlanData["data"]["id"];
+        const auto tariffExpiredAtData = tariffPlanData["expiredAt"];
+
+        bool isExpiredAtValid{};
+        const auto expiredAtSecs = tariffExpiredAtData.toString("").toInt(&isExpiredAtValid);
+
+        if (tariffId.isString() && isExpiredAtValid)
+        {
+            tariffData = Profile::TariffData{tariffId.toString(), QDateTime::fromSecsSinceEpoch(expiredAtSecs)};
+        }
+    }
+
+    m_profile.setData(Profile::Data{profileData["id"].toString(""),                //
+                                    profileData["username"].toString(""),          //
+                                    profileData["email"].toString(""),             //
+                                    profileData["ovpnConfigPassword"].toString(),  //
+                                    clientStatus,                                  //
+                                    tariffData});
 }
 
 }  // namespace app

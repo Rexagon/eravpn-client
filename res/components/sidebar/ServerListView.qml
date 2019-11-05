@@ -7,6 +7,8 @@ import com.eravpn.backend 1.0
 import "../era"
 
 ListView {
+    property bool isPremium: false
+
     id: view
 
     clip: true
@@ -74,6 +76,10 @@ ListView {
             width: 100
 
             enabled: {
+                if (view.isPremium && !BackEnd.profile.isTariffPurchased) {
+                    return false;
+                }
+
                 const running = BackEnd.vpnConnection.running;
 
                 if (running && button.isCurrent) {
