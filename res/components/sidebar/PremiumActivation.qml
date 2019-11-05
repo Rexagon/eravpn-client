@@ -4,6 +4,10 @@ import QtQuick.Layouts 1.13
 import "../era"
 
 Rectangle {
+    id: component
+
+    signal pressed
+
     EraButton {
         anchors.fill: parent
         anchors.margins: 28
@@ -29,6 +33,10 @@ Rectangle {
             Item {
                 Layout.fillWidth: true
             }
+        }
+
+        onPressed: {
+            component.pressed()
         }
     }
 }

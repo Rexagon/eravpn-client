@@ -23,6 +23,11 @@ public:
 
     Q_INVOKABLE void signOut();
 
+    Q_INVOKABLE void refreshProfile();
+
+signals:
+    void profileUpdateError();
+
 private:
     void setAuthData(const QString &accessToken, const QString &refreshToken);
     void setProfileData(const QJsonObject &profileData);

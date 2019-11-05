@@ -12,6 +12,8 @@ import "../components/certificateselection"
 Item {
     id: view
 
+    signal switchToTariffSelection
+
     function showCertificateSelectionPopup(countryId, startOnSelect) {
         BackEnd.certificateController.refreshCertificates(countryId);
         certificateSelectionPopup.countryId = countryId;
@@ -22,6 +24,8 @@ Item {
     Component.onCompleted: {
         BackEnd.locationController.updateCurrentLocation();
 
+        BackEnd.tariffController.refreshTariffs();
+
         BackEnd.countriesController.refreshCountries(false);
         BackEnd.countriesController.refreshCountries(true);
     }
@@ -29,9 +33,12 @@ Item {
     StackView.onActivating: {
         windowTitleText = "EraVPN"
         windowTitleButtonsVisible = true
+
+        profileRefreshTimer.start();
     }
 
     Component.onDestruction: {
+        profileRefreshTimer.stop();
         BackEnd.vpnController.stop();
     }
 
@@ -39,6 +46,20 @@ Item {
         id: locationRefreshTimer
         interval: 500; running: false; repeat: false
         onTriggered: BackEnd.locationController.updateCurrentLocation()
+    }
+
+    Timer {
+        id: profileRefreshTimer
+        interval: 60000
+        running: false
+        repeat: true
+        onTriggered: {
+            if (BackEnd.profile.isTariffPurchased) {
+                stop();
+            }
+
+            BackEnd.profileController.refreshProfile();
+        }
     }
 
     Connections {

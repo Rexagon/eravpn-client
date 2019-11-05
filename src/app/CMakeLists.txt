@@ -11,6 +11,7 @@ set(SRC
         Controllers/ProfileController.cpp
         Controllers/LocationController.cpp
         Controllers/CountriesController.cpp
+        Controllers/TariffController.cpp
         Controllers/VpnController.cpp
 
         Models/Certificate.cpp
@@ -19,7 +20,8 @@ set(SRC
         Models/CountryListModel.cpp
         Models/Location.cpp
         Models/Profile.cpp
-        Models/TariffPlan.cpp
+        Models/TariffListModel.cpp
+        Models/Tariff.cpp
         Models/VpnConnection.cpp
 
         Stuff/StringHelpers.cpp
@@ -36,12 +38,14 @@ set(SRC_MOC
         Controllers/CountriesController.hpp
         Controllers/LocationController.hpp
         Controllers/ProfileController.hpp
+        Controllers/TariffController.hpp
         Controllers/VpnController.hpp
 
         Models/CertificateListModel.hpp
         Models/CountryListModel.hpp
         Models/Location.hpp
         Models/Profile.hpp
+        Models/TariffListModel.hpp
         Models/VpnConnection.hpp)
 
 qt5_add_resources(RESOURCES

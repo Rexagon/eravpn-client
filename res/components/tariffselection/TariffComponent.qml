@@ -14,16 +14,15 @@ Rectangle {
     readonly property string darkTextColor: "#f4f6fa"
     readonly property string darkTextColorBottom: "#99bbed"
 
-    property string tariffId: ""
-    property string tariffTitle: "title"
-    property double tariffPrice: 36
-    property double tariffProfitInPercent: 70
-    property int tariffMonthCount: 12
+    property string title: "title"
+    property double price: 36
+    property double profitInPercent: 70
+    property int monthCount: 12
 
     property bool isPressed: false
 
-    readonly property double pricePerMonth: tariffPrice / tariffMonthCount
-    readonly property double originalPrice: tariffPrice * 100 / (100 - tariffProfitInPercent)
+    readonly property double pricePerMonth: price / monthCount
+    readonly property double originalPrice: price * 100 / (100 - profitInPercent)
 
     signal pressed
 
@@ -36,12 +35,14 @@ Rectangle {
 
     radius: 10
 
-    width: 260
+    width: 250
     height: 350
+
+    state: "unhovered"
 
     states: [
         State {
-            name: "hovered"
+            name: "unhovered"
             PropertyChanges {
                 target: gradientTop
                 color: darkGradientTop
@@ -106,7 +107,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 30
 
-        text: tariffTitle
+        text: title
 
         color: lightTextColor
         font.family: futuraMediumFont.name
@@ -194,6 +195,8 @@ Rectangle {
             Text {
                 text: '$' + originalPrice
 
+                visible: originalPrice != price
+
                 font.strikeout: true
 
                 color: redTextColor
@@ -204,7 +207,7 @@ Rectangle {
             Text {
                 id: billDescriptionPriceLabel
 
-                text: '$' + tariffPrice
+                text: '$' + price
 
                 color: lightTextColor
                 font.family: futuraMediumFont.name
@@ -227,8 +230,13 @@ Rectangle {
         anchors.topMargin: 30
 
         text: {
-            "счёт выставляется\nраз в " + tariffMonthCount + " " +
-                    declension(tariffMonthCount, ["месяц", "месяца", "месяцев"])
+            let string = "счёт выставляется\nраз в ";
+
+            if (monthCount == 1) {
+                return string + "месяц";
+            }
+
+            return string + monthCount + " " + declension(monthCount, ["месяц", "месяца", "месяцев"]);
         }
 
         horizontalAlignment: Text.AlignHCenter
@@ -273,8 +281,8 @@ Rectangle {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
 
-        onEntered: component.state = "hovered"
-        onExited: component.state = ""
+        onEntered: component.state = ""
+        onExited: component.state = "unhovered"
 
         onPressed: {
             component.isPressed = true;

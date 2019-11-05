@@ -30,6 +30,10 @@ Item {
             color: backgroundColor
 
             visible: !BackEnd.profile.isTariffPurchased
+
+            onPressed: {
+                view.switchToTariffSelection();
+            }
         }
 
         Rectangle {

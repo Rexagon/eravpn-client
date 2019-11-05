@@ -246,6 +246,25 @@ void ProfileController::setAuthData(const QString &accessToken, const QString &r
 }
 
 
+void ProfileController::refreshProfile()
+{
+    const auto errorHandler = [this](const QNetworkReply &) { emit profileUpdateError(); };
+
+    const auto successHandler = [this](const QJsonDocument &reply) {
+        const auto clientData = reply["data"]["client"]["getData"]["client"];
+
+        if (!clientData.isObject())
+        {
+            emit profileUpdateError();
+        }
+
+        setProfileData(clientData.toObject());
+    };
+
+    m_connection.post(query::getClientData.prepare(), successHandler, errorHandler);
+}
+
+
 void ProfileController::setProfileData(const QJsonObject &profileData)
 {
     const auto statusData = profileData["status"].toString();

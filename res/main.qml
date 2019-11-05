@@ -153,6 +153,9 @@ ApplicationWindow
             id: mainView
 
             MainView {
+                onSwitchToTariffSelection: {
+                    viewsContainer.push(tariffSelectionView);
+                }
             }
         }
 
@@ -171,6 +174,17 @@ ApplicationWindow
             id: settingsView
 
             SettingsView {
+                onCloseView: {
+                    windowTitleBar.state = "";
+                    viewsContainer.pop();
+                }
+            }
+        }
+
+        Component {
+            id: tariffSelectionView
+
+            TariffSelectionView {
                 onCloseView: {
                     windowTitleBar.state = "";
                     viewsContainer.pop();

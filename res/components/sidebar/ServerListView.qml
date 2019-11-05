@@ -61,6 +61,10 @@ ListView {
             acceptedButtons: Qt.RightButton
 
             onClicked: {
+                if (isPremium && !BackEnd.profile.isTariffPurchased) {
+                    return;
+                }
+
                 showCertificateSelectionPopup(countryId, false);
             }
         }

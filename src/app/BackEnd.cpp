@@ -12,6 +12,7 @@ BackEnd::BackEnd()
     , m_countriesController{m_connection, m_freeServersList, m_premiumServersList}
     , m_locationController{IPSTACK_KEY, m_location}
     , m_profileController{m_connection, m_profile}
+    , m_tariffController{m_connection, m_tariffListModel}
     , m_vpnController{m_connection, m_profile, m_vpnConnection}
 {
 }
@@ -54,6 +55,12 @@ ProfileController *BackEnd::profileController()
 }
 
 
+TariffController *BackEnd::tariffController()
+{
+    return &m_tariffController;
+}
+
+
 VpnController *BackEnd::vpnController()
 {
     return &m_vpnController;
@@ -75,6 +82,12 @@ CountryListModel *BackEnd::freeServersList()
 CountryListModel *BackEnd::premiumServersList()
 {
     return &m_premiumServersList;
+}
+
+
+TariffListModel *BackEnd::tariffListModel()
+{
+    return &m_tariffListModel;
 }
 
 

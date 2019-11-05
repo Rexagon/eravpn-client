@@ -11,6 +11,7 @@
         <file>views/ProfileView.qml</file>
         <file>views/RememberedSignInView.qml</file>
         <file>views/SettingsView.qml</file>
+        <file>views/TariffSelectionView.qml</file>
     </qresource>
     <qresource>
         <file>components/certificateselection/CertificateListView.qml</file>

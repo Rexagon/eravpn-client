@@ -16,8 +16,8 @@ Item {
     id: view
 
     StackView.onActivating: {
-        windowTitleText = "Профиль"
-        windowTitleButtonsVisible = true
+        windowTitleText = "Профиль";
+        windowTitleButtonsVisible = true;
     }
 
     Keys.onPressed: {

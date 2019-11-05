@@ -4,20 +4,22 @@
 
 namespace app
 {
-class TariffPlan
+class Tariff
 {
 public:
-    explicit TariffPlan(const QString &id, const QString &title, int price, int monthCount);
+    explicit Tariff(const QString &id, const QString &title, double price, double profitInPercent, int monthCount);
 
     const QString &id() const;
     const QString &title() const;
-    int price() const;
+    double price() const;
+    double profitInPercent() const;
     int monthCount() const;
 
 private:
     QString m_id;
     QString m_title;
-    int m_price;
+    double m_price;
+    double m_profitInPercent;
     int m_monthCount;
 };
 
