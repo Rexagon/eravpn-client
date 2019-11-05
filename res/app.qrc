@@ -35,6 +35,8 @@
         <file>components/sidebar/ServerActivationButton.qml</file>
         <file>components/sidebar/ServerListView.qml</file>
 
+        <file>components/tariffselection/TariffComponent.qml</file>
+
         <file>components/titlebar/TitleBarButton.qml</file>
 
         <file>components/BackgroundMap.qml</file>
