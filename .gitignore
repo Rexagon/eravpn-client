@@ -11,3 +11,4 @@ build
 extlibs
 
 *.qmlproject.user
+*.exe
