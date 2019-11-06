@@ -56,6 +56,7 @@ public:
     bool authorized() const;
 
     void setData(const Data &data);
+    void setEmail(const QString &email);
 
     QString id() const;
     QString userName() const;

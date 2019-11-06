@@ -102,6 +102,23 @@ const auto signUpWithUsername = app::QueryBuilder::createMutation()
             .addItem<QString>("refreshToken")
     .build();
 
+const changeEmail = QueryBuilder::newMutation()
+    .addObject("client")
+        .addUnion("changeEmail")
+            .withArgument("email")
+            .addUnionVariant("Result")
+                .addItem<QString>("success")
+    .build();
+
+const changePassword = QueryBuilder::newMutation()
+    .addObject("client")
+        .addUnion("changePassword")
+            .withArgument("oldPassword")
+            .withArgument("password")
+            .addUnionVariant("Result")
+                .addItem<QString>("success")
+    .build();
+
 // clang-format on
 }  // namespace query
 
@@ -256,12 +273,54 @@ void ProfileController::refreshProfile()
         if (!clientData.isObject())
         {
             emit profileUpdateError();
+            return;
         }
 
         setProfileData(clientData.toObject());
     };
 
     m_connection.post(query::getClientData.prepare(), successHandler, errorHandler);
+}
+
+
+void ProfileController::changeEmail(const QString &newEmail)
+{
+    const auto errorHandler = [this](const QNetworkReply &) { emit emailChangeError(); };
+
+    const auto successHandler = [this, newEmail](const QJsonDocument &reply) {
+        const auto successData = reply["data"]["client"]["changeEmail"]["success"];
+
+        if (!successData.toBool(false))
+        {
+            emit emailChangeError();
+            return;
+        }
+
+        emit emailChanged();
+        m_profile.setEmail(newEmail);
+    };
+
+    m_connection.post(query::changeEmail.prepare(newEmail), successHandler, errorHandler);
+}
+
+
+void ProfileController::changePassword(const QString &oldPassword, const QString &newPassword)
+{
+    const auto errorHandler = [this](const QNetworkReply &) { emit passwordChangeError(); };
+
+    const auto successHandler = [this](const QJsonDocument &reply) {
+        const auto successData = reply["data"]["client"]["changePassword"]["success"];
+
+        if (!successData.toBool(false))
+        {
+            emit passwordChangeError();
+            return;
+        }
+
+        emit passwordChanged();
+    };
+
+    m_connection.post(query::changePassword.prepare(oldPassword, newPassword), successHandler, errorHandler);
 }
 
 
