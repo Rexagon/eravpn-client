@@ -46,6 +46,7 @@ set(SRC_MOC
         Models/Location.hpp
         Models/Profile.hpp
         Models/TariffListModel.hpp
+        Models/Tariff.hpp
         Models/VpnConnection.hpp)
 
 qt5_add_resources(RESOURCES

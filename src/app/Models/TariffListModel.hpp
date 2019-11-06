@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+
 #include <QAbstractListModel>
 
 #include "Tariff.hpp"
@@ -25,12 +28,14 @@ public:
 
     explicit TariffListModel();
 
-    void updateTariffs(const QVector<Tariff> &tariffs);
+    void updateTariffs(std::vector<std::unique_ptr<Tariff>> &&tariffs);
 
     void setLoading(bool isLoading);
 
     int tariffCount() const;
     bool isLoading() const;
+
+    Q_INVOKABLE Tariff *get(int index);
 
 signals:
     void tariffCountChanged();
@@ -45,7 +50,7 @@ public:
 
 private:
     bool m_isLoading{true};
-    QVector<Tariff> m_tariffs{};
+    std::vector<std::unique_ptr<Tariff>> m_tariffs{};
 };
 
 }  // namespace app

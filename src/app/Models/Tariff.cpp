@@ -5,8 +5,15 @@
 
 namespace app
 {
+Tariff::Tariff()
+    : QObject{nullptr}
+{
+}
+
+
 Tariff::Tariff(const QString &id, const QString &title, double price, double profitInPercent, int monthCount)
-    : m_id{id}
+    : QObject{nullptr}
+    , m_id{id}
     , m_title{title}
     , m_price{price}
     , m_profitInPercent{profitInPercent}

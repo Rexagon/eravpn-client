@@ -113,7 +113,7 @@ Button {
             return;
         }
 
-        if (pressed) {
+        if (hovered && pressed) {
             state = "pressed";
             return;
         }
@@ -122,7 +122,7 @@ Button {
     }
 
     onFocusChanged: {
-        controlBackground.border.width = focus ? 1 : 0;
+        controlBackground.border.width = !enabled || focus ? 1 : 0;
     }
 
     onEnabledChanged: {

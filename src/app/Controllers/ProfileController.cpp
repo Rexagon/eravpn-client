@@ -102,7 +102,7 @@ const auto signUpWithUsername = app::QueryBuilder::createMutation()
             .addItem<QString>("refreshToken")
     .build();
 
-const changeEmail = QueryBuilder::newMutation()
+const auto changeEmail = QueryBuilder::createMutation()
     .addObject("client")
         .addUnion("changeEmail")
             .withArgument("email")
@@ -110,7 +110,7 @@ const changeEmail = QueryBuilder::newMutation()
                 .addItem<QString>("success")
     .build();
 
-const changePassword = QueryBuilder::newMutation()
+const auto changePassword = QueryBuilder::createMutation()
     .addObject("client")
         .addUnion("changePassword")
             .withArgument("oldPassword")

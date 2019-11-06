@@ -15,6 +15,8 @@ constexpr auto BASE_MODULE_NAME = "com.eravpn.backend";
 constexpr auto BASE_VERSION_MAJOR = 1;
 constexpr auto BASE_VERSION_MINOR = 0;
 
+constexpr auto UNCREATABLE_MESSAGE = "This type of object is managed by native code";
+
 }  // namespace
 
 int main(int argc, char **argv)
@@ -32,6 +34,12 @@ int main(int argc, char **argv)
                                           QQmlEngine::setObjectOwnership(object, QQmlEngine::CppOwnership);
                                           return object;
                                       });
+
+    qmlRegisterUncreatableType<Profile>(BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "Profile",
+                                        UNCREATABLE_MESSAGE);
+    qmlRegisterUncreatableType<Tariff>(BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "Tariff",
+                                       UNCREATABLE_MESSAGE);
+    qRegisterMetaType<Tariff *>("Tariff*");
 
     QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
 

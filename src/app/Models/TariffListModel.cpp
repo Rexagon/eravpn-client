@@ -3,6 +3,8 @@
 
 #include "TariffListModel.hpp"
 
+#include <QQmlEngine>
+
 namespace app
 {
 TariffListModel::TariffListModel()
@@ -11,11 +13,11 @@ TariffListModel::TariffListModel()
 }
 
 
-void TariffListModel::updateTariffs(const QVector<Tariff> &tariffs)
+void TariffListModel::updateTariffs(std::vector<std::unique_ptr<Tariff>> &&tariffs)
 {
     emit layoutAboutToBeChanged();
 
-    m_tariffs = tariffs;
+    m_tariffs = std::move(tariffs);
 
     emit layoutChanged();
     emit tariffCountChanged();
@@ -31,7 +33,21 @@ void TariffListModel::setLoading(bool isLoading)
 
 int TariffListModel::tariffCount() const
 {
-    return m_tariffs.size();
+    return static_cast<int>(m_tariffs.size());
+}
+
+
+Tariff *TariffListModel::get(int index)
+{
+    if (index >= m_tariffs.size())
+    {
+        return nullptr;
+    }
+
+    auto *pointer = m_tariffs[index].get();
+    QQmlEngine::setObjectOwnership(pointer, QQmlEngine::CppOwnership);
+
+    return pointer;
 }
 
 
@@ -43,7 +59,7 @@ bool TariffListModel::isLoading() const
 
 int TariffListModel::rowCount(const QModelIndex &parent) const
 {
-    return m_tariffs.size();
+    return static_cast<int>(m_tariffs.size());
 }
 
 
@@ -60,19 +76,19 @@ QVariant TariffListModel::data(const QModelIndex &index, int role) const
     switch (role)
     {
         case DataRoles::Id:
-            return tariff.id();
+            return tariff->id();
 
         case DataRoles::Title:
-            return tariff.title();
+            return tariff->title();
 
         case DataRoles::Price:
-            return tariff.price();
+            return tariff->price();
 
         case DataRoles::ProfitInPercent:
-            return tariff.profitInPercent();
+            return tariff->profitInPercent();
 
         case DataRoles::MonthCount:
-            return tariff.monthCount();
+            return tariff->monthCount();
 
         default:
             break;

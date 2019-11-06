@@ -110,17 +110,41 @@ Item {
                 title: {
                     const baseText = "Ваш email-адрес";
 
-                    if (BackEnd.profile.status !== "new" || BackEnd.profile.email.length < 1) {
+                    if (BackEnd.profile.email.length < 1) {
                         return baseText;
                     }
 
-                    return baseText + " (подтверждён)";
+                    const status = BackEnd.profile.status === Profile.New ? "не подтверждён" : "подтверждён";
+
+                    return baseText + " (" + status + ")";
                 }
 
                 contentItem: ColumnLayout {
+                    id: emailChangeGroup
+
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
+
+                    property bool inProcess: false
+                    property bool isInputValid: {
+                        return emailInput.length > 0 && emailInput.text !== BackEnd.profile.email;
+                    }
+
+                    Connections {
+                        target: BackEnd.profileController
+
+                        onEmailChangeError: {
+                            notificationArea.notify("Не удалось изменить email-адрес");
+                            emailChangeGroup.inProcess = false;
+                        }
+
+                        onEmailChanged: {
+                            notificationArea.notify("Email-адрес успешно изменён");
+                            emailChangeGroup.inProcess = false;
+                            BackEnd.profileController.refreshProfile();
+                        }
+                    }
 
                     RowLayout {
                         Layout.fillWidth: true
@@ -142,11 +166,12 @@ Item {
                             Layout.minimumWidth: 200
                             Layout.minimumHeight: 40
 
-                            enabled: emailInput.length > 0 && emailInput.text !== BackEnd.profile.email
+                            enabled: emailChangeGroup.isInputValid && !emailChangeGroup.inProcess
 
                             text: "Изменить"
 
-                            onPressed: {
+                            onClicked: {
+                                emailChangeGroup.inProcess = true;
                                 BackEnd.profileController.changeEmail(emailInput.text);
                             }
                         }
@@ -161,13 +186,87 @@ Item {
                 title: "Ваш тариф"
 
                 contentItem: ColumnLayout {
+                    id: tariffGroup
+
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
 
+                    property string tariffId: BackEnd.profile.tariffId
+
+                    property Tariff tariff: {
+                        const model = BackEnd.tariffListModel;
+                        for (let i = 0; i < model.tariffCount; ++i) {
+                            const tariff = model.get(i);
+
+                            if (tariff.id === tariffId) {
+                                return tariff;
+                            }
+                        }
+
+                        return null;
+                    }
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        Layout.minimumHeight: 40
+
+                        spacing: 10
+
+                        visible: BackEnd.profile.isTariffPurchased
+
+                        Rectangle {
+                            radius: 4
+
+                            Layout.minimumWidth: 200
+                            Layout.minimumHeight: 40
+
+                            gradient: Gradient {
+                                orientation: Gradient.Horizontal
+                                GradientStop { position: 0.0; color: "#ffb280" }
+                                GradientStop { position: 1.0; color: "#ff5d81" }
+                            }
+
+                            Text {
+                                anchors.fill: parent
+
+                                text: tariffGroup.tariff ? tariffGroup.tariff.title : "unknown"
+
+                                color: "white"
+
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                font.family: futuraMediumFont.name
+                                font.pointSize: 12
+                            }
+                        }
+
+                        Item {
+                            Layout.minimumWidth: 300
+                            Layout.minimumHeight: 40
+
+                            Text {
+                                anchors.fill: parent
+
+                                text: {
+                                    return qsTr("Действителен до: ") + Qt.formatDateTime(BackEnd.profile.tariffExpiredAt, "dd.MM.yyyy hh:mm");
+                                }
+
+                                color: "white"
+
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                font.family: futuraMediumFont.name
+                                font.pointSize: 12
+                            }
+                        }
+                    }
+
                     EraButton {
                         Layout.minimumWidth: 200
                         Layout.minimumHeight: 40
+
+                        visible: !BackEnd.profile.isTariffPurchased
 
                         text: "Выбрать тариф"
 
@@ -185,16 +284,33 @@ Item {
                 title: "Смена пароля"
 
                 contentItem: ColumnLayout {
+                    id: passwordChangeGroup
+
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
 
+                    property bool inProcess: false
                     property bool isInputValid: {
                         const password = passwordInput.text;
 
                         return password.length >= 0 &&
                                 newPasswordInput.length >= 6 && newPasswordInput.length <= 16 &&
                                 newPasswordInput.text === newPasswordRepeatInput.text;
+                    }
+
+                    Connections {
+                        target: BackEnd.profileController
+
+                        onPasswordChangeError: {
+                            notificationArea.notify("Не удалось изменить пароль");
+                            passwordChangeGroup.inProcess = false;
+                        }
+
+                        onPasswordChanged: {
+                            notificationArea.notify("Пароль успешно изменён");
+                            passwordChangeGroup.inProcess = false;
+                        }
                     }
 
                     RowLayout {
@@ -235,11 +351,12 @@ Item {
                         Layout.minimumWidth: 200
                         Layout.minimumHeight: 40
 
-                        enabled: parent.isInputValid
+                        enabled: parent.isInputValid && !parent.inProcess
 
                         text: "Подтвердить"
 
-                        onPressed: {
+                        onClicked: {
+                            parent.inProcess = true;
                             BackEnd.profileController.changePassword(passwordInput.text, newPasswordInput.text);
                         }
                     }

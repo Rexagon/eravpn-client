@@ -62,7 +62,7 @@ void TariffController::refreshTariffs()
 
         const auto tariffsArray = tariffsData.toArray();
 
-        QVector<Tariff> tariffs;
+        std::vector<std::unique_ptr<Tariff>> tariffs;
         tariffs.reserve(tariffsArray.size());
 
         for (const auto &tariffData : tariffsArray)
@@ -80,11 +80,12 @@ void TariffController::refreshTariffs()
                 return;
             }
 
-            tariffs.append(Tariff{idData.toString(), titleData.toString(), priceData.toDouble(),
-                                  profitInPercentData.toDouble(), static_cast<int>(monthCountData.toDouble())});
+            tariffs.emplace_back(std::make_unique<Tariff>(idData.toString(), titleData.toString(), priceData.toDouble(),
+                                                          profitInPercentData.toDouble(),
+                                                          static_cast<int>(monthCountData.toDouble())));
         }
 
-        m_tariffListModel.updateTariffs(tariffs);
+        m_tariffListModel.updateTariffs(std::move(tariffs));
         m_tariffListModel.setLoading(false);
     };
 
