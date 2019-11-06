@@ -145,6 +145,10 @@ Item {
                             enabled: emailInput.length > 0 && emailInput.text !== BackEnd.profile.email
 
                             text: "Изменить"
+
+                            onPressed: {
+                                BackEnd.profileController.changeEmail(emailInput.text);
+                            }
                         }
                     }
                 }
@@ -234,6 +238,10 @@ Item {
                         enabled: parent.isInputValid
 
                         text: "Подтвердить"
+
+                        onPressed: {
+                            BackEnd.profileController.changePassword(passwordInput.text, newPasswordInput.text);
+                        }
                     }
                 }
             }

@@ -38,6 +38,18 @@ void Profile::setData(const Data &data)
 }
 
 
+void Profile::setEmail(const QString &email)
+{
+    if (!m_data.has_value())
+    {
+        return;
+    }
+
+    m_data->email = email;
+    emit dataChanged();
+}
+
+
 QString Profile::id() const
 {
     return m_data.has_value() ? m_data->id : "";

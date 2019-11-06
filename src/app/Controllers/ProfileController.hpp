@@ -25,8 +25,17 @@ public:
 
     Q_INVOKABLE void refreshProfile();
 
+    Q_INVOKABLE void changeEmail(const QString &newEmail);
+
+    Q_INVOKABLE void changePassword(const QString &oldPassword, const QString &newPassword);
+
 signals:
     void profileUpdateError();
+    void passwordChangeError();
+    void emailChangeError();
+
+    void passwordChanged();
+    void emailChanged();
 
 private:
     void setAuthData(const QString &accessToken, const QString &refreshToken);
