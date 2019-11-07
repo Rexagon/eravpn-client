@@ -18,7 +18,7 @@ Item {
     id: view
 
     StackView.onActivating: {
-        windowTitleText = "Профиль";
+        windowTitleText = qsTr("Profile");
         windowTitleButtonsVisible = true;
         windowTitleBar.state = "profile_opened";
     }
@@ -91,7 +91,7 @@ Item {
             }
 
             Text {
-                text: "Профиль " + BackEnd.profile.userName
+                text: qsTr("Profile") + " " + BackEnd.profile.userName
 
                 color: "white"
 
@@ -108,13 +108,13 @@ Item {
                 implicitHeight: 120
 
                 title: {
-                    const baseText = "Ваш email-адрес";
+                    const baseText = qsTr("YourEmailAddress");
 
                     if (BackEnd.profile.email.length < 1) {
                         return baseText;
                     }
 
-                    const status = BackEnd.profile.status === Profile.New ? "не подтверждён" : "подтверждён";
+                    const status = BackEnd.profile.status === Profile.New ? qsTr("NotVerified") : qsTr("Verified");
 
                     return baseText + " (" + status + ")";
                 }
@@ -135,12 +135,12 @@ Item {
                         target: BackEnd.profileController
 
                         onEmailChangeError: {
-                            notificationArea.notify("Не удалось изменить email-адрес");
+                            notificationArea.notify(qsTr("EmailChangeError"));
                             emailChangeGroup.inProcess = false;
                         }
 
                         onEmailChanged: {
-                            notificationArea.notify("Email-адрес успешно изменён");
+                            notificationArea.notify(qsTr("EmailChanged"));
                             emailChangeGroup.inProcess = false;
                             BackEnd.profileController.refreshProfile();
                         }
@@ -159,7 +159,7 @@ Item {
                             implicitWidth: 200
 
                             text: BackEnd.profile.email
-                            placeholderText: "Email адрес"
+                            placeholderText: qsTr("EmailAddress")
                         }
 
                         EraButton {
@@ -183,7 +183,7 @@ Item {
                 Layout.minimumWidth: 120
                 implicitHeight: 120
 
-                title: "Ваш тариф"
+                title: qsTr("YourTariff")
 
                 contentItem: ColumnLayout {
                     id: tariffGroup
@@ -249,7 +249,8 @@ Item {
                                 anchors.fill: parent
 
                                 text: {
-                                    return qsTr("Действителен до: ") + Qt.formatDateTime(BackEnd.profile.tariffExpiredAt, "dd.MM.yyyy hh:mm");
+                                    return qsTr("ExpiresAt") + ": " +
+                                            Qt.formatDateTime(BackEnd.profile.tariffExpiredAt, "dd.MM.yyyy hh:mm");
                                 }
 
                                 color: "white"
@@ -268,7 +269,7 @@ Item {
 
                         visible: !BackEnd.profile.isTariffPurchased
 
-                        text: "Выбрать тариф"
+                        text: qsTr("SelectTariff")
 
                         onClicked: {
                             view.switchToTariffSelection();
@@ -281,7 +282,7 @@ Item {
                 Layout.minimumWidth: 120
                 implicitHeight: 120
 
-                title: "Смена пароля"
+                title: qsTr("ChangePassword", "as title")
 
                 contentItem: ColumnLayout {
                     id: passwordChangeGroup
@@ -303,12 +304,12 @@ Item {
                         target: BackEnd.profileController
 
                         onPasswordChangeError: {
-                            notificationArea.notify("Не удалось изменить пароль");
+                            notificationArea.notify(qsTr("PasswordChangeError"));
                             passwordChangeGroup.inProcess = false;
                         }
 
                         onPasswordChanged: {
-                            notificationArea.notify("Пароль успешно изменён");
+                            notificationArea.notify(qsTr("PasswordChanged"));
                             passwordChangeGroup.inProcess = false;
                         }
                     }
@@ -325,7 +326,7 @@ Item {
                             Layout.fillHeight: true
                             implicitWidth: 200
 
-                            placeholderText: "Текущий пароль"
+                            placeholderText: qsTr("CurrentPassword")
                         }
 
                         EraPasswordField {
@@ -334,7 +335,7 @@ Item {
                             Layout.fillHeight: true
                             implicitWidth: 200
 
-                            placeholderText: "Новый пароль"
+                            placeholderText: qsTr("NewPassword")
                         }
 
                         EraPasswordField {
@@ -343,7 +344,7 @@ Item {
                             Layout.fillHeight: true
                             implicitWidth: 200
 
-                            placeholderText: "Повторите новый пароль"
+                            placeholderText: qsTr("NewPasswordRepeat")
                         }
                     }
 
@@ -353,7 +354,7 @@ Item {
 
                         enabled: parent.isInputValid && !parent.inProcess
 
-                        text: "Подтвердить"
+                        text: qsTr("Apply")
 
                         onClicked: {
                             parent.inProcess = true;
@@ -371,7 +372,7 @@ Item {
                 Layout.minimumWidth: 120
                 Layout.minimumHeight: 40
 
-                text: "Выход"
+                text: qsTr("SignOut", "as action")
 
                 onClicked: {
                     view.closeView();

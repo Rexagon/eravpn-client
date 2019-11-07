@@ -18,7 +18,7 @@ Item {
     }
 
     StackView.onActivated: {
-        windowTitleText = "Вход"
+        windowTitleText = qsTr("SignIn", "as title")
         windowTitleButtonsVisible = false
     }
 

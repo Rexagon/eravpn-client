@@ -14,7 +14,7 @@ Item {
     id: view
 
     StackView.onActivating: {
-        windowTitleText = "Выбор тарифа"
+        windowTitleText = qsTr("TariffSelection")
         windowTitleButtonsVisible = true
     }
 
@@ -38,7 +38,7 @@ Item {
         }
 
         Text {
-            text: "Выбор тарифа"
+            text: qsTr("TariffSelection")
 
             color: "white"
 

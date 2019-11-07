@@ -21,7 +21,7 @@ Item {
     }
 
     StackView.onActivating: {
-        windowTitleText = "Регистрация"
+        windowTitleText = qsTr("SignUp", "as title")
         windowTitleButtonsVisible = false
     }
 
@@ -59,7 +59,7 @@ Item {
         }
         onSignUpErrorOccurred: {
             view.state = "";
-            notificationArea.notify("Ошибка регистрации");
+            notificationArea.notify(qsTr("SignUpError"));
         }
     }
 
@@ -97,7 +97,7 @@ Item {
 
                     Text {
                         id: emailMethodSelectionLabel
-                        text: "С email и паролем"
+                        text: qsTr("WithEmailAndPassword")
                         color: isAnonymous ? "#7880a2" : "white"
 
                         font.family: rootUiFontBold.name
@@ -134,7 +134,7 @@ Item {
 
                     Text {
                         id: anonymousMethodSelectionLabel
-                        text: "Анонимная регистрация"
+                        text: qsTr("AnonymousSignUp")
                         color: isAnonymous ? "white" : "#7880a2"
 
                         font.family: rootUiFontBold.name
@@ -188,7 +188,7 @@ Item {
 
                 focus: true
 
-                placeholderText: isAnonymous ? "Придумайте логин" : "Введите email"
+                placeholderText: isAnonymous ? qsTr("CreateNickName") : qsTr("EnterEmail")
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
@@ -199,7 +199,7 @@ Item {
             EraPasswordField {
                 id: passwordInput
 
-                placeholderText: "Придумайте пароль"
+                placeholderText: qsTr("CreatePassword")
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
@@ -210,7 +210,7 @@ Item {
             EraPasswordField {
                 id: passwordRepeatInput
 
-                placeholderText: "Введите пароль ещё раз"
+                placeholderText: qsTr("RepeatPassword")
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
@@ -221,7 +221,7 @@ Item {
             EraTextField {
                 id: promoCodeInput
 
-                placeholderText: "Введите промокод"
+                placeholderText: qsTr("EnterCouponCode")
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
@@ -232,7 +232,7 @@ Item {
             EraButton {
                 id: registrationButton
 
-                text: isAnonymous ? "Сгенерировать код-пароль" : "Зарегистрироваться"
+                text: isAnonymous ? qsTr("GenerateAuthKey") : qsTr("SignUp", "as action")
 
                 enabled: view.state === "" && parent.isInputValid
 
@@ -248,11 +248,11 @@ Item {
                 Layout.alignment: Qt.AlignCenter
 
                 EraLabel {
-                    text: "Уже есть аккаунт?"
+                    text: qsTr("AlreadyHaveAccount")
                 }
 
                 EraLink {
-                    text: "Войти"
+                    text: qsTr("SignIn", "as action")
                     horizontalAlignment: Text.AlignRight
                     onClicked: view.switchToLogin()
                 }

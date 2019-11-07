@@ -31,7 +31,7 @@ Item {
     }
 
     StackView.onActivating: {
-        windowTitleText = "EraVPN"
+        windowTitleText = qsTr("Title")
         windowTitleButtonsVisible = true
 
         profileRefreshTimer.start();
@@ -66,7 +66,7 @@ Item {
         target: BackEnd.countriesController
 
         onCountriesRequestError: {
-            notificationArea.notify("Невозможно обновить список стран");
+            notificationArea.notify(qsTr("CountriesRequestError"));
         }
     }
 
@@ -86,7 +86,7 @@ Item {
         }
 
         onRuntimeErrorOccurred: {
-            notificationArea.notify("Ошибка во время работы VPN");
+            notificationArea.notify(qsTr("VpnError"));
         }
     }
 
