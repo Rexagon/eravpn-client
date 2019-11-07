@@ -11,6 +11,7 @@ set(SRC
         Controllers/ProfileController.cpp
         Controllers/LocationController.cpp
         Controllers/CountriesController.cpp
+        Controllers/SystemTrayController.cpp
         Controllers/TariffController.cpp
         Controllers/TranslationController.cpp
         Controllers/VpnController.cpp
@@ -41,6 +42,7 @@ set(SRC_MOC
         Controllers/CountriesController.hpp
         Controllers/LocationController.hpp
         Controllers/ProfileController.hpp
+        Controllers/SystemTrayController.hpp
         Controllers/TariffController.hpp
         Controllers/TranslationController.hpp
         Controllers/VpnController.hpp
@@ -86,6 +88,7 @@ target_link_libraries(app PRIVATE
         vpn
         Qt5::Core
         Qt5::Quick
+        Qt5::Widgets
         Qt5::Network)
 
 # inject properties
@@ -97,10 +100,15 @@ target_compile_definitions(app PRIVATE
 if (WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "/MANIFEST:NO")
 
+    PREPEND(ABSOLUTE_SRC ${CMAKE_CURRENT_SOURCE_DIR} ${SRC})
+    PREPEND(ABSOLUTE_SRC_MOC ${CMAKE_CURRENT_SOURCE_DIR} ${SRC_MOC})
+
     add_custom_command(TARGET app PRE_BUILD
             COMMAND "${CMAKE_COMMAND}" -E
             env PATH="${_qt_bin_dir}" "${LUPDATE_EXECUTABLE}"
             ${CMAKE_SOURCE_DIR}/res/app.qrc
+            ${ABSOLUTE_SRC}
+            ${ABSOLUTE_SRC_MOC}
             -ts
             ${CMAKE_SOURCE_DIR}/res/translations/main_ru.ts
             ${CMAKE_SOURCE_DIR}/res/translations/main_en.ts)

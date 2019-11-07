@@ -85,6 +85,7 @@
         <file>images/icon_fraud.png</file>
         <file>images/icon_fraud_dark.png</file>
         <file>images/loading.svg</file>
+        <file>images/icon.ico</file>
     </qresource>
     <qresource>
         <file>images/logo_small.png</file>

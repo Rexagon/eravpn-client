@@ -9,6 +9,7 @@
 #include "Controllers/CountriesController.hpp"
 #include "Controllers/LocationController.hpp"
 #include "Controllers/ProfileController.hpp"
+#include "Controllers/SystemTrayController.hpp"
 #include "Controllers/TariffController.hpp"
 #include "Controllers/TranslationController.hpp"
 #include "Controllers/VpnController.hpp"
@@ -26,6 +27,7 @@ class BackEnd : public QObject
     Q_PROPERTY(ProfileController *profileController READ profileController CONSTANT)
     Q_PROPERTY(LocationController *locationController READ locationController CONSTANT)
     Q_PROPERTY(CountriesController *countriesController READ countriesController CONSTANT)
+    Q_PROPERTY(SystemTrayController *systemTrayController READ systemTrayController CONSTANT)
     Q_PROPERTY(TariffController *tariffController READ tariffController CONSTANT)
     Q_PROPERTY(TranslationController *translationController READ translationController CONSTANT)
     Q_PROPERTY(VpnController *vpnController READ vpnController CONSTANT)
@@ -55,6 +57,7 @@ public:
     ProfileController *profileController();
     LocationController *locationController();
     CountriesController *countriesController();
+    SystemTrayController *systemTrayController();
     TariffController *tariffController();
     TranslationController *translationController();
     VpnController *vpnController();
@@ -88,6 +91,7 @@ private:
     LocationController m_locationController;
     ProfileController m_profileController;
     TariffController m_tariffController;
+    SystemTrayController m_systemTrayController;
     TranslationController m_translationController;
     VpnController m_vpnController;
 };

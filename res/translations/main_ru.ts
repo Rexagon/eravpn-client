@@ -53,7 +53,7 @@
     <message>
         <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="45"/>
         <source>UserIsNotVerified</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь не подтверждён</translation>
     </message>
     <message>
         <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="47"/>
@@ -535,6 +535,24 @@
         <location filename="../views/TariffSelectionView.qml" line="41"/>
         <source>TariffSelection</source>
         <translation>Выбор тарифа</translation>
+    </message>
+</context>
+<context>
+    <name>app::SystemTrayController</name>
+    <message>
+        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="59"/>
+        <source>Quit</source>
+        <translation>Выход</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="62"/>
+        <source>Connected</source>
+        <translation>Подключено</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="62"/>
+        <source>Disconnected</source>
+        <translation>Не подключено</translation>
     </message>
 </context>
 </TS>

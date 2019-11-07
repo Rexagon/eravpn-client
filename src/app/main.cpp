@@ -1,7 +1,7 @@
 // This is an open source non-commercial project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    QGuiApplication application(argc, argv);
+    QApplication application(argc, argv);
 
     qmlRegisterSingletonType<BackEnd>(BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "BackEnd",
                                       [](QQmlEngine *, QJSEngine *) {
@@ -53,5 +53,5 @@ int main(int argc, char **argv)
     BackEnd::instance().connect(BackEnd::instance().translation(), &Translation::languageChanged, &viewEngine,
                                 &QQmlApplicationEngine::retranslate);
 
-    return QGuiApplication::exec();
+    return QApplication::exec();
 }

@@ -48,6 +48,19 @@ ApplicationWindow
         }
     }
 
+    Connections {
+        target: BackEnd.systemTrayController
+
+        onShowRequested: {
+            window.show();
+            window.visibility = ApplicationWindow.Windowed;
+        }
+
+        onQuitRequested: {
+            window.close();
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
@@ -89,7 +102,9 @@ ApplicationWindow
             }
 
             onMinimizeRequested: window.visibility = ApplicationWindow.Minimized
-            onCloseRequested: window.close()
+            onCloseRequested: {
+                window.hide();
+            }
         }
 
         StackView {
