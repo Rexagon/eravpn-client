@@ -49,7 +49,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.WordWrap
 
-                text: qsTr("AuthKey")
+                text: qsTr("AuthKey") + ":"
                 color: "white"
 
                 font.pointSize: 16
@@ -67,7 +67,7 @@ Item {
                 wrapMode: Text.WrapAnywhere
 
                 ToolTip.visible: tooltipVisible
-                ToolTip.text: qsTr(PressToCopy)
+                ToolTip.text: qsTr("PressToCopy")
 
                 MouseArea {
                     anchors.fill: parent

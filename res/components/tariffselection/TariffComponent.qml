@@ -248,7 +248,7 @@ Rectangle {
             let string = qsTr("Billed") + " ";
 
             if (monthCount == 1) {
-                return string + qsTr("MonthDeclensionOne");
+                return string + qsTr("MonthSingle");
             }
 
             const declensions = [qsTr("MonthDeclensionOne"), qsTr("MonthDeclensionTwo"), qsTr("MonthDeclensionFive")];

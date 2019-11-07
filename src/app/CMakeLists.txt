@@ -92,11 +92,17 @@ target_compile_definitions(app PRIVATE
 if (WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "/MANIFEST:NO")
 
-    add_custom_command(TARGET app POST_BUILD
+    add_custom_command(TARGET app PRE_BUILD
             COMMAND "${CMAKE_COMMAND}" -E
             env PATH="${_qt_bin_dir}" "${LUPDATE_EXECUTABLE}"
             ${CMAKE_SOURCE_DIR}/res/app.qrc
             -ts
+            ${CMAKE_SOURCE_DIR}/res/translations/main_ru.ts
+            ${CMAKE_SOURCE_DIR}/res/translations/main_en.ts)
+
+    add_custom_command(TARGET app PRE_BUILD
+            COMMAND "${CMAKE_COMMAND}" -E
+            env PATH="${_qt_bin_dir}" "${LRELEASE_EXECUTABLE}"
             ${CMAKE_SOURCE_DIR}/res/translations/main_ru.ts
             ${CMAKE_SOURCE_DIR}/res/translations/main_en.ts)
 
