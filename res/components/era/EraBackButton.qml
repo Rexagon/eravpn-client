@@ -25,7 +25,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: arrow.right
 
-        text: "Назад"
+        text: qsTr("Back")
 
         font.family: rootUiFontRegular.name
         font.pointSize: 12

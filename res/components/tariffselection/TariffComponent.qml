@@ -180,7 +180,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.bottomMargin: 8
 
-                text: '/ за месяц'
+                text: "/ " + qsTr("PerMonth")
 
                 color: lightTextColor
                 font.family: futuraHeavyFont.name
@@ -245,13 +245,14 @@ Rectangle {
         anchors.topMargin: 30
 
         text: {
-            let string = "счёт выставляется\nраз в ";
+            let string = qsTr("Billed") + " ";
 
             if (monthCount == 1) {
-                return string + "месяц";
+                return string + qsTr("MonthSingle");
             }
 
-            return string + monthCount + " " + declension(monthCount, ["месяц", "месяца", "месяцев"]);
+            const declensions = [qsTr("MonthDeclensionOne"), qsTr("MonthDeclensionTwo"), qsTr("MonthDeclensionFive")];
+            return string + monthCount + " " + declension(monthCount, declensions);
         }
 
         horizontalAlignment: Text.AlignHCenter
@@ -268,7 +269,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 20
 
-        text: "Безлимитный трафик"
+        text: qsTr("UnlimitedTraffic")
 
         color: lightTextColor
         font.family: futuraMediumFont.name
@@ -282,7 +283,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 10
 
-        text: "В данном тарифе доступна\nреферальная программа"
+        text: qsTr("ReferralProgramAvailable")
 
         horizontalAlignment: Text.AlignHCenter
 
@@ -316,7 +317,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
 
-            text: "Выгода " + profitInPercent + "%"
+            text: qsTr("Profit") + profitInPercent + "%"
 
             color: lightTextColor
             font.family: futuraMediumFont.name

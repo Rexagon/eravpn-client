@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "../components"
 import "../components/era"
 import "../components/settings"
@@ -15,7 +17,7 @@ Item {
     id: view
 
     StackView.onActivating: {
-        windowTitleText = "Настройки"
+        windowTitleText = qsTr("Settings")
         windowTitleButtonsVisible = true
         windowTitleBar.state = "settings_opened";
     }
@@ -88,7 +90,7 @@ Item {
             }
 
             Text {
-                text: "Настройки"
+                text: qsTr("Settings")
 
                 color: "white"
 
@@ -102,12 +104,42 @@ Item {
 
             SettingsGroup {
                 Layout.fillWidth: true
-                Layout.minimumHeight: 100
+                Layout.minimumHeight: 30
 
-                withToggleButton: true
+                title: qsTr("SelectLanguage")
+            }
 
-                title: "Безопасный разрыв соединения"
-                description: "Если соединение с vpn будет нестабильным, то при его отключении, сервис зашифрует и прервёт передачу данных через провайдера."
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 60
+
+                spacing: 10
+
+                EraButton {
+                    Layout.minimumWidth: 200
+                    Layout.minimumHeight: 40
+
+                    text: "English"
+
+                    enabled: BackEnd.translation.language !== "en"
+
+                    onClicked: {
+                        BackEnd.translationController.setLanguage("en");
+                    }
+                }
+
+                EraButton {
+                    Layout.minimumWidth: 200
+                    Layout.minimumHeight: 40
+
+                    text: "Русский"
+
+                    enabled: BackEnd.translation.language !== "ru"
+
+                    onClicked: {
+                        BackEnd.translationController.setLanguage("ru");
+                    }
+                }
             }
 
             Separator {
@@ -120,8 +152,8 @@ Item {
 
                 withToggleButton: true
 
-                title: "Использовать наши DNS"
-                description: "Для полной конфиденциальности в сети рекомендуем вам использовать наши собственные доменные серверы, чтобы никто не мог узнать, какие сайты вы посещали."
+                title: qsTr("SafeDisconnection")
+                description: qsTr("SafeDisconnectionDescription")
             }
 
             Separator {
@@ -132,15 +164,29 @@ Item {
                 Layout.fillWidth: true
                 Layout.minimumHeight: 100
 
-                title: "White connection"
-                description: "Внесите в список сайты, которые вы хотите посещать напрямую, без прослойки Era VPN. Например: ваш онлайн банк."
+                withToggleButton: true
+
+                title: qsTr("UseOurDns")
+                description: qsTr("UseOurDnsDescription")
+            }
+
+            Separator {
+                Layout.fillWidth: true
+            }
+
+            SettingsGroup {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 100
+
+                title: qsTr("WhiteConnection")
+                description: qsTr("WhiteConnectionDescription")
             }
 
             TextArea {
                 Layout.fillWidth: true
                 Layout.minimumHeight: 100
 
-                placeholderText: "Введите адрес сайта"
+                placeholderText: qsTr("EnterWebsiteAddress")
                 font.family: rootUiFontRegular.name
                 font.pointSize: 12
 
@@ -155,7 +201,7 @@ Item {
                 Layout.minimumWidth: 120
                 Layout.minimumHeight: 40
 
-                text: "Сохранить"
+                text: qsTr("Save")
             }
 
             Separator {
@@ -166,8 +212,8 @@ Item {
                 Layout.fillWidth: true
                 Layout.minimumHeight: 100
 
-                title: "Multi connection"
-                description: "Для большей надёжности вы можете пропускать ваш интернет трафик через два ниших сервера, чтобы исключить малейшую вероятность вычисления вашего реального IP."
+                title: qsTr("MultiConnection")
+                description: qsTr("MultiConnectionDescription")
             }
         }
     }

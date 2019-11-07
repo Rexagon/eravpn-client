@@ -91,4 +91,8 @@
         <file>images/map.png</file>
         <file>images/payment.png</file>
     </qresource>
+    <qresource>
+        <file>translations/main_ru.qm</file>
+        <file>translations/main_en.qm</file>
+    </qresource>
 </RCC>

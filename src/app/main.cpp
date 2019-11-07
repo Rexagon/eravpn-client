@@ -43,5 +43,8 @@ int main(int argc, char **argv)
 
     QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
 
+    BackEnd::instance().connect(BackEnd::instance().translation(), &Translation::languageChanged, &viewEngine,
+                                &QQmlApplicationEngine::retranslate);
+
     return QGuiApplication::exec();
 }

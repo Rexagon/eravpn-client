@@ -24,7 +24,7 @@ ColumnLayout {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
 
-        text: connectionInfo.connected ? "Подключено" : "Не подключено"
+        text: connectionInfo.connected ? qsTr("Connected") : qsTr("Disconnected")
         color: connectionInfo.connected ? blueColor : redColor
         font.family: futuraMediumFont.name
         font.pointSize: 16
@@ -36,7 +36,7 @@ ColumnLayout {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
 
-        text: "Местоположение"
+        text: qsTr("Location")
         color: darkBlueColor
         font.family: futuraMediumFont.name
         font.pointSize: 12

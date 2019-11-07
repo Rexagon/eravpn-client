@@ -45,7 +45,7 @@ ListView {
             spacing: 0
 
             EraLabel {
-                text: "Расположение сервера"
+                text: qsTr("ServerLocation")
                 font.pointSize: 8
             }
 

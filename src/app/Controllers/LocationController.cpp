@@ -11,7 +11,7 @@
 namespace
 {
 constexpr auto REQUEST_URL = "http://api.ipstack.com/check?access_key=%1&"
-                             "language=ru&format=0&"
+                             "language=%2&format=0&"
                              "fields=ip,country_name,region_name";
 
 constexpr auto MAX_ATTEMPT_COUNT = 10;
@@ -19,9 +19,10 @@ constexpr auto MAX_ATTEMPT_COUNT = 10;
 
 namespace app
 {
-LocationController::LocationController(const QString &ipStackKey, Location &location)
+LocationController::LocationController(const QString &ipStackKey, Location &location, const Translation &translation)
     : QObject{nullptr}
     , m_location{location}
+    , m_translation{translation}
     , m_ipStackKey{ipStackKey}
 {
     m_reconnectionTimer.setInterval(1000);
@@ -96,7 +97,7 @@ void LocationController::requestLocation()
 
     m_networkManager = std::make_unique<QNetworkAccessManager>();
 
-    QNetworkRequest request{QString{REQUEST_URL}.arg(m_ipStackKey)};
+    QNetworkRequest request{QString{REQUEST_URL}.arg(m_ipStackKey).arg(m_translation.language())};
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json; charset=UTF-8");
     request.setHeader(QNetworkRequest::UserAgentHeader, "EraVPN Client");
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);

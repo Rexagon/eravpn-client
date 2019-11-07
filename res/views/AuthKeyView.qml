@@ -16,11 +16,11 @@ Item {
 
     function copyAuthKey() {
         BackEnd.clipboardController.copyToClipboard(view.authKey);
-        notificationArea.notify("Ссылка скопирована в буффер обмена");
+        notificationArea.notify(qsTr("AuthKeyCopied"));
     }
 
     StackView.onActivating: {
-        windowTitleText = "Код авторизации"
+        windowTitleText = qsTr("AuthKey", "as title")
         windowTitleButtonsVisible = false
     }
 
@@ -49,7 +49,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.WordWrap
 
-                text: "Код авторизации:"
+                text: qsTr("AuthKey") + ":"
                 color: "white"
 
                 font.pointSize: 16
@@ -67,7 +67,7 @@ Item {
                 wrapMode: Text.WrapAnywhere
 
                 ToolTip.visible: tooltipVisible
-                ToolTip.text: "Нажмите чтобы скопировать"
+                ToolTip.text: qsTr("PressToCopy")
 
                 MouseArea {
                     anchors.fill: parent
@@ -97,7 +97,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.WordWrap
 
-                text: "Сохраните данный код!"
+                text: qsTr("SaveThisCode")
                 color: "white"
 
                 font.pointSize: 16
@@ -107,7 +107,7 @@ Item {
             EraLabel {
                 Layout.fillWidth: true
 
-                text: "С его помощью можно восстановить доступ к Вашему аккаунту."
+                text: qsTr("SaveThisCodeDescription")
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -121,7 +121,7 @@ Item {
             EraButton {
                 id: confirmButton
 
-                text: "Готово"
+                text: qsTr("Done")
 
                 onClicked: switchToMain()
 

@@ -47,7 +47,7 @@ Item {
     }
 
     StackView.onActivating: {
-        windowTitleText = "Вход в аккаунт"
+        windowTitleText = qsTr("SignIn", "as title")
         windowTitleButtonsVisible = false
     }
 
@@ -59,7 +59,7 @@ Item {
             }
         }
         onSignInErrorOccurred: {
-            notificationArea.notify("Неправильный логин или пароль");
+            notificationArea.notify(qsTr("IncorrectLoginOrPassword"));
             view.state = "";
         }
     }
@@ -112,7 +112,7 @@ Item {
                 anchors.bottom: logoSmallText.top
                 anchors.bottomMargin: 5
 
-                text: "EraVPN"
+                text: qsTr("Title")
 
                 font.family: futuraHeavyFont.name
                 font.pointSize: 17
@@ -128,7 +128,7 @@ Item {
 
                 horizontalAlignment: Text.AlignHCenter
 
-                text: "EraVPN – это, пожалуй, самый быстрый\nи безопасный способ подключения к сети"
+                text: qsTr("ServiceDescription")
                 textFormat: Text.PlainText
 
                 font.family: futuraMediumFont.name
@@ -156,7 +156,7 @@ Item {
 
                 focus: true
 
-                placeholderText: "Введите логин или email"
+                placeholderText: qsTr("EnterLoginOrEmail")
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
@@ -167,7 +167,7 @@ Item {
             EraPasswordField {
                 id: passwordInput
 
-                placeholderText: "Введите пароль"
+                placeholderText: qsTr("EnterPassword")
 
                 Layout.fillWidth: true
                 Layout.minimumHeight: 44
@@ -178,7 +178,7 @@ Item {
             EraButton {
                 id: loginButton
 
-                text: "Вход"
+                text: qsTr("SignIn", "as action")
 
                 enabled: view.isInputValid
 
@@ -204,7 +204,7 @@ Item {
                 */
 
                 EraLink {
-                    text: "Зарегистрироваться"
+                    text: qsTr("SignUp", "as action")
                     horizontalAlignment: Text.AlignHCenter /* Qt.AlignRight */
                     onClicked: view.switchToRegistration()
 

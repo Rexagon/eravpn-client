@@ -10,6 +10,7 @@
 #include "Controllers/LocationController.hpp"
 #include "Controllers/ProfileController.hpp"
 #include "Controllers/TariffController.hpp"
+#include "Controllers/TranslationController.hpp"
 #include "Controllers/VpnController.hpp"
 
 namespace app
@@ -26,6 +27,7 @@ class BackEnd : public QObject
     Q_PROPERTY(LocationController *locationController READ locationController CONSTANT)
     Q_PROPERTY(CountriesController *countriesController READ countriesController CONSTANT)
     Q_PROPERTY(TariffController *tariffController READ tariffController CONSTANT)
+    Q_PROPERTY(TranslationController *translationController READ translationController CONSTANT)
     Q_PROPERTY(VpnController *vpnController READ vpnController CONSTANT)
 
     Q_PROPERTY(CountryListModel *freeServersList READ freeServersList CONSTANT)
@@ -36,6 +38,7 @@ class BackEnd : public QObject
     Q_PROPERTY(VpnConnection *vpnConnection READ vpnConnection CONSTANT)
     Q_PROPERTY(Profile *profile READ profile CONSTANT)
     Q_PROPERTY(Location *location READ location CONSTANT)
+    Q_PROPERTY(Translation *translation READ translation CONSTANT)
 
     explicit BackEnd();
 
@@ -53,6 +56,7 @@ public:
     LocationController *locationController();
     CountriesController *countriesController();
     TariffController *tariffController();
+    TranslationController *translationController();
     VpnController *vpnController();
 
     CountryListModel *freeServersList();
@@ -63,6 +67,7 @@ public:
     VpnConnection *vpnConnection();
     Profile *profile();
     Location *location();
+    Translation *translation();
 
 private:
     Connection m_connection;
@@ -75,6 +80,7 @@ private:
     VpnConnection m_vpnConnection{};
     Profile m_profile{};
     Location m_location{};
+    Translation m_translation{};
 
     CertificateController m_certificateController;
     ClipboardController m_clipboardController{};
@@ -82,6 +88,7 @@ private:
     LocationController m_locationController;
     ProfileController m_profileController;
     TariffController m_tariffController;
+    TranslationController m_translationController;
     VpnController m_vpnController;
 };
 

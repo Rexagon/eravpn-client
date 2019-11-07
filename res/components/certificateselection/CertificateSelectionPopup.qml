@@ -44,7 +44,7 @@ Popup {
             anchors.horizontalCenter: parent.horizontalCenter
             height: 30
 
-            text: "Файлы конфигурации"
+            text: qsTr("ConfigurationFiles")
 
             color: "white"
             font.pointSize: 12
@@ -125,7 +125,7 @@ Popup {
 
                 width: 120
 
-                text: "Сгенерировать"
+                text: qsTr("Generate")
 
                 onClicked: {
                     BackEnd.certificateController.createNew(countryId);

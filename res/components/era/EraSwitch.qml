@@ -16,7 +16,7 @@ Switch {
             name: "checked"
             PropertyChanges {
                 target: label
-                text: "ВКЛ"
+                text: qsTr("On")
                 horizontalAlignment: Text.AlignLeft
             }
             PropertyChanges {
@@ -50,7 +50,7 @@ Switch {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignRight
 
-        text: "ВЫКЛ"
+        text: qsTr("Off")
 
         color: "white"
         font.family: futuraHeavyFont.name

@@ -12,6 +12,7 @@ set(SRC
         Controllers/LocationController.cpp
         Controllers/CountriesController.cpp
         Controllers/TariffController.cpp
+        Controllers/TranslationController.cpp
         Controllers/VpnController.cpp
 
         Models/Certificate.cpp
@@ -22,6 +23,7 @@ set(SRC
         Models/Profile.cpp
         Models/TariffListModel.cpp
         Models/Tariff.cpp
+        Models/Translation.cpp
         Models/VpnConnection.cpp
 
         Stuff/StringHelpers.cpp
@@ -39,6 +41,7 @@ set(SRC_MOC
         Controllers/LocationController.hpp
         Controllers/ProfileController.hpp
         Controllers/TariffController.hpp
+        Controllers/TranslationController.hpp
         Controllers/VpnController.hpp
 
         Models/CertificateListModel.hpp
@@ -47,6 +50,7 @@ set(SRC_MOC
         Models/Profile.hpp
         Models/TariffListModel.hpp
         Models/Tariff.hpp
+        Models/Translation.hpp
         Models/VpnConnection.hpp)
 
 qt5_add_resources(RESOURCES
@@ -58,9 +62,9 @@ if (WIN32)
             ${CMAKE_SOURCE_DIR}/res/app.rc
             ${CMAKE_SOURCE_DIR}/res/app.exe.manifest)
 
-    if(CMAKE_BUILD_TYPE MATCHES Release)
+    if (CMAKE_BUILD_TYPE MATCHES Release)
         set(ADDITIONAL_EXECUTABLE_OPTIONS WIN32)
-    endif()
+    endif ()
 endif ()
 
 # Executable
@@ -91,6 +95,20 @@ target_compile_definitions(app PRIVATE
 
 if (WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "/MANIFEST:NO")
+
+    add_custom_command(TARGET app PRE_BUILD
+            COMMAND "${CMAKE_COMMAND}" -E
+            env PATH="${_qt_bin_dir}" "${LUPDATE_EXECUTABLE}"
+            ${CMAKE_SOURCE_DIR}/res/app.qrc
+            -ts
+            ${CMAKE_SOURCE_DIR}/res/translations/main_ru.ts
+            ${CMAKE_SOURCE_DIR}/res/translations/main_en.ts)
+
+    add_custom_command(TARGET app PRE_BUILD
+            COMMAND "${CMAKE_COMMAND}" -E
+            env PATH="${_qt_bin_dir}" "${LRELEASE_EXECUTABLE}"
+            ${CMAKE_SOURCE_DIR}/res/translations/main_ru.ts
+            ${CMAKE_SOURCE_DIR}/res/translations/main_en.ts)
 
     add_custom_command(TARGET app POST_BUILD
             COMMAND "${CMAKE_COMMAND}" -E
