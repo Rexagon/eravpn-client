@@ -2,6 +2,8 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
+import com.eravpn.backend 1.0
+
 import "../components"
 import "../components/era"
 import "../components/settings"
@@ -98,6 +100,50 @@ Item {
 
             Item {
                 implicitHeight: 20
+            }
+
+            SettingsGroup {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 30
+
+                title: qsTr("SelectLanguage")
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 60
+
+                spacing: 10
+
+                EraButton {
+                    Layout.minimumWidth: 200
+                    Layout.minimumHeight: 40
+
+                    text: "English"
+
+                    enabled: BackEnd.translation.language !== "en"
+
+                    onClicked: {
+                        BackEnd.translationController.setLanguage("en");
+                    }
+                }
+
+                EraButton {
+                    Layout.minimumWidth: 200
+                    Layout.minimumHeight: 40
+
+                    text: "Русский"
+
+                    enabled: BackEnd.translation.language !== "ru"
+
+                    onClicked: {
+                        BackEnd.translationController.setLanguage("ru");
+                    }
+                }
+            }
+
+            Separator {
+                Layout.fillWidth: true
             }
 
             SettingsGroup {

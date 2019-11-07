@@ -406,58 +406,63 @@
 <context>
     <name>SettingsView</name>
     <message>
-        <location filename="../views/SettingsView.qml" line="18"/>
-        <location filename="../views/SettingsView.qml" line="91"/>
+        <location filename="../views/SettingsView.qml" line="20"/>
+        <location filename="../views/SettingsView.qml" line="93"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../views/SettingsView.qml" line="109"/>
+        <source>SelectLanguage</source>
+        <translation>Выберите язык</translation>
+    </message>
+    <message>
+        <location filename="../views/SettingsView.qml" line="155"/>
         <source>SafeDisconnection</source>
         <translation>Безопасный разрыв соединения</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="110"/>
+        <location filename="../views/SettingsView.qml" line="156"/>
         <source>SafeDisconnectionDescription</source>
         <translation>Если соединение с vpn будет нестабильным, то при его отключении, сервис зашифрует и прервёт передачу данных через провайдера.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="123"/>
+        <location filename="../views/SettingsView.qml" line="169"/>
         <source>UseOurDns</source>
         <translation>Использовать наши DNS</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="124"/>
+        <location filename="../views/SettingsView.qml" line="170"/>
         <source>UseOurDnsDescription</source>
         <translation>Для полной конфиденциальности в сети рекомендуем вам использовать наши собственные доменные серверы, чтобы никто не мог узнать, какие сайты вы посещали.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="135"/>
+        <location filename="../views/SettingsView.qml" line="181"/>
         <source>WhiteConnection</source>
         <translation>White connection</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="136"/>
+        <location filename="../views/SettingsView.qml" line="182"/>
         <source>WhiteConnectionDescription</source>
         <translation>Внесите в список сайты, которые вы хотите посещать напрямую, без прослойки Era VPN. Например: ваш онлайн банк.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="143"/>
+        <location filename="../views/SettingsView.qml" line="189"/>
         <source>EnterWebsiteAddress</source>
         <translation>Введите адрес сайта</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="158"/>
+        <location filename="../views/SettingsView.qml" line="204"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="169"/>
+        <location filename="../views/SettingsView.qml" line="215"/>
         <source>MultiConnection</source>
         <translation>Multi connection</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="170"/>
+        <location filename="../views/SettingsView.qml" line="216"/>
         <source>MultiConnectionDescription</source>
         <translation>Для большей надёжности вы можете пропускать ваш интернет трафик через два наших сервера, чтобы исключить малейшую вероятность вычисления вашего реального IP.</translation>
     </message>

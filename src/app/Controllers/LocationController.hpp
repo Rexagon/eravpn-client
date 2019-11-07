@@ -8,6 +8,7 @@
 #include <QTimer>
 
 #include "../Models/Location.hpp"
+#include "TranslationController.hpp"
 
 namespace app
 {
@@ -16,7 +17,7 @@ class LocationController final : public QObject
     Q_OBJECT
 
 public:
-    explicit LocationController(const QString &ipStackKey, Location &location);
+    explicit LocationController(const QString &ipStackKey, Location &location, const Translation &translation);
     ~LocationController() override;
 
     Q_INVOKABLE void updateCurrentLocation();
@@ -29,6 +30,7 @@ private:
     void requestLocation();
 
     Location &m_location;
+    const Translation &m_translation;
 
     QString m_ipStackKey;
 

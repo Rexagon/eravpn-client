@@ -406,58 +406,63 @@
 <context>
     <name>SettingsView</name>
     <message>
-        <location filename="../views/SettingsView.qml" line="18"/>
-        <location filename="../views/SettingsView.qml" line="91"/>
+        <location filename="../views/SettingsView.qml" line="20"/>
+        <location filename="../views/SettingsView.qml" line="93"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
         <location filename="../views/SettingsView.qml" line="109"/>
-        <source>SafeDisconnection</source>
-        <translation>Sage disconnection</translation>
+        <source>SelectLanguage</source>
+        <translation>Select language</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="110"/>
+        <location filename="../views/SettingsView.qml" line="155"/>
+        <source>SafeDisconnection</source>
+        <translation>Safe disconnection</translation>
+    </message>
+    <message>
+        <location filename="../views/SettingsView.qml" line="156"/>
         <source>SafeDisconnectionDescription</source>
         <translation>If the connection with vpn is unstable, then when it is disconnected, the service will encode data and stop sending it through the provider.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="123"/>
+        <location filename="../views/SettingsView.qml" line="169"/>
         <source>UseOurDns</source>
         <translation>Use our DNS</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="124"/>
+        <location filename="../views/SettingsView.qml" line="170"/>
         <source>UseOurDnsDescription</source>
         <translation>For complete privacy, we recommend you use our own domain servers so that no one can find out which sites you visited.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="135"/>
+        <location filename="../views/SettingsView.qml" line="181"/>
         <source>WhiteConnection</source>
         <translation>White connection</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="136"/>
+        <location filename="../views/SettingsView.qml" line="182"/>
         <source>WhiteConnectionDescription</source>
         <translation>List the sites you want to visit directly without the Era VPN layer. For example: your online bank.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="143"/>
+        <location filename="../views/SettingsView.qml" line="189"/>
         <source>EnterWebsiteAddress</source>
         <translation>Enter website address</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="158"/>
+        <location filename="../views/SettingsView.qml" line="204"/>
         <source>Save</source>
         <translation>Save</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="169"/>
+        <location filename="../views/SettingsView.qml" line="215"/>
         <source>MultiConnection</source>
         <translation>Multi connection</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="170"/>
+        <location filename="../views/SettingsView.qml" line="216"/>
         <source>MultiConnectionDescription</source>
         <translation>For better reliability, you can pass your traffic through two our servers to eliminate the slightest chance of calculating your real IP.</translation>
     </message>
@@ -472,7 +477,7 @@
     <message>
         <location filename="../components/tariffselection/TariffComponent.qml" line="248"/>
         <source>Billed</source>
-        <translation>bidded
+        <translation>billed
 once a</translation>
     </message>
     <message>

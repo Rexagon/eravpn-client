@@ -4,7 +4,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
-#include <QTranslator>
 
 #include "BackEnd.hpp"
 
@@ -27,12 +26,7 @@ int main(int argc, char **argv)
     QCoreApplication::setOrganizationDomain("com.eravpn");
     QCoreApplication::setApplicationName("EraVPN Client");
 
-    QTranslator tr;
-    tr.load(":/translations/main_ru.qm");
-
     QGuiApplication application(argc, argv);
-
-    QGuiApplication::installTranslator(&tr);
 
     qmlRegisterSingletonType<BackEnd>(BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "BackEnd",
                                       [](QQmlEngine *, QJSEngine *) {
@@ -48,6 +42,9 @@ int main(int argc, char **argv)
     qRegisterMetaType<Tariff *>("Tariff*");
 
     QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
+
+    BackEnd::instance().connect(BackEnd::instance().translation(), &Translation::languageChanged, &viewEngine,
+                                &QQmlApplicationEngine::retranslate);
 
     return QGuiApplication::exec();
 }

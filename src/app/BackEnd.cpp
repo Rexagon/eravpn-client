@@ -10,9 +10,10 @@ BackEnd::BackEnd()
     , m_connection{API_URL}
     , m_certificateController{m_connection, m_profile, m_certificateListModel}
     , m_countriesController{m_connection, m_freeServersList, m_premiumServersList}
-    , m_locationController{IPSTACK_KEY, m_location}
+    , m_locationController{IPSTACK_KEY, m_location, m_translation}
     , m_profileController{m_connection, m_profile}
     , m_tariffController{m_connection, m_tariffListModel}
+    , m_translationController{m_translation}
     , m_vpnController{m_connection, m_profile, m_vpnConnection}
 {
 }
@@ -61,6 +62,12 @@ TariffController *BackEnd::tariffController()
 }
 
 
+TranslationController *BackEnd::translationController()
+{
+    return &m_translationController;
+}
+
+
 VpnController *BackEnd::vpnController()
 {
     return &m_vpnController;
@@ -106,6 +113,12 @@ Profile *BackEnd::profile()
 Location *BackEnd::location()
 {
     return &m_location;
+}
+
+
+Translation *BackEnd::translation()
+{
+    return &m_translation;
 }
 
 }  // namespace app

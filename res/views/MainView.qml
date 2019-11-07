@@ -90,6 +90,14 @@ Item {
         }
     }
 
+    Connections {
+        target: BackEnd.translation
+
+        onLanguageChanged: {
+            BackEnd.locationController.updateCurrentLocation()
+        }
+    }
+
     RowLayout {
         anchors.fill: parent
 
