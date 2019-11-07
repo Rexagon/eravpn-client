@@ -83,7 +83,7 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
-                        text: "Бесплатные серверы"
+                        text: qsTr("FreeServers")
                         font.pointSize: 11
                     }
 
@@ -106,7 +106,7 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
 
-                        text: "Премиум-доступ"
+                        text: qsTr("PremiumServers")
                         font.pointSize: 11
                     }
 

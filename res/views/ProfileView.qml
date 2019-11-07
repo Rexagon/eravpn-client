@@ -168,7 +168,7 @@ Item {
 
                             enabled: emailChangeGroup.isInputValid && !emailChangeGroup.inProcess
 
-                            text: "Изменить"
+                            text: qsTr("Change")
 
                             onClicked: {
                                 emailChangeGroup.inProcess = true;

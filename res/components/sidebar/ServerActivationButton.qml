@@ -19,7 +19,7 @@ Button {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
 
-        text: activated ? "Отключиться" : "Подключиться"
+        text: activated ? qsTr("Disconnect") : qsTr("Connect")
 
         color: "white"
         font.family: futuraMediumFont.name
@@ -127,7 +127,7 @@ Button {
     }
 
     onFocusChanged: {
-        controlBackground.border.width = focus ? 1 : 0;
+        controlBackground.border.width = !enabled || focus ? 1 : 0;
     }
 
     onEnabledChanged: {

@@ -36,6 +36,82 @@
     </message>
 </context>
 <context>
+    <name>CertificateListView</name>
+    <message>
+        <location filename="../components/certificateselection/CertificateListView.qml" line="64"/>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CertificateSelectionPopup</name>
+    <message>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="47"/>
+        <source>ConfigurationFiles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="128"/>
+        <source>Generate</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConnectionInfo</name>
+    <message>
+        <location filename="../components/mainview/ConnectionInfo.qml" line="27"/>
+        <source>Connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/mainview/ConnectionInfo.qml" line="27"/>
+        <source>Disconnected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/mainview/ConnectionInfo.qml" line="39"/>
+        <location filename="../components/sidebar/ConnectionInfo.qml" line="59"/>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/sidebar/ConnectionInfo.qml" line="43"/>
+        <source>ConnectionIsSecure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/sidebar/ConnectionInfo.qml" line="43"/>
+        <source>ConnectionIsNotSecure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/sidebar/ConnectionInfo.qml" line="52"/>
+        <source>YourIp</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EraBackButton</name>
+    <message>
+        <location filename="../components/era/EraBackButton.qml" line="28"/>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EraSwitch</name>
+    <message>
+        <location filename="../components/era/EraSwitch.qml" line="19"/>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/era/EraSwitch.qml" line="53"/>
+        <source>Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoginView</name>
     <message>
         <location filename="../views/LoginView.qml" line="50"/>
@@ -82,6 +158,19 @@
     </message>
 </context>
 <context>
+    <name>MainSideBar</name>
+    <message>
+        <location filename="../components/MainSideBar.qml" line="86"/>
+        <source>FreeServers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/MainSideBar.qml" line="109"/>
+        <source>PremiumServers</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainView</name>
     <message>
         <location filename="../views/MainView.qml" line="34"/>
@@ -96,6 +185,14 @@
     <message>
         <location filename="../views/MainView.qml" line="89"/>
         <source>VpnError</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PremiumActivation</name>
+    <message>
+        <location filename="../components/sidebar/PremiumActivation.qml" line="25"/>
+        <source>ActivatePremium</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -135,6 +232,11 @@
     <message>
         <location filename="../views/ProfileView.qml" line="162"/>
         <source>EmailAddress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../views/ProfileView.qml" line="171"/>
+        <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -276,6 +378,27 @@
     </message>
 </context>
 <context>
+    <name>ServerActivationButton</name>
+    <message>
+        <location filename="../components/sidebar/ServerActivationButton.qml" line="22"/>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/sidebar/ServerActivationButton.qml" line="22"/>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServerListView</name>
+    <message>
+        <location filename="../components/sidebar/ServerListView.qml" line="48"/>
+        <source>ServerLocation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsView</name>
     <message>
         <location filename="../views/SettingsView.qml" line="18"/>
@@ -331,6 +454,50 @@
     <message>
         <location filename="../views/SettingsView.qml" line="170"/>
         <source>MultiConnectionDescription</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TariffComponent</name>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="183"/>
+        <source>PerMonth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="248"/>
+        <source>Billed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="251"/>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="254"/>
+        <source>MonthDeclensionOne</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="254"/>
+        <source>MonthDeclensionTwo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="254"/>
+        <source>MonthDeclensionFive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="272"/>
+        <source>UnlimitedTraffic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="286"/>
+        <source>ReferralProgramAvailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/tariffselection/TariffComponent.qml" line="320"/>
+        <source>Profit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

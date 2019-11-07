@@ -61,7 +61,7 @@ ListView {
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
 
-                text: "Выбрать"
+                text: qsTr("Select")
 
                 onClicked: {
                     certificateSelected(certificateId);

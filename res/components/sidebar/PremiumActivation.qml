@@ -22,7 +22,7 @@ Rectangle {
             }
 
             Text {
-                text: "Активировать премиум"
+                text: qsTr("ActivatePremium")
 
                 color: "white"
 

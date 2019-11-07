@@ -40,7 +40,7 @@ Rectangle {
             }
 
             EraLabel {
-                text: connectionInfo.connected ? "Соединение защищено" : "Соединение не защищено"
+                text: connectionInfo.connected ? qsTr("ConnectionIsSecure") : qsTr("ConnectionIsNotSecure")
                 font.family: futuraMediumFont.name
                 color: connectionInfo.connected ? blueColor : redColor
             }
@@ -49,14 +49,14 @@ Rectangle {
         EraLabel {
             Layout.alignment: Qt.AlignVCenter
 
-            text: "Ваш IP: " + BackEnd.location.ip
+            text: qsTr("YourIp") + ": " + BackEnd.location.ip
             color: "white"
         }
 
         EraLabel {
             Layout.alignment: Qt.AlignVCenter
 
-            text: "Местоположение: " + BackEnd.location.regionName
+            text: qsTr("Location") + ": " + BackEnd.location.regionName
             color: "white"
         }
 
