@@ -7,11 +7,12 @@ ListView {
 
     property int currentNotificationId: 0
 
-    function notify(title, duration = 1000) {
+    function notify(title, success = false, duration = 1000) {
         model.append({
             modelUniqueId: currentNotificationId,
             modelTitle: title,
-            modelDuration: duration
+            modelDuration: duration,
+            modelSuccess: success
         });
 
         ++currentNotificationId;
@@ -34,6 +35,7 @@ ListView {
         uniqueId: modelUniqueId
         title: modelTitle
         duration: modelDuration
+        success: modelSuccess
 
         onDestroyRequested: {
             const model = notificationArea.model;

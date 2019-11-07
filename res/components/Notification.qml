@@ -4,11 +4,13 @@ import QtQuick.Layouts 1.13
 
 Rectangle {
     readonly property string darkRedColor: "#ee252e"
+    readonly property string greenColor: "#0ed079"
 
     property int uniqueId
 
     property alias title: titleLabel.text
     property alias duration: animationPause.duration
+    property bool success: false
 
     signal destroyRequested
 
@@ -18,7 +20,7 @@ Rectangle {
     width: 300
     height: 40
 
-    color: darkRedColor
+    color: success ? greenColor : darkRedColor
 
     Text {
         anchors.fill: parent

@@ -137,7 +137,8 @@
     <message>
         <location filename="../views/LoginView.qml" line="131"/>
         <source>ServiceDescription</source>
-        <translation>this is probably the fastest\nand safest way to connect to the internet</translation>
+        <translation>this is probably the fastest
+and safest way to connect to the internet</translation>
     </message>
     <message>
         <location filename="../views/LoginView.qml" line="159"/>
@@ -210,93 +211,93 @@
         <translation>Profile</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="111"/>
+        <location filename="../views/ProfileView.qml" line="127"/>
         <source>YourEmailAddress</source>
         <translation>Your email address</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="117"/>
+        <location filename="../views/ProfileView.qml" line="133"/>
         <source>NotVerified</source>
         <translation>not verified</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="117"/>
+        <location filename="../views/ProfileView.qml" line="133"/>
         <source>Verified</source>
         <translation>verified</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="138"/>
+        <location filename="../views/ProfileView.qml" line="154"/>
         <source>EmailChangeError</source>
         <translation>Unable to change email address</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="143"/>
+        <location filename="../views/ProfileView.qml" line="159"/>
         <source>EmailChanged</source>
         <translation>Email address successfully changed</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="162"/>
+        <location filename="../views/ProfileView.qml" line="178"/>
         <source>EmailAddress</source>
         <translation>Email address</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="171"/>
+        <location filename="../views/ProfileView.qml" line="187"/>
         <source>Change</source>
         <translation>Change</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="186"/>
+        <location filename="../views/ProfileView.qml" line="202"/>
         <source>YourTariff</source>
         <translation>Your tariff</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="252"/>
+        <location filename="../views/ProfileView.qml" line="268"/>
         <source>ExpiresAt</source>
         <translation>Expires at</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="272"/>
+        <location filename="../views/ProfileView.qml" line="288"/>
         <source>SelectTariff</source>
         <translation>Select tariff</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="285"/>
+        <location filename="../views/ProfileView.qml" line="301"/>
         <source>ChangePassword</source>
         <comment>as title</comment>
         <translation>Change password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="307"/>
+        <location filename="../views/ProfileView.qml" line="323"/>
         <source>PasswordChangeError</source>
         <translation>Unable to change password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="312"/>
+        <location filename="../views/ProfileView.qml" line="330"/>
         <source>PasswordChanged</source>
         <translation>Password successfully changed</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="329"/>
+        <location filename="../views/ProfileView.qml" line="351"/>
         <source>CurrentPassword</source>
         <translation>Current password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="338"/>
+        <location filename="../views/ProfileView.qml" line="360"/>
         <source>NewPassword</source>
         <translation>New password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="347"/>
+        <location filename="../views/ProfileView.qml" line="369"/>
         <source>NewPasswordRepeat</source>
         <translation>Repeat new password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="357"/>
+        <location filename="../views/ProfileView.qml" line="379"/>
         <source>Apply</source>
         <translation>Apply</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="375"/>
+        <location filename="../views/ProfileView.qml" line="110"/>
         <source>SignOut</source>
         <comment>as action</comment>
         <translation>Sign out</translation>

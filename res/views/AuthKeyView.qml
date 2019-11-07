@@ -16,7 +16,7 @@ Item {
 
     function copyAuthKey() {
         BackEnd.clipboardController.copyToClipboard(view.authKey);
-        notificationArea.notify(qsTr("AuthKeyCopied"));
+        notificationArea.notify(qsTr("AuthKeyCopied"), true);
     }
 
     StackView.onActivating: {

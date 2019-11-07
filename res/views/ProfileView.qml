@@ -103,6 +103,22 @@ Item {
                 implicitHeight: 20
             }
 
+            EraButton {
+                Layout.minimumWidth: 120
+                Layout.minimumHeight: 40
+
+                text: qsTr("SignOut", "as action")
+
+                onClicked: {
+                    view.closeView();
+                    BackEnd.profileController.signOut();
+                }
+            }
+
+            Item {
+                implicitHeight: 20
+            }
+
             Group {
                 Layout.minimumWidth: 120
                 implicitHeight: 120
@@ -140,7 +156,7 @@ Item {
                         }
 
                         onEmailChanged: {
-                            notificationArea.notify(qsTr("EmailChanged"));
+                            notificationArea.notify(qsTr("EmailChanged"), true);
                             emailChangeGroup.inProcess = false;
                             BackEnd.profileController.refreshProfile();
                         }
@@ -306,11 +322,17 @@ Item {
                         onPasswordChangeError: {
                             notificationArea.notify(qsTr("PasswordChangeError"));
                             passwordChangeGroup.inProcess = false;
+                            passwordInput.text = "";
+                            newPasswordRepeatInput.text = "";
                         }
 
                         onPasswordChanged: {
-                            notificationArea.notify(qsTr("PasswordChanged"));
+                            notificationArea.notify(qsTr("PasswordChanged"), true);
                             passwordChangeGroup.inProcess = false;
+                            passwordInput.text = "";
+                            newPasswordInput.text = "";
+                            newPasswordRepeatInput.text = "";
+
                         }
                     }
 
@@ -361,22 +383,6 @@ Item {
                             BackEnd.profileController.changePassword(passwordInput.text, newPasswordInput.text);
                         }
                     }
-                }
-            }
-
-            Item {
-                implicitHeight: 20
-            }
-
-            EraButton {
-                Layout.minimumWidth: 120
-                Layout.minimumHeight: 40
-
-                text: qsTr("SignOut", "as action")
-
-                onClicked: {
-                    view.closeView();
-                    BackEnd.profileController.signOut();
                 }
             }
         }
