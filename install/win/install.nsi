@@ -31,6 +31,7 @@
 
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_LICENSE "..\..\LICENSE"
+  !insertmacro MUI_PAGE_COMPONENTS
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES
 
@@ -46,7 +47,7 @@
 ;--------------------------------
 ;Installer Sections
 
-Section ""
+Section "EraVPN Client" SEC0000
   SetOutPath "$INSTDIR"
 
   File /r ..\..\build\*
@@ -60,6 +61,13 @@ Section ""
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd
 
+Section "TAP-Windows"
+  SetOutPath $INSTDIR\redist
+
+  File "tap-windows.exe"
+  ExecWait "$INSTDIR\redist\tap-windows.exe"
+SectionEnd
+
 ;--------------------------------
 ;Reserve Files
 
@@ -69,7 +77,7 @@ SectionEnd
 ;Installer Functions
 
 Function .onInit
-
+  SectionSetFlags ${SEC0000} 17
   !insertmacro MUI_LANGDLL_DISPLAY
 
 FunctionEnd

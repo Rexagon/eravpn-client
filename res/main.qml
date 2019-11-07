@@ -48,21 +48,6 @@ ApplicationWindow
         }
     }
 
-    NotificationArea {
-        id: notificationArea
-
-        z: 1000
-
-        width: 300
-        height: 0
-
-        anchors.right: parent.right
-        anchors.top: parent.top
-
-        anchors.topMargin: 50
-        anchors.rightMargin: 20
-    }
-
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
@@ -204,5 +189,20 @@ ApplicationWindow
                 onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
             }
         }
+    }
+
+    NotificationArea {
+        id: notificationArea
+
+        z: 1000
+
+        width: 300
+        height: 0
+
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        anchors.topMargin: 50
+        anchors.rightMargin: 20
     }
 }

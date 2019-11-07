@@ -128,6 +128,7 @@ void CertificateController::createNew(const QString &countryId)
         if (!idData.isString() || !linkData.isString())
         {
             emit certificateCreationError();
+            m_certificateListModel.setLoading(false);
             return;
         }
 

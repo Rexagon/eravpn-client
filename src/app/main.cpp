@@ -6,6 +6,7 @@
 #include <QQuickView>
 
 #include "BackEnd.hpp"
+#include "Stuff/RunGuard.hpp"
 
 using namespace app;
 
@@ -25,6 +26,12 @@ int main(int argc, char **argv)
     QCoreApplication::setOrganizationName("EraVPN");
     QCoreApplication::setOrganizationDomain("com.eravpn");
     QCoreApplication::setApplicationName("EraVPN Client");
+
+    RunGuard runGuard{BASE_MODULE_NAME};
+    if (!runGuard.tryToRun())
+    {
+        return 0;
+    }
 
     QGuiApplication application(argc, argv);
 

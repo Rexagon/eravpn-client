@@ -51,12 +51,22 @@
 <context>
     <name>CertificateSelectionPopup</name>
     <message>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="45"/>
+        <source>UserIsNotVerified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="47"/>
+        <source>CertificateCreationError</source>
+        <translation>Unable to create configuration file</translation>
+    </message>
+    <message>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="59"/>
         <source>ConfigurationFiles</source>
         <translation>Configuration files</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="128"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="140"/>
         <source>Generate</source>
         <translation>Generate</translation>
     </message>

@@ -27,6 +27,7 @@ set(SRC
         Models/VpnConnection.cpp
 
         Stuff/StringHelpers.cpp
+        Stuff/RunGuard.cpp
         Stuff/Settings.cpp
         Stuff/Query.cpp
         Stuff/QueryBuilder.cpp)

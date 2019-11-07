@@ -317,7 +317,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
 
-            text: qsTr("Profit") + profitInPercent + "%"
+            text: qsTr("Profit") + " " + profitInPercent + "%"
 
             color: lightTextColor
             font.family: futuraMediumFont.name
