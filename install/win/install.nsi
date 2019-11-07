@@ -24,6 +24,7 @@
 ;Interface Settings
 
   !define MUI_ABORTWARNING
+  !define MUI_LANGDLL_ALLLANGUAGES
 
 ;--------------------------------
 ;Pages
@@ -39,6 +40,7 @@
 ;--------------------------------
 ;Languages
 
+  !insertmacro MUI_LANGUAGE "English"
   !insertmacro MUI_LANGUAGE "Russian"
 
 ;--------------------------------
@@ -59,6 +61,20 @@ Section ""
 SectionEnd
 
 ;--------------------------------
+;Reserve Files
+
+  !insertmacro MUI_RESERVEFILE_LANGDLL
+
+;--------------------------------
+;Installer Functions
+
+Function .onInit
+
+  !insertmacro MUI_LANGDLL_DISPLAY
+
+FunctionEnd
+
+;--------------------------------
 ;Uninstaller Section
 
 Section "Uninstall"
@@ -71,3 +87,12 @@ Section "Uninstall"
   DeleteRegKey HKCU "Software\EraVPN\EraVPN Client"
 
 SectionEnd
+
+;--------------------------------
+;Uninstaller Functions
+
+Function un.onInit
+
+  !insertmacro MUI_UNGETLANGUAGE
+
+FunctionEnd
