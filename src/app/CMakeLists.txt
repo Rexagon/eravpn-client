@@ -27,6 +27,7 @@ set(SRC
         Models/Translation.cpp
         Models/VpnConnection.cpp
 
+        Stuff/Logger.cpp
         Stuff/StringHelpers.cpp
         Stuff/RunGuard.cpp
         Stuff/Settings.cpp
@@ -66,10 +67,11 @@ if (WIN32)
     set(WIN_RESOURCES
             ${CMAKE_SOURCE_DIR}/res/app.rc
             ${CMAKE_SOURCE_DIR}/res/app.exe.manifest)
+endif ()
 
-    if (CMAKE_BUILD_TYPE MATCHES Release)
-        set(ADDITIONAL_EXECUTABLE_OPTIONS WIN32)
-    endif ()
+# Build type specific options
+if (CMAKE_BUILD_TYPE MATCHES Release)
+    set(DISABLE_LOGGING ON)
 endif ()
 
 # Executable
@@ -97,7 +99,8 @@ target_link_libraries(app PRIVATE
 
 target_compile_definitions(app PRIVATE
         API_URL="$ENV{API_URL}"
-        IPSTACK_KEY="$ENV{IPSTACK_KEY}")
+        IPSTACK_KEY="$ENV{IPSTACK_KEY}"
+        ${DISABLE_LOGGING})
 
 if (WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "/MANIFEST:NO")

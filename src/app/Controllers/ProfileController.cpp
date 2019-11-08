@@ -133,8 +133,6 @@ ProfileController::ProfileController(app::Connection &connection, Profile &profi
 
 void ProfileController::signInRemembered()
 {
-    std::cout << query::getClientData.prepare().toStdString() << std::endl;
-
     const auto emitConnectionError = [this] {
         m_connection.resetAuthorizationData();
         emit m_profile.signInErrorOccurred();

@@ -142,6 +142,7 @@ Item {
                 }
             }
 
+            /*
             Separator {
                 Layout.fillWidth: true
             }
@@ -215,6 +216,7 @@ Item {
                 title: qsTr("MultiConnection")
                 description: qsTr("MultiConnectionDescription")
             }
+            */
         }
     }
 }

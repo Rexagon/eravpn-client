@@ -1,6 +1,10 @@
 // This is an open source non-commercial project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
+#ifdef WIN32
+#include <Windows.h>
+#endif
+
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
@@ -22,6 +26,11 @@ constexpr auto UNCREATABLE_MESSAGE = "This type of object is managed by native c
 
 int main(int argc, char **argv)
 {
+#ifdef WIN32
+    HWND hWnd = GetConsoleWindow();
+    ShowWindow(hWnd, SW_HIDE);
+#endif
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setOrganizationName("EraVPN");
     QCoreApplication::setOrganizationDomain("com.eravpn");
@@ -51,13 +60,13 @@ int main(int argc, char **argv)
                                        UNCREATABLE_MESSAGE);
     qRegisterMetaType<Tariff *>("Tariff*");
 
-    QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
+    BackEnd::connect(&runGuard, &RunGuard::showRequested, backEnd.applicationController(),
+                     &ApplicationController::showRequested);
+
+    QQmlApplicationEngine viewEngine{QUrl("qrc:/main.qml")};
 
     BackEnd::connect(backEnd.translation(), &Translation::languageChanged, &viewEngine,
                      &QQmlApplicationEngine::retranslate);
-
-    BackEnd::connect(&runGuard, &RunGuard::showRequested, backEnd.applicationController(),
-                     &ApplicationController::showRequested);
 
     return QApplication::exec();
 }

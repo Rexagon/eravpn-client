@@ -428,54 +428,44 @@
         <translation>Выберите язык</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="155"/>
         <source>SafeDisconnection</source>
-        <translation>Безопасный разрыв соединения</translation>
+        <translation type="vanished">Безопасный разрыв соединения</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="156"/>
         <source>SafeDisconnectionDescription</source>
-        <translation>Если соединение с vpn будет нестабильным, то при его отключении, сервис зашифрует и прервёт передачу данных через провайдера.</translation>
+        <translation type="vanished">Если соединение с vpn будет нестабильным, то при его отключении, сервис зашифрует и прервёт передачу данных через провайдера.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="169"/>
         <source>UseOurDns</source>
-        <translation>Использовать наши DNS</translation>
+        <translation type="vanished">Использовать наши DNS</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="170"/>
         <source>UseOurDnsDescription</source>
-        <translation>Для полной конфиденциальности в сети рекомендуем вам использовать наши собственные доменные серверы, чтобы никто не мог узнать, какие сайты вы посещали.</translation>
+        <translation type="vanished">Для полной конфиденциальности в сети рекомендуем вам использовать наши собственные доменные серверы, чтобы никто не мог узнать, какие сайты вы посещали.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="181"/>
         <source>WhiteConnection</source>
-        <translation>White connection</translation>
+        <translation type="vanished">White connection</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="182"/>
         <source>WhiteConnectionDescription</source>
-        <translation>Внесите в список сайты, которые вы хотите посещать напрямую, без прослойки Era VPN. Например: ваш онлайн банк.</translation>
+        <translation type="vanished">Внесите в список сайты, которые вы хотите посещать напрямую, без прослойки Era VPN. Например: ваш онлайн банк.</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="189"/>
         <source>EnterWebsiteAddress</source>
-        <translation>Введите адрес сайта</translation>
+        <translation type="vanished">Введите адрес сайта</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="204"/>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation type="vanished">Сохранить</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="215"/>
         <source>MultiConnection</source>
-        <translation>Multi connection</translation>
+        <translation type="vanished">Multi connection</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="216"/>
         <source>MultiConnectionDescription</source>
-        <translation>Для большей надёжности вы можете пропускать ваш интернет трафик через два наших сервера, чтобы исключить малейшую вероятность вычисления вашего реального IP.</translation>
+        <translation type="vanished">Для большей надёжности вы можете пропускать ваш интернет трафик через два наших сервера, чтобы исключить малейшую вероятность вычисления вашего реального IP.</translation>
     </message>
 </context>
 <context>
