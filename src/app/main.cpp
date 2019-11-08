@@ -27,13 +27,16 @@ int main(int argc, char **argv)
     QCoreApplication::setOrganizationDomain("com.eravpn");
     QCoreApplication::setApplicationName("EraVPN Client");
 
+    QApplication application{argc, argv};
+
     RunGuard runGuard{BASE_MODULE_NAME};
     if (!runGuard.tryToRun())
     {
+        runGuard.notifyAnother();
         return 0;
     }
 
-    QApplication application(argc, argv);
+    auto &backEnd = BackEnd::instance();
 
     qmlRegisterSingletonType<BackEnd>(BASE_MODULE_NAME, BASE_VERSION_MAJOR, BASE_VERSION_MINOR, "BackEnd",
                                       [](QQmlEngine *, QJSEngine *) {
@@ -50,8 +53,11 @@ int main(int argc, char **argv)
 
     QQmlApplicationEngine viewEngine(QUrl("qrc:/main.qml"));
 
-    BackEnd::instance().connect(BackEnd::instance().translation(), &Translation::languageChanged, &viewEngine,
-                                &QQmlApplicationEngine::retranslate);
+    BackEnd::connect(backEnd.translation(), &Translation::languageChanged, &viewEngine,
+                     &QQmlApplicationEngine::retranslate);
+
+    BackEnd::connect(&runGuard, &RunGuard::showRequested, backEnd.applicationController(),
+                     &ApplicationController::showRequested);
 
     return QApplication::exec();
 }

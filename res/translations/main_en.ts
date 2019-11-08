@@ -537,21 +537,36 @@ once a</translation>
     </message>
 </context>
 <context>
-    <name>app::SystemTrayController</name>
+    <name>app::ApplicationController</name>
     <message>
-        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="59"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="64"/>
         <source>Quit</source>
         <translation>Quit</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="62"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
         <source>Connected</source>
         <translation>Connected</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="62"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
         <source>Disconnected</source>
         <translation>Disconnected</translation>
+    </message>
+</context>
+<context>
+    <name>app::SystemTrayController</name>
+    <message>
+        <source>Quit</source>
+        <translation type="vanished">Quit</translation>
+    </message>
+    <message>
+        <source>Connected</source>
+        <translation type="vanished">Connected</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation type="vanished">Disconnected</translation>
     </message>
 </context>
 </TS>

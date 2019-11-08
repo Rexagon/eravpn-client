@@ -1,7 +1,7 @@
 // This is an open source non-commercial project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
-#include "SystemTrayController.hpp"
+#include "ApplicationController.hpp"
 
 namespace
 {
@@ -12,7 +12,7 @@ constexpr auto APPLICATION_TRAY_TOOLTIP = "EraVPN (%1)";
 
 namespace app
 {
-SystemTrayController::SystemTrayController(VpnConnection &vpnConnection, Translation &translation)
+ApplicationController::ApplicationController(VpnConnection &vpnConnection, Translation &translation)
     : QObject{nullptr}
     , m_vpnConnection{vpnConnection}
     , m_translation{translation}
@@ -21,24 +21,29 @@ SystemTrayController::SystemTrayController(VpnConnection &vpnConnection, Transla
 
     m_systemTrayIcon.setContextMenu(&m_menu);
     m_systemTrayIcon.setIcon(QIcon{APPLICATION_TRAY_ICON});
-    m_systemTrayIcon.show();
 
     updateState();
-    connect(&vpnConnection, &VpnConnection::connectedChanged, this, &SystemTrayController::updateState);
-    connect(&translation, &Translation::languageChanged, this, &SystemTrayController::updateState);
+    connect(&vpnConnection, &VpnConnection::connectedChanged, this, &ApplicationController::updateState);
+    connect(&translation, &Translation::languageChanged, this, &ApplicationController::updateState);
 
-    connect(&m_systemTrayIcon, &QSystemTrayIcon::activated, this, &SystemTrayController::handleIconEvent);
-    connect(&m_quitAction, &QAction::triggered, this, &SystemTrayController::quitRequested);
+    connect(&m_systemTrayIcon, &QSystemTrayIcon::activated, this, &ApplicationController::handleIconEvent);
+    connect(&m_quitAction, &QAction::triggered, this, &ApplicationController::quitRequested);
 }
 
 
-SystemTrayController::~SystemTrayController()
+ApplicationController::~ApplicationController()
 {
     m_systemTrayIcon.hide();
 }
 
 
-void SystemTrayController::handleIconEvent(QSystemTrayIcon::ActivationReason reason)
+void ApplicationController::setTrayIconVisible(bool visible)
+{
+    m_systemTrayIcon.setVisible(visible);
+}
+
+
+void ApplicationController::handleIconEvent(QSystemTrayIcon::ActivationReason reason)
 {
     switch (reason)
     {
@@ -53,7 +58,7 @@ void SystemTrayController::handleIconEvent(QSystemTrayIcon::ActivationReason rea
 }
 
 
-void SystemTrayController::updateState()
+void ApplicationController::updateState()
 {
     // Update context menu
     m_quitAction.setText(tr("Quit"));

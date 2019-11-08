@@ -6,12 +6,12 @@ set(SRC
         BackEnd.cpp
         Connection.cpp
 
+        Controllers/ApplicationController.cpp
         Controllers/CertificateController.cpp
         Controllers/ClipboardController.cpp
         Controllers/ProfileController.cpp
         Controllers/LocationController.cpp
         Controllers/CountriesController.cpp
-        Controllers/SystemTrayController.cpp
         Controllers/TariffController.cpp
         Controllers/TranslationController.cpp
         Controllers/VpnController.cpp
@@ -37,12 +37,12 @@ set(SRC_MOC
         BackEnd.hpp
         Connection.hpp
 
+        Controllers/ApplicationController.hpp
         Controllers/CertificateController.hpp
         Controllers/ClipboardController.hpp
         Controllers/CountriesController.hpp
         Controllers/LocationController.hpp
         Controllers/ProfileController.hpp
-        Controllers/SystemTrayController.hpp
         Controllers/TariffController.hpp
         Controllers/TranslationController.hpp
         Controllers/VpnController.hpp
@@ -54,7 +54,9 @@ set(SRC_MOC
         Models/TariffListModel.hpp
         Models/Tariff.hpp
         Models/Translation.hpp
-        Models/VpnConnection.hpp)
+        Models/VpnConnection.hpp
+
+        Stuff/RunGuard.hpp)
 
 qt5_add_resources(RESOURCES
         ${CMAKE_SOURCE_DIR}/res/app.qrc)

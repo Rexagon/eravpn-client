@@ -22,6 +22,10 @@ ApplicationWindow
     property string windowTitleText: ""
     property bool windowTitleButtonsVisible: false
 
+    function minimizeToTray() {
+        windowHidingTimer.start();
+    }
+
     id: window
     visible: true
     width: 900
@@ -42,22 +46,37 @@ ApplicationWindow
     Connections {
         target: BackEnd.profile
         onAuthorizedChanged: {
-            if (!BackEnd.profile.authorized) {
+            const authorized = BackEnd.profile.authorized;
+
+            BackEnd.applicationController.setTrayIconVisible(authorized);
+
+            if (!authorized) {
                 viewsContainer.replace(loginView, StackView.PopTransition);
             }
         }
     }
 
     Connections {
-        target: BackEnd.systemTrayController
+        target: BackEnd.applicationController
 
         onShowRequested: {
-            window.show();
-            window.visibility = ApplicationWindow.Windowed;
+            window.showNormal();
         }
 
         onQuitRequested: {
             window.close();
+        }
+    }
+
+    Timer {
+        id: windowHidingTimer
+
+        interval: 0
+        repeat: false
+        running: false
+
+        onTriggered: {
+            window.hide();
         }
     }
 
@@ -101,9 +120,15 @@ ApplicationWindow
                 viewsContainer.pop();
             }
 
-            onMinimizeRequested: window.visibility = ApplicationWindow.Minimized
+            onMinimizeRequested: {
+                if (BackEnd.profile.authorized) {
+                    window.minimizeToTray();
+                } else {
+                    window.visibility = ApplicationWindow.Minimized
+                }
+            }
             onCloseRequested: {
-                window.hide();
+                window.close();
             }
         }
 

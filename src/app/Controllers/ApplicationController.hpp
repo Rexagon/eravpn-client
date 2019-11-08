@@ -10,13 +10,15 @@
 
 namespace app
 {
-class SystemTrayController : public QObject
+class ApplicationController final : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit SystemTrayController(VpnConnection &vpnConnection, Translation &translation);
-    virtual ~SystemTrayController();
+    explicit ApplicationController(VpnConnection &vpnConnection, Translation &translation);
+    ~ApplicationController() final;
+
+    Q_INVOKABLE void setTrayIconVisible(bool visible);
 
 signals:
     void showRequested();

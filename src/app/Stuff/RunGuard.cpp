@@ -3,7 +3,11 @@
 
 #include "RunGuard.hpp"
 
+#include <optional>
+
 #include <QCryptographicHash>
+#include <QEventLoop>
+#include <QLocalSocket>
 
 namespace
 {
@@ -23,9 +27,11 @@ QString generateKeyHash(const QString &key, const QString &salt)
 namespace app
 {
 RunGuard::RunGuard(const QString &key)
-    : m_key{key}
+    : QObject{nullptr}
+    , m_key{key}
     , m_memLockKey{generateKeyHash(key, "_memLockKey")}
     , m_sharedMemoryKey{generateKeyHash(key, "_sharedMemoryKey")}
+    , m_localServerKey{generateKeyHash(key, "_localServer")}
     , m_sharedMemory{m_sharedMemoryKey}
     , m_systemSemaphore{m_memLockKey, 1}
 {
@@ -41,6 +47,45 @@ RunGuard::RunGuard(const QString &key)
 RunGuard::~RunGuard()
 {
     release();
+}
+
+
+bool RunGuard::tryToRun()
+{
+    if (m_localServer != nullptr || isAnotherRunning())
+    {
+        return false;
+    }
+
+    m_systemSemaphore.acquire();
+    const bool result = m_sharedMemory.create(sizeof(quint64));
+    m_systemSemaphore.release();
+
+    if (!result)
+    {
+        release();
+        return false;
+    }
+
+    m_localServer = std::make_unique<QLocalServer>();
+    connect(m_localServer.get(), &QLocalServer::newConnection, this, &RunGuard::showRequested);
+    m_localServer->listen(m_localServerKey);
+
+    return true;
+}
+
+
+void RunGuard::notifyAnother()
+{
+    QLocalSocket socket{};
+    socket.connectToServer(m_localServerKey);
+
+    if (socket.isOpen())
+    {
+        socket.close();
+    }
+
+    socket.deleteLater();
 }
 
 
@@ -63,25 +108,6 @@ bool RunGuard::isAnotherRunning()
     return isRunning;
 }
 
-bool RunGuard::tryToRun()
-{
-    if (isAnotherRunning())
-    {
-        return false;
-    }
-
-    m_systemSemaphore.acquire();
-    const bool result = m_sharedMemory.create(sizeof(quint64));
-    m_systemSemaphore.release();
-
-    if (!result)
-    {
-        release();
-        return false;
-    }
-
-    return true;
-}
 
 void RunGuard::release()
 {

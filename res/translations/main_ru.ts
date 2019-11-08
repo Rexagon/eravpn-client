@@ -538,21 +538,36 @@
     </message>
 </context>
 <context>
-    <name>app::SystemTrayController</name>
+    <name>app::ApplicationController</name>
     <message>
-        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="59"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="64"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="62"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
         <source>Connected</source>
         <translation>Подключено</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/SystemTrayController.cpp" line="62"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
         <source>Disconnected</source>
         <translation>Не подключено</translation>
+    </message>
+</context>
+<context>
+    <name>app::SystemTrayController</name>
+    <message>
+        <source>Quit</source>
+        <translation type="vanished">Выход</translation>
+    </message>
+    <message>
+        <source>Connected</source>
+        <translation type="vanished">Подключено</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation type="vanished">Не подключено</translation>
     </message>
 </context>
 </TS>
