@@ -12,3 +12,6 @@ extlibs
 
 *.qmlproject.user
 *.exe
+
+!install/win/*.exe
+eravpn_setup.*

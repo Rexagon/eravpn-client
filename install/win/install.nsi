@@ -51,6 +51,7 @@ Section "EraVPN Client" SEC0000
   SetOutPath "$INSTDIR"
 
   File /r ..\..\build\*
+  File "*.dll"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\EraVPN\EraVPN Client" "Install_Dir" $INSTDIR
@@ -61,11 +62,18 @@ Section "EraVPN Client" SEC0000
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 SectionEnd
 
-Section "TAP-Windows"
+Section "TAP-Windows Driver"
   SetOutPath $INSTDIR\redist
 
   File "tap-windows.exe"
   ExecWait "$INSTDIR\redist\tap-windows.exe"
+SectionEnd
+
+Section "Microsoft Visual C++ Redistributable"
+  SetOutPath $INSTDIR\redist
+
+  File "VC_redist.x64.exe"
+  ExecWait "$INSTDIR\redist\VC_redist.x64.exe"
 SectionEnd
 
 ;--------------------------------
