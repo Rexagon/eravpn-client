@@ -433,13 +433,17 @@ Item {
             }
 
             Group {
-                Layout.fillWidth: true
-                Layout.minimumHeight: 100 + referralClientListView.model.referralClientCount * 40
+                readonly property int referralCount: BackEnd.referralClientListModel.referralClientCount
 
-                title: qsTr("YourReferrals")
+                Layout.fillWidth: true
+                Layout.minimumHeight: 100 + referralCount * 40
+
+                title: referralCount > 0 ? qsTr("YourReferrals") : qsTr("YouHaveNoReferrals")
 
                 contentItem: ColumnLayout {
                     anchors.fill: parent
+
+                    visible: parent.referralCount > 0
 
                     Item {
                         Layout.fillWidth: true

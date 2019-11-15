@@ -41,7 +41,7 @@ Popup {
             target: BackEnd.certificateController
 
             onCertificateCreationError: {
-                if (BackEnd.profile.status === Status.New) {
+                if (BackEnd.profile.status === Profile.New) {
                     notificationArea.notify(qsTr("UserIsNotVerified"))
                 } else {
                     notificationArea.notify(qsTr("CertificateCreationError"))

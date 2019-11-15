@@ -317,9 +317,14 @@ and safest way to connect to the internet</translation>
         <translation>Apply</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="439"/>
+        <location filename="../views/ProfileView.qml" line="441"/>
         <source>YourReferrals</source>
         <translation>Your referrals</translation>
+    </message>
+    <message>
+        <location filename="../views/ProfileView.qml" line="441"/>
+        <source>YouHaveNoReferrals</source>
+        <translation>You have no referrals</translation>
     </message>
     <message>
         <location filename="../views/ProfileView.qml" line="111"/>
@@ -517,7 +522,7 @@ and safest way to connect to the internet</translation>
         <location filename="../components/tariffselection/TariffComponent.qml" line="248"/>
         <source>Billed</source>
         <translation>billed
-once a</translation>
+once every</translation>
     </message>
     <message>
         <location filename="../components/tariffselection/TariffComponent.qml" line="251"/>
@@ -559,9 +564,19 @@ once a</translation>
     <name>TariffSelectionView</name>
     <message>
         <location filename="../views/TariffSelectionView.qml" line="17"/>
-        <location filename="../views/TariffSelectionView.qml" line="41"/>
+        <location filename="../views/TariffSelectionView.qml" line="53"/>
         <source>TariffSelection</source>
         <translation>Tariff selection</translation>
+    </message>
+    <message>
+        <location filename="../views/TariffSelectionView.qml" line="32"/>
+        <source>AccountIsNotActivatedError</source>
+        <translation>Account is not activated</translation>
+    </message>
+    <message>
+        <location filename="../views/TariffSelectionView.qml" line="34"/>
+        <source>TariffLinkGenerationError</source>
+        <translation>Tariff link generation error</translation>
     </message>
 </context>
 <context>

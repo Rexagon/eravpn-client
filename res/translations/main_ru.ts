@@ -317,9 +317,14 @@
         <translation>Подтвердить</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="439"/>
+        <location filename="../views/ProfileView.qml" line="441"/>
         <source>YourReferrals</source>
         <translation>Ваши рефералы</translation>
+    </message>
+    <message>
+        <location filename="../views/ProfileView.qml" line="441"/>
+        <source>YouHaveNoReferrals</source>
+        <translation>У Вас не рефералов</translation>
     </message>
     <message>
         <location filename="../views/ProfileView.qml" line="111"/>
@@ -560,9 +565,19 @@
     <name>TariffSelectionView</name>
     <message>
         <location filename="../views/TariffSelectionView.qml" line="17"/>
-        <location filename="../views/TariffSelectionView.qml" line="41"/>
+        <location filename="../views/TariffSelectionView.qml" line="53"/>
         <source>TariffSelection</source>
         <translation>Выбор тарифа</translation>
+    </message>
+    <message>
+        <location filename="../views/TariffSelectionView.qml" line="32"/>
+        <source>AccountIsNotActivatedError</source>
+        <translation>Ваш аккаунт не подтверждён</translation>
+    </message>
+    <message>
+        <location filename="../views/TariffSelectionView.qml" line="34"/>
+        <source>TariffLinkGenerationError</source>
+        <translation>Невозможно сгенерировать ссылку</translation>
     </message>
 </context>
 <context>
