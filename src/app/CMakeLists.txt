@@ -51,7 +51,7 @@ endif ()
 
 # Build type specific options
 if (CMAKE_BUILD_TYPE MATCHES Release)
-    set(DISABLE_LOGGING ON)
+    set(ADDITIONAL_DEFINES DISABLE_LOGGING)
 endif ()
 
 # Executable
@@ -80,7 +80,7 @@ target_link_libraries(app PRIVATE
 target_compile_definitions(app PRIVATE
         API_URL="$ENV{API_URL}"
         IPSTACK_KEY="$ENV{IPSTACK_KEY}"
-        ${DISABLE_LOGGING})
+        ${ADDITIONAL_DEFINES})
 
 if (WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "/MANIFEST:NO")

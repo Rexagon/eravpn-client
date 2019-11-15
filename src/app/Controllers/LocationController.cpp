@@ -3,10 +3,10 @@
 
 #include "LocationController.hpp"
 
-#include <iostream>
-
 #include <QJsonDocument>
 #include <QNetworkReply>
+
+#include "../Stuff/Logger.hpp"
 
 namespace
 {
@@ -52,12 +52,12 @@ void LocationController::updateCurrentLocation()
 
 void LocationController::replyHandler(QNetworkReply *reply)
 {
-    std::cout << "GET response received" << std::endl;
+    Logger::instance().debug("GET response received");
 
     const auto hasError = reply->error() != QNetworkReply::NoError;
     if (hasError && m_attemptCount++ < MAX_ATTEMPT_COUNT)
     {
-        std::cout << "Attempt to reconnect" << std::endl;
+        Logger::instance().debug("Attempt to reconnect");
         emit tryReconnect();
         return;
     }
@@ -68,13 +68,13 @@ void LocationController::replyHandler(QNetworkReply *reply)
 
     if (hasError)
     {
-        std::cout << "Error(" << reply->error() << "): " << reply->errorString().toStdString() << std::endl;
+        Logger::instance().error(QString{"code(%1), %1"}.arg(reply->error()).arg(reply->errorString()));
         emit m_location.errorOccurred();
         return;
     }
 
     const auto data = QJsonDocument::fromJson(reply->readAll());
-    std::cout << data.toJson().toStdString() << std::endl;
+    Logger::instance().debug(QString{data.toJson()});
 
     const auto ipData = data["ip"];
     const auto countryNameData = data["country_name"];
@@ -103,7 +103,7 @@ void LocationController::requestLocation()
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
     auto *reply = m_networkManager->get(request);
-    std::cout << "GET request sent" << std::endl;
+    Logger::instance().debug("GET request sent");
 
     connect(reply, &QNetworkReply::finished, [this, reply] { replyHandler(reply); });
 }

@@ -3,13 +3,13 @@
 
 #include "Connection.hpp"
 
-#include <iostream>
-
+#include "Stuff/Logger.hpp"
 #include "Stuff/Settings.hpp"
 
 namespace
 {
 constexpr auto QUERY_CONTAINER = R"({"query":"%1","variables":{},"operationName":null})";
+
 }  // namespace
 
 
@@ -34,29 +34,30 @@ Connection::Connection(const QString &url)
 
 
 void Connection::post(const QString &query,
-                           const JsonCallback &successCallback,
-                           const std::optional<RawCallback> &errorCallback)
+                      const JsonCallback &successCallback,
+                      const std::optional<RawCallback> &errorCallback)
 {
     const auto escapedQuery = QString{QUERY_CONTAINER}.arg(escaped(query));
     const auto bytes = escapedQuery.toUtf8();
 
     auto *reply = m_networkManager.post(m_baseRequest, bytes);
-    std::cout << "POST request sent" << std::endl;
-    std::cout << query.toStdString() << std::endl;
+
+    Logger::instance().debug("POST request sent");
+    Logger::instance().debug(query);
 
     connect(reply, &QNetworkReply::finished, [reply, successCallback, errorCallback]() {
-        std::cout << "POST response received" << std::endl;
+        Logger::instance().debug("POST response received");
 
         if (reply->error() == QNetworkReply::NoError)
         {
             const auto data = QJsonDocument::fromJson(reply->readAll());
-            std::cout << data.toJson().toStdString() << std::endl;
+            Logger::instance().debug(QString{data.toJson()});
 
             successCallback(data);
         }
         else
         {
-            std::cout << "Error(" << reply->error() << "): " << reply->errorString().toStdString() << std::endl;
+            Logger::instance().error(QString{"code(%1), %1"}.arg(reply->error()).arg(reply->errorString()));
 
             if (errorCallback)
             {
@@ -75,10 +76,10 @@ void Connection::get(const QString &url,
     request.setUrl(url);
 
     auto *reply = m_networkManager.get(request);
-    std::cout << "GET request sent" << std::endl;
+    Logger::instance().debug("GET request sent");
 
     connect(reply, &QNetworkReply::finished, [reply, successCallback, errorCallback]() {
-        std::cout << "GET response received" << std::endl;
+        Logger::instance().debug("GET response received");
 
         if (reply->error() == QNetworkReply::NoError)
         {
@@ -86,7 +87,7 @@ void Connection::get(const QString &url,
         }
         else
         {
-            std::cout << "Error(" << reply->error() << "): " << reply->errorString().toStdString() << std::endl;
+            Logger::instance().error(QString{"code(%1), %1"}.arg(reply->error()).arg(reply->errorString()));
 
             if (errorCallback)
             {
