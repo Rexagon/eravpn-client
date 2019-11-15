@@ -11,14 +11,14 @@ Item {
     readonly property string activeSecondaryColor: "#0162f6"
     readonly property string activePrimaryColor: "#00ddf6"
 
-    property bool activated: false
+    property bool activated: {
+        return !BackEnd.vpnConnection.busy && BackEnd.vpnConnection.connected;
+    }
 
     id: component
 
     width: 140
     height: width
-
-    state: BackEnd.vpnConnection.connected ? "active" : ""
 
     Rectangle {
         id: componentShadow
@@ -96,5 +96,28 @@ Item {
         NumberAnimation { properties: "opacity"; duration: 1000 }
     }
 
-    onActivatedChanged: state = activated ? "activated" : ""
+    onActivatedChanged: state = activated ? "active" : ""
+
+    MouseArea {
+        anchors.fill: parent
+
+        cursorShape: mouseInCircle ? Qt.PointingHandCursor : Qt.ArrowCursor
+        hoverEnabled: true
+
+        property bool mouseInCircle: {
+            if (!containsMouse || !component.activated) {
+                return false;
+            }
+
+            const radius = width / 2;
+            const distanceFromCenter = Math.pow(radius - mouseX, 2) + Math.pow(radius - mouseY, 2);
+            return distanceFromCenter < Math.pow(radius, 2);
+        }
+
+        onClicked: {
+            if (mouseInCircle && BackEnd.vpnConnection.running) {
+                BackEnd.vpnController.stop();
+            }
+        }
+    }
 }

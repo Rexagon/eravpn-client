@@ -27,15 +27,24 @@ public:
 
     Q_INVOKABLE void changeEmail(const QString &newEmail);
 
+    Q_INVOKABLE void resendConfirmCode();
+
     Q_INVOKABLE void changePassword(const QString &oldPassword, const QString &newPassword);
 
 signals:
+    void signInErrorOccurred();
+
+    void signUpErrorOccurred();
+    void authKeyCopyRequested(const QString &authKey);
+
     void profileUpdateError();
     void passwordChangeError();
     void emailChangeError();
+    void confirmCodeResendError();
 
     void passwordChanged();
     void emailChanged();
+    void confirmCodeSent();
 
 private:
     void setAuthData(const QString &accessToken, const QString &refreshToken);

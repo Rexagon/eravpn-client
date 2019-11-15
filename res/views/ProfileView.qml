@@ -144,7 +144,9 @@ Item {
 
                     property bool inProcess: false
                     property bool isInputValid: {
-                        return emailInput.length > 0 && emailInput.text !== BackEnd.profile.email;
+                        return emailInput.length > 0 &&
+                                emailInput.validator.regExp.test(emailInput.text) &&
+                                emailInput.text !== BackEnd.profile.email;
                     }
 
                     Connections {
@@ -159,6 +161,11 @@ Item {
                             notificationArea.notify(qsTr("EmailChanged"), true);
                             emailChangeGroup.inProcess = false;
                             BackEnd.profileController.refreshProfile();
+                        }
+
+                        onConfirmCodeResendError: {
+                            notificationArea.notify(qsTr("ConfirmCodeResendError"));
+                            emailChangeGroup.inProcess = false;
                         }
                     }
 
@@ -176,11 +183,17 @@ Item {
 
                             text: BackEnd.profile.email
                             placeholderText: qsTr("EmailAddress")
+
+                            validator: RegExpValidator {
+                                regExp: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/
+                            }
                         }
 
                         EraButton {
                             Layout.minimumWidth: 200
                             Layout.minimumHeight: 40
+
+                            visible: BackEnd.profile.email !== emailInput.text
 
                             enabled: emailChangeGroup.isInputValid && !emailChangeGroup.inProcess
 
@@ -189,6 +202,26 @@ Item {
                             onClicked: {
                                 emailChangeGroup.inProcess = true;
                                 BackEnd.profileController.changeEmail(emailInput.text);
+                            }
+                        }
+
+                        EraButton {
+                            Layout.minimumWidth: 200
+                            Layout.minimumHeight: 40
+
+                            visible: BackEnd.profile.status === Profile.New &&
+                                     BackEnd.profile.email.length > 0 &&
+                                     BackEnd.profile.email === emailInput.text
+
+                            enabled: BackEnd.profile.status === Profile.New &&
+                                     BackEnd.profile.email.length > 0 &&
+                                     !emailChangeGroup.inProcess
+
+                            text: qsTr("ResendConfirmCode")
+
+                            onClicked: {
+                                emailChangeGroup.inProcess = true;
+                                BackEnd.profileController.resendConfirmCode();
                             }
                         }
                     }

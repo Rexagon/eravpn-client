@@ -154,6 +154,7 @@ ApplicationWindow
             id: registrationView
 
             RegistrationView {
+                onSwitchToMain: viewsContainer.replace(mainView, StackView.PushTransition)
                 onSwitchToLogin: viewsContainer.replace(loginView, StackView.PushTransition)
                 onSwitchToAuthKey: {
                     viewsContainer.replace([

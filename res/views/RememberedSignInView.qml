@@ -27,6 +27,10 @@ Item {
         onAuthorizedChanged: {
             view.switchToMain()
         }
+    }
+
+    Connections {
+        target: BackEnd.profileController
         onSignInErrorOccurred: {
             view.switchToLogin()
         }

@@ -8,6 +8,7 @@ import "../components"
 import "../components/era"
 
 Item {
+    signal switchToMain
     signal switchToLogin
     signal switchToAuthKey(string authKey)
 
@@ -53,13 +54,22 @@ Item {
     ]
 
     Connections {
-        target: BackEnd.profile
+        target: BackEnd.profileController
         onAuthKeyCopyRequested: {
             view.switchToAuthKey(authKey);
         }
         onSignUpErrorOccurred: {
             view.state = "";
             notificationArea.notify(qsTr("SignUpError"));
+        }
+    }
+
+    Connections {
+        target: BackEnd.profile
+        onAuthorizedChanged: {
+            if (BackEnd.profile.authorized) {
+                view.switchToMain();
+            }
         }
     }
 

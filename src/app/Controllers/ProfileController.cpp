@@ -110,6 +110,13 @@ const auto changeEmail = QueryBuilder::createMutation()
                 .addItem<QString>("success")
     .build();
 
+const auto resendConfirmCode = QueryBuilder::createMutation()
+    .addObject("auth")
+        .addUnion("resendConfirmCode")
+            .addUnionVariant("Result")
+                .addItem<QString>("success")
+    .build();
+
 const auto changePassword = QueryBuilder::createMutation()
     .addObject("client")
         .addUnion("changePassword")
@@ -135,7 +142,7 @@ void ProfileController::signInRemembered()
 {
     const auto emitConnectionError = [this] {
         m_connection.resetAuthorizationData();
-        emit m_profile.signInErrorOccurred();
+        emit signInErrorOccurred();
     };
 
     const auto errorHandler = [emitConnectionError](const QNetworkReply &) { emitConnectionError(); };
@@ -184,7 +191,7 @@ void ProfileController::signIn(const QString &login, const QString &password)
 
             if (!accessTokenData.isString() || !refreshTokenData.isString() || !clientData.isObject())
             {
-                emit m_profile.signInErrorOccurred();
+                emit signInErrorOccurred();
                 return;
             }
 
@@ -193,7 +200,7 @@ void ProfileController::signIn(const QString &login, const QString &password)
 
             m_profile.signIn();
         },
-        [this](const QNetworkReply &) { emit m_profile.signInErrorOccurred(); });
+        [this](const QNetworkReply &) { emit signInErrorOccurred(); });
 }
 
 
@@ -220,7 +227,7 @@ void ProfileController::signUp(bool isAnonymous,
             if (!accessTokenData.isString() || !refreshTokenData.isString() || !clientData.isObject() ||
                 (isAnonymous && !authKeyData.isString()) || !statusData.isString())
             {
-                emit m_profile.signUpErrorOccurred();
+                emit signUpErrorOccurred();
                 return;
             }
 
@@ -229,13 +236,13 @@ void ProfileController::signUp(bool isAnonymous,
 
             if (isAnonymous)
             {
-                emit m_profile.authKeyCopyRequested(authKeyData.toString());
+                emit authKeyCopyRequested(authKeyData.toString());
                 return;
             }
 
             m_profile.signIn();
         },
-        [this](const QNetworkReply &) { emit m_profile.signUpErrorOccurred(); });
+        [this](const QNetworkReply &) { emit signUpErrorOccurred(); });
 }
 
 
@@ -299,6 +306,26 @@ void ProfileController::changeEmail(const QString &newEmail)
     };
 
     m_connection.post(query::changeEmail.prepare(newEmail), successHandler, errorHandler);
+}
+
+
+void ProfileController::resendConfirmCode()
+{
+    const auto errorHandler = [this](const QNetworkReply &) { emit confirmCodeResendError(); };
+
+    const auto successHandler = [this](const QJsonDocument &reply) {
+        const auto successData = reply["data"]["client"]["resendConfirmCode"]["success"];
+
+        if (!successData.toBool(false))
+        {
+            emit confirmCodeResendError();
+            return;
+        }
+
+        emit confirmCodeSent();
+    };
+
+    m_connection.post(query::resendConfirmCode.prepare(), successHandler, errorHandler);
 }
 
 

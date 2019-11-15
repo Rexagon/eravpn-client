@@ -135,39 +135,39 @@
         <translation>Вход в аккаунт</translation>
     </message>
     <message>
-        <location filename="../views/LoginView.qml" line="62"/>
+        <location filename="../views/LoginView.qml" line="66"/>
         <source>IncorrectLoginOrPassword</source>
         <translation>Неправильный логин или пароль</translation>
     </message>
     <message>
-        <location filename="../views/LoginView.qml" line="115"/>
+        <location filename="../views/LoginView.qml" line="119"/>
         <source>Title</source>
         <translation>EraVPN</translation>
     </message>
     <message>
-        <location filename="../views/LoginView.qml" line="131"/>
+        <location filename="../views/LoginView.qml" line="135"/>
         <source>ServiceDescription</source>
         <translation>это, пожалуй, самый быстрый
 и безопасный способ подключения к сети</translation>
     </message>
     <message>
-        <location filename="../views/LoginView.qml" line="159"/>
+        <location filename="../views/LoginView.qml" line="163"/>
         <source>EnterLoginOrEmail</source>
         <translation>Введите логин или email</translation>
     </message>
     <message>
-        <location filename="../views/LoginView.qml" line="170"/>
+        <location filename="../views/LoginView.qml" line="174"/>
         <source>EnterPassword</source>
         <translation>Введите пароль</translation>
     </message>
     <message>
-        <location filename="../views/LoginView.qml" line="181"/>
+        <location filename="../views/LoginView.qml" line="185"/>
         <source>SignIn</source>
         <comment>as action</comment>
         <translation>Войти</translation>
     </message>
     <message>
-        <location filename="../views/LoginView.qml" line="207"/>
+        <location filename="../views/LoginView.qml" line="211"/>
         <source>SignUp</source>
         <comment>as action</comment>
         <translation>Зарегистрироваться</translation>
@@ -236,73 +236,83 @@
         <translation>подтверждён</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="154"/>
+        <location filename="../views/ProfileView.qml" line="156"/>
         <source>EmailChangeError</source>
         <translation>Не удалось изменить email-адрес</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="159"/>
+        <location filename="../views/ProfileView.qml" line="161"/>
         <source>EmailChanged</source>
         <translation>Email-адрес успешно изменён</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="178"/>
+        <location filename="../views/ProfileView.qml" line="167"/>
+        <source>ConfirmCodeResendError</source>
+        <translation>Вы можете отправить письма раз в 60 минут</translation>
+    </message>
+    <message>
+        <location filename="../views/ProfileView.qml" line="185"/>
         <source>EmailAddress</source>
         <translation>Email-адрес</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="187"/>
+        <location filename="../views/ProfileView.qml" line="200"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="202"/>
+        <location filename="../views/ProfileView.qml" line="220"/>
+        <source>ResendConfirmCode</source>
+        <translation>Отправить код заново</translation>
+    </message>
+    <message>
+        <location filename="../views/ProfileView.qml" line="235"/>
         <source>YourTariff</source>
         <translation>Ваш тариф</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="268"/>
+        <location filename="../views/ProfileView.qml" line="301"/>
         <source>ExpiresAt</source>
         <translation>Действителен до</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="288"/>
+        <location filename="../views/ProfileView.qml" line="321"/>
         <source>SelectTariff</source>
         <translation>Выбрать тариф</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="301"/>
+        <location filename="../views/ProfileView.qml" line="334"/>
         <source>ChangePassword</source>
         <comment>as title</comment>
         <translation>Смена пароля</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="323"/>
+        <location filename="../views/ProfileView.qml" line="356"/>
         <source>PasswordChangeError</source>
         <translation>Не удалось изменить пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="330"/>
+        <location filename="../views/ProfileView.qml" line="363"/>
         <source>PasswordChanged</source>
         <translation>Пароль успешно изменён</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="351"/>
+        <location filename="../views/ProfileView.qml" line="384"/>
         <source>CurrentPassword</source>
         <translation>Текущий пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="360"/>
+        <location filename="../views/ProfileView.qml" line="393"/>
         <source>NewPassword</source>
         <translation>Новый пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="369"/>
+        <location filename="../views/ProfileView.qml" line="402"/>
         <source>NewPasswordRepeat</source>
         <translation>Повторите новый пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="379"/>
+        <location filename="../views/ProfileView.qml" line="412"/>
         <source>Apply</source>
         <translation>Подтвердить</translation>
     </message>
@@ -316,69 +326,69 @@
 <context>
     <name>RegistrationView</name>
     <message>
-        <location filename="../views/RegistrationView.qml" line="24"/>
+        <location filename="../views/RegistrationView.qml" line="25"/>
         <source>SignUp</source>
         <comment>as title</comment>
         <translation>Регистрация</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="62"/>
+        <location filename="../views/RegistrationView.qml" line="63"/>
         <source>SignUpError</source>
         <translation>Ошибка регистрации</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="100"/>
+        <location filename="../views/RegistrationView.qml" line="110"/>
         <source>WithEmailAndPassword</source>
         <translation>С email и паролем</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="137"/>
+        <location filename="../views/RegistrationView.qml" line="147"/>
         <source>AnonymousSignUp</source>
         <translation>Анонимная регистрация</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="191"/>
+        <location filename="../views/RegistrationView.qml" line="201"/>
         <source>CreateNickName</source>
         <translation>Придумайте логин</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="191"/>
+        <location filename="../views/RegistrationView.qml" line="201"/>
         <source>EnterEmail</source>
         <translation>Введите email</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="202"/>
+        <location filename="../views/RegistrationView.qml" line="212"/>
         <source>CreatePassword</source>
         <translation>Придумайте пароль</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="213"/>
+        <location filename="../views/RegistrationView.qml" line="223"/>
         <source>RepeatPassword</source>
         <translation>Введите пароль ещё раз</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="224"/>
+        <location filename="../views/RegistrationView.qml" line="234"/>
         <source>EnterCouponCode</source>
         <translation>Введите промокод</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="235"/>
+        <location filename="../views/RegistrationView.qml" line="245"/>
         <source>GenerateAuthKey</source>
         <translation>Сгенерировать код-пароль</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="235"/>
+        <location filename="../views/RegistrationView.qml" line="245"/>
         <source>SignUp</source>
         <comment>as action</comment>
         <translation>Зарегистрироваться</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="251"/>
+        <location filename="../views/RegistrationView.qml" line="261"/>
         <source>AlreadyHaveAccount</source>
         <translation>Уже есть аккаунт?</translation>
     </message>
     <message>
-        <location filename="../views/RegistrationView.qml" line="255"/>
+        <location filename="../views/RegistrationView.qml" line="265"/>
         <source>SignIn</source>
         <comment>as action</comment>
         <translation>Войти</translation>

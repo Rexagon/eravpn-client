@@ -6,10 +6,14 @@ TextField {
 
     height: 44
 
+    selectByMouse: true
+
     font.family: rootUiFontRegular.name
     font.pointSize: large ? 12 : 10
 
     color: "white"
+    selectedTextColor: "white"
+    selectionColor: "#1463f6"
 
     background: Rectangle {
         radius: 3

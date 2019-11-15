@@ -69,11 +69,6 @@ public:
     QDateTime tariffExpiredAt() const;
 
 signals:
-    void signInErrorOccurred();
-
-    void signUpErrorOccurred();
-    void authKeyCopyRequested(const QString &authKey);
-
     void authorizedChanged();
     void dataChanged();
 

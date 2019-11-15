@@ -109,7 +109,8 @@ Item {
         ColumnLayout {
             Item {
                 Layout.fillWidth: true
-                Layout.minimumHeight: 160
+                Layout.minimumHeight: 140
+                Layout.topMargin: 60
 
                 PowerButton {
                     anchors.horizontalCenter: parent.horizontalCenter

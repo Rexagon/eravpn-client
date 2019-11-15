@@ -58,6 +58,10 @@ Item {
                 view.switchToMain()
             }
         }
+    }
+
+    Connections {
+        target: BackEnd.profileController
         onSignInErrorOccurred: {
             notificationArea.notify(qsTr("IncorrectLoginOrPassword"));
             view.state = "";
