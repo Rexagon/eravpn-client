@@ -4,7 +4,6 @@
 #include "CertificateController.hpp"
 
 #include <QJsonArray>
-#include <QJsonObject>
 #include <QSysInfo>
 
 #include "../Stuff/Settings.hpp"

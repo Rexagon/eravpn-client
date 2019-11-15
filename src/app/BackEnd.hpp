@@ -10,6 +10,7 @@
 #include "Controllers/CountriesController.hpp"
 #include "Controllers/LocationController.hpp"
 #include "Controllers/ProfileController.hpp"
+#include "Controllers/ReferralClientsController.hpp"
 #include "Controllers/TariffController.hpp"
 #include "Controllers/TranslationController.hpp"
 #include "Controllers/VpnController.hpp"
@@ -28,6 +29,7 @@ class BackEnd : public QObject
     Q_PROPERTY(ProfileController *profileController READ profileController CONSTANT)
     Q_PROPERTY(LocationController *locationController READ locationController CONSTANT)
     Q_PROPERTY(CountriesController *countriesController READ countriesController CONSTANT)
+    Q_PROPERTY(ReferralClientsController *referralClientsController READ referralClientsController CONSTANT)
     Q_PROPERTY(TariffController *tariffController READ tariffController CONSTANT)
     Q_PROPERTY(TranslationController *translationController READ translationController CONSTANT)
     Q_PROPERTY(VpnController *vpnController READ vpnController CONSTANT)
@@ -35,6 +37,7 @@ class BackEnd : public QObject
     Q_PROPERTY(CountryListModel *freeServersList READ freeServersList CONSTANT)
     Q_PROPERTY(CountryListModel *premiumServersList READ premiumServersList CONSTANT)
     Q_PROPERTY(CertificateListModel *certificateListModel READ certificateListModel CONSTANT)
+    Q_PROPERTY(ReferralClientListModel *referralClientListModel READ referralClientListModel CONSTANT)
     Q_PROPERTY(TariffListModel *tariffListModel READ tariffListModel CONSTANT)
 
     Q_PROPERTY(VpnConnection *vpnConnection READ vpnConnection CONSTANT)
@@ -58,6 +61,7 @@ public:
     ProfileController *profileController();
     LocationController *locationController();
     CountriesController *countriesController();
+    ReferralClientsController *referralClientsController();
     TariffController *tariffController();
     TranslationController *translationController();
     VpnController *vpnController();
@@ -65,6 +69,7 @@ public:
     CountryListModel *freeServersList();
     CountryListModel *premiumServersList();
     CertificateListModel *certificateListModel();
+    ReferralClientListModel *referralClientListModel();
     TariffListModel *tariffListModel();
 
     VpnConnection *vpnConnection();
@@ -78,6 +83,7 @@ private:
     CountryListModel m_freeServersList{};
     CountryListModel m_premiumServersList{};
     CertificateListModel m_certificateListModel{};
+    ReferralClientListModel m_referralClientListModel{};
     TariffListModel m_tariffListModel{};
 
     VpnConnection m_vpnConnection{};
@@ -91,6 +97,7 @@ private:
     CountriesController m_countriesController;
     LocationController m_locationController;
     ProfileController m_profileController;
+    ReferralClientsController m_referralClientsController;
     TariffController m_tariffController;
     TranslationController m_translationController;
     VpnController m_vpnController;

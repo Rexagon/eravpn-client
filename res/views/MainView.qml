@@ -26,6 +26,8 @@ Item {
 
         BackEnd.tariffController.refreshTariffs();
 
+        BackEnd.referralClientsController.refreshReferralClients();
+
         BackEnd.countriesController.refreshCountries(false);
         BackEnd.countriesController.refreshCountries(true);
     }

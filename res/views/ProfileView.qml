@@ -7,6 +7,7 @@ import com.eravpn.backend 1.0
 import "../components"
 import "../components/era"
 import "../components/settings"
+import "../components/profileview"
 
 Item {
     readonly property string lightBackgroundColor: "#4f6699"
@@ -228,6 +229,10 @@ Item {
                 }
             }
 
+            Separator {
+                Layout.fillWidth: true
+            }
+
             Group {
                 Layout.minimumWidth: 120
                 implicitHeight: 120
@@ -327,9 +332,13 @@ Item {
                 }
             }
 
+            Separator {
+                Layout.fillWidth: true
+            }
+
             Group {
                 Layout.minimumWidth: 120
-                implicitHeight: 120
+                implicitHeight: 160
 
                 title: qsTr("ChangePassword", "as title")
 
@@ -414,6 +423,36 @@ Item {
                         onClicked: {
                             parent.inProcess = true;
                             BackEnd.profileController.changePassword(passwordInput.text, newPasswordInput.text);
+                        }
+                    }
+                }
+            }
+
+            Separator {
+                Layout.fillWidth: true
+            }
+
+            Group {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 100 + referralClientListView.model.referralClientCount * 40
+
+                title: qsTr("YourReferrals")
+
+                contentItem: ColumnLayout {
+                    anchors.fill: parent
+
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        ReferralClientListView {
+                            id: referralClientListView
+
+                            anchors.fill: parent
+                            anchors.leftMargin: 20
+                            anchors.rightMargin: 20
+
+                            model: BackEnd.referralClientListModel
                         }
                     }
                 }
