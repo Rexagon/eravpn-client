@@ -51,22 +51,22 @@
 <context>
     <name>CertificateSelectionPopup</name>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="45"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="48"/>
         <source>UserIsNotVerified</source>
         <translation>Пользователь не подтверждён</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="47"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="50"/>
         <source>CertificateCreationError</source>
         <translation>Невозможно создать файл конфигурации</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="59"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="62"/>
         <source>ConfigurationFiles</source>
         <translation>Файлы конфигурации</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="140"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="143"/>
         <source>Generate</source>
         <translation>Сгенерировать</translation>
     </message>
@@ -199,7 +199,7 @@
         <translation>Невозможно обновить список стран</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="91"/>
+        <location filename="../views/MainView.qml" line="95"/>
         <source>VpnError</source>
         <translation>Ошибка во время работы VPN</translation>
     </message>

@@ -111,6 +111,7 @@ void CertificateController::refreshCertificates(const QString &countryId)
 void CertificateController::createNew(const QString &countryId)
 {
     m_certificateListModel.setLoading(true);
+    m_certificateListModel.setGenerating(true);
 
     const auto now = QDateTime::currentDateTime();
 
@@ -128,6 +129,7 @@ void CertificateController::createNew(const QString &countryId)
         {
             emit certificateCreationError();
             m_certificateListModel.setLoading(false);
+            m_certificateListModel.setGenerating(false);
             return;
         }
 
@@ -137,6 +139,7 @@ void CertificateController::createNew(const QString &countryId)
 
         emit certificateCreated(certificate.id());
         m_certificateListModel.setLoading(false);
+        m_certificateListModel.setGenerating(false);
     };
 
     m_connection.post(query::createCertificate.prepare(countryId, hostName), successHandler, errorHandler);

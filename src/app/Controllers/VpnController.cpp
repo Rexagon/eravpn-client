@@ -115,7 +115,7 @@ void VpnController::start(const QString &countryId)
             }
         }
 
-        emit certificateNotFound(countryId);
+        emit certificateNotFound(countryId, ovpnConfigFiles.size());
     };
 
     m_connection.post(query::getCountryCertificates.prepare(countryId), configsRequestHandler, errorHandler);

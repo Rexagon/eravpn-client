@@ -12,6 +12,7 @@ class CertificateListModel : public QAbstractListModel
 
     Q_PROPERTY(int certificateCount READ certificateCount NOTIFY certificateCountChanged)
     Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+    Q_PROPERTY(bool isGenerating READ isGenerating NOTIFY isGeneratingChanged)
 
 public:
     enum DataRoles
@@ -27,13 +28,16 @@ public:
     void appendCertificate(const Certificate &certificate);
 
     void setLoading(bool isLoading);
+    void setGenerating(bool isGenerating);
 
     int certificateCount() const;
     bool isLoading() const;
+    bool isGenerating() const;
 
 signals:
     void certificateCountChanged();
     void isLoadingChanged();
+    void isGeneratingChanged();
 
 public:
     int rowCount(const QModelIndex &parent) const final;
@@ -44,6 +48,7 @@ public:
 
 private:
     bool m_isLoading{true};
+    bool m_isGenerating{false};
     QVector<Certificate> m_certificates{};
 };
 

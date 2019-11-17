@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 {
 #ifdef WIN32
     HWND hWnd = GetConsoleWindow();
-    ShowWindow(hWnd, SW_HIDE);
+    ShowWindow(hWnd, SW_HIDE); // Prevent windows console from flickering when netsh commands are executed
 #endif
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

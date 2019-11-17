@@ -76,6 +76,10 @@ Item {
         target: BackEnd.vpnController
 
         onCertificateNotFound: {
+            if (certificateCount < 5) {
+                BackEnd.certificateController.createNew(countryId);
+            }
+
             showCertificateSelectionPopup(countryId, true);
         }
     }

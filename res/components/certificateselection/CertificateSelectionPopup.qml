@@ -10,7 +10,10 @@ Popup {
     property string countryId: ""
     property bool startOnSelect: false
 
-    readonly property bool isLoading: BackEnd.certificateListModel.isLoading
+    readonly property bool isLoading: {
+        return BackEnd.certificateListModel.isLoading ||
+                BackEnd.certificateListModel.isGenerating;
+    }
 
     id: popup
 

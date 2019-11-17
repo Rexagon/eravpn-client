@@ -51,22 +51,22 @@
 <context>
     <name>CertificateSelectionPopup</name>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="45"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="48"/>
         <source>UserIsNotVerified</source>
         <translation>User is not verified</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="47"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="50"/>
         <source>CertificateCreationError</source>
         <translation>Unable to create configuration file</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="59"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="62"/>
         <source>ConfigurationFiles</source>
         <translation>Configuration files</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="140"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="143"/>
         <source>Generate</source>
         <translation>Generate</translation>
     </message>
@@ -199,7 +199,7 @@ and safest way to connect to the internet</translation>
         <translation>Unable to get countries list</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="91"/>
+        <location filename="../views/MainView.qml" line="95"/>
         <source>VpnError</source>
         <translation>Connection error occured</translation>
     </message>

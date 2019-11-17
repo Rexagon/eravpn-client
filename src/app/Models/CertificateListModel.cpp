@@ -41,6 +41,14 @@ void CertificateListModel::setLoading(bool isLoading)
 }
 
 
+void CertificateListModel::setGenerating(bool isGenerating)
+{
+    m_isGenerating = isGenerating;
+
+    emit isGeneratingChanged();
+}
+
+
 int CertificateListModel::certificateCount() const
 {
     return m_certificates.size();
@@ -50,6 +58,12 @@ int CertificateListModel::certificateCount() const
 bool CertificateListModel::isLoading() const
 {
     return m_isLoading;
+}
+
+
+bool CertificateListModel::isGenerating() const
+{
+    return m_isGenerating;
 }
 
 
