@@ -29,9 +29,11 @@ int main(int argc, char **argv)
 #ifdef WIN32
     HWND hWnd = GetConsoleWindow();
     ShowWindow(hWnd, SW_HIDE);
+
+    SetProcessDPIAware();
 #endif
 
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
     QCoreApplication::setOrganizationName("EraVPN");
     QCoreApplication::setOrganizationDomain("com.eravpn");
     QCoreApplication::setApplicationName("EraVPN Client");
