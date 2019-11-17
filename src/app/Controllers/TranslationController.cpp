@@ -53,6 +53,7 @@ void TranslationController::setLanguage(const QString &language)
     m_translator.load(QString{TRANSLATION_PATH}.arg(newLanguage));
     QGuiApplication::installTranslator(&m_translator);
 
+    Settings::instance().setLanguage(newLanguage);
     m_translation.setLanguage(newLanguage);
 }
 

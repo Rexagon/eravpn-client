@@ -68,6 +68,18 @@ ApplicationWindow
         }
     }
 
+    Connections {
+        target: BackEnd.tariffController
+
+        onTariffLinkGenerationError: {
+            if (BackEnd.profile.status === Profile.New) {
+                notificationArea.notify(qsTr("AccountIsNotActivatedError"));
+            } else {
+                notificationArea.notify(qsTr("TariffLinkGenerationError"));
+            }
+        }
+    }
+
     Timer {
         id: windowHidingTimer
 

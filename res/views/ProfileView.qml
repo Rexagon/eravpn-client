@@ -32,7 +32,6 @@ Item {
 
     ScrollView {
         anchors.fill: parent
-        anchors.topMargin: 16
         anchors.leftMargin: 56
         anchors.rightMargin: 16
 
@@ -44,6 +43,9 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
+
+            anchors.topMargin: 16
+            anchors.bottomMargin: 16
 
             width: 10
 
@@ -83,38 +85,50 @@ Item {
         ColumnLayout {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
+            anchors.topMargin: 16
+
             width: window.width - 56 * 2
 
-            EraBackButton {
-                Layout.alignment: Qt.AlignLeft
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 60
 
-                onClicked: view.closeView()
-            }
+                Item {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
 
-            Text {
-                text: qsTr("Profile") + " " + BackEnd.profile.userName
+                    ColumnLayout {
+                        EraBackButton {
+                            Layout.alignment: Qt.AlignLeft
 
-                color: "white"
+                            onClicked: view.closeView()
+                        }
 
-                font.family: futuraHeavyFont.name
-                font.pointSize: 20
-            }
+                        Text {
+                            text: qsTr("Profile") + " " + BackEnd.profile.userName
 
-            Item {
-                implicitHeight: 20
-            }
+                            color: "white"
 
-            EraButton {
-                Layout.minimumWidth: 120
-                Layout.minimumHeight: 40
+                            font.family: futuraHeavyFont.name
+                            font.pointSize: 20
+                        }
+                    }
+                }
 
-                text: qsTr("SignOut", "as action")
+                EraButton {
+                    Layout.minimumWidth: 120
+                    Layout.minimumHeight: 40
+                    Layout.alignment: Qt.AlignBottom
 
-                onClicked: {
-                    view.closeView();
-                    BackEnd.profileController.signOut();
+                    text: qsTr("SignOut", "as action")
+
+                    onClicked: {
+                        view.closeView();
+                        BackEnd.profileController.signOut();
+                    }
                 }
             }
+
 
             Item {
                 implicitHeight: 20
@@ -193,8 +207,6 @@ Item {
                         EraButton {
                             Layout.minimumWidth: 200
                             Layout.minimumHeight: 40
-
-                            visible: BackEnd.profile.email !== emailInput.text
 
                             enabled: emailChangeGroup.isInputValid && !emailChangeGroup.inProcess
 

@@ -216,118 +216,118 @@ and safest way to connect to the internet</translation>
     <name>ProfileView</name>
     <message>
         <location filename="../views/ProfileView.qml" line="22"/>
-        <location filename="../views/ProfileView.qml" line="95"/>
+        <location filename="../views/ProfileView.qml" line="108"/>
         <source>Profile</source>
         <translation>Profile</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="128"/>
+        <location filename="../views/ProfileView.qml" line="142"/>
         <source>YourEmailAddress</source>
         <translation>Your email address</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="134"/>
+        <location filename="../views/ProfileView.qml" line="148"/>
         <source>NotVerified</source>
         <translation>not verified</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="134"/>
+        <location filename="../views/ProfileView.qml" line="148"/>
         <source>Verified</source>
         <translation>verified</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="157"/>
+        <location filename="../views/ProfileView.qml" line="171"/>
         <source>EmailChangeError</source>
         <translation>Unable to change email address</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="162"/>
+        <location filename="../views/ProfileView.qml" line="176"/>
         <source>EmailChanged</source>
         <translation>Email address successfully changed</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="168"/>
+        <location filename="../views/ProfileView.qml" line="182"/>
         <source>ConfirmCodeResendError</source>
         <translation>You can send emails only once per hour</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="186"/>
+        <location filename="../views/ProfileView.qml" line="200"/>
         <source>EmailAddress</source>
         <translation>Email address</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="201"/>
+        <location filename="../views/ProfileView.qml" line="213"/>
         <source>Change</source>
         <translation>Change</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="221"/>
+        <location filename="../views/ProfileView.qml" line="233"/>
         <source>ResendConfirmCode</source>
         <translation>Resend confirm code</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="240"/>
+        <location filename="../views/ProfileView.qml" line="252"/>
         <source>YourTariff</source>
         <translation>Your tariff</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="306"/>
+        <location filename="../views/ProfileView.qml" line="318"/>
         <source>ExpiresAt</source>
         <translation>Expires at</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="326"/>
+        <location filename="../views/ProfileView.qml" line="338"/>
         <source>SelectTariff</source>
         <translation>Select tariff</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="343"/>
+        <location filename="../views/ProfileView.qml" line="355"/>
         <source>ChangePassword</source>
         <comment>as title</comment>
         <translation>Change password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="365"/>
+        <location filename="../views/ProfileView.qml" line="377"/>
         <source>PasswordChangeError</source>
         <translation>Unable to change password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="372"/>
+        <location filename="../views/ProfileView.qml" line="384"/>
         <source>PasswordChanged</source>
         <translation>Password successfully changed</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="393"/>
+        <location filename="../views/ProfileView.qml" line="405"/>
         <source>CurrentPassword</source>
         <translation>Current password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="402"/>
+        <location filename="../views/ProfileView.qml" line="414"/>
         <source>NewPassword</source>
         <translation>New password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="411"/>
+        <location filename="../views/ProfileView.qml" line="423"/>
         <source>NewPasswordRepeat</source>
         <translation>Repeat new password</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="421"/>
+        <location filename="../views/ProfileView.qml" line="433"/>
         <source>Apply</source>
         <translation>Apply</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="443"/>
+        <location filename="../views/ProfileView.qml" line="455"/>
         <source>YourReferrals</source>
         <translation>Your referrals</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="443"/>
+        <location filename="../views/ProfileView.qml" line="455"/>
         <source>YouHaveNoReferrals</source>
         <translation>You have no referrals</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="111"/>
+        <location filename="../views/ProfileView.qml" line="123"/>
         <source>SignOut</source>
         <comment>as action</comment>
         <translation>Sign out</translation>
@@ -461,14 +461,24 @@ and safest way to connect to the internet</translation>
     <name>SettingsView</name>
     <message>
         <location filename="../views/SettingsView.qml" line="20"/>
-        <location filename="../views/SettingsView.qml" line="93"/>
+        <location filename="../views/SettingsView.qml" line="94"/>
         <source>Settings</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="109"/>
+        <location filename="../views/SettingsView.qml" line="110"/>
         <source>SelectLanguage</source>
         <translation>Select language</translation>
+    </message>
+    <message>
+        <location filename="../views/SettingsView.qml" line="156"/>
+        <source>AutoGenerateCertificates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../views/SettingsView.qml" line="157"/>
+        <source>AutoGenerateCertificatesDescription</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SafeDisconnection</source>
@@ -564,19 +574,17 @@ once every</translation>
     <name>TariffSelectionView</name>
     <message>
         <location filename="../views/TariffSelectionView.qml" line="17"/>
-        <location filename="../views/TariffSelectionView.qml" line="53"/>
+        <location filename="../views/TariffSelectionView.qml" line="41"/>
         <source>TariffSelection</source>
         <translation>Tariff selection</translation>
     </message>
     <message>
-        <location filename="../views/TariffSelectionView.qml" line="32"/>
         <source>AccountIsNotActivatedError</source>
-        <translation>Account is not activated</translation>
+        <translation type="vanished">Account is not activated</translation>
     </message>
     <message>
-        <location filename="../views/TariffSelectionView.qml" line="34"/>
         <source>TariffLinkGenerationError</source>
-        <translation>Tariff link generation error</translation>
+        <translation type="vanished">Tariff link generation error</translation>
     </message>
 </context>
 <context>
@@ -610,6 +618,19 @@ once every</translation>
     <message>
         <source>Disconnected</source>
         <translation type="vanished">Disconnected</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../main.qml" line="76"/>
+        <source>AccountIsNotActivatedError</source>
+        <translation type="unfinished">Account is not activated</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="78"/>
+        <source>TariffLinkGenerationError</source>
+        <translation type="unfinished">Tariff link generation error</translation>
     </message>
 </context>
 </TS>

@@ -216,118 +216,118 @@
     <name>ProfileView</name>
     <message>
         <location filename="../views/ProfileView.qml" line="22"/>
-        <location filename="../views/ProfileView.qml" line="95"/>
+        <location filename="../views/ProfileView.qml" line="108"/>
         <source>Profile</source>
         <translation>Профиль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="128"/>
+        <location filename="../views/ProfileView.qml" line="142"/>
         <source>YourEmailAddress</source>
         <translation>Ваш email-адрес</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="134"/>
+        <location filename="../views/ProfileView.qml" line="148"/>
         <source>NotVerified</source>
         <translation>не подтверждён</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="134"/>
+        <location filename="../views/ProfileView.qml" line="148"/>
         <source>Verified</source>
         <translation>подтверждён</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="157"/>
+        <location filename="../views/ProfileView.qml" line="171"/>
         <source>EmailChangeError</source>
         <translation>Не удалось изменить email-адрес</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="162"/>
+        <location filename="../views/ProfileView.qml" line="176"/>
         <source>EmailChanged</source>
         <translation>Email-адрес успешно изменён</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="168"/>
+        <location filename="../views/ProfileView.qml" line="182"/>
         <source>ConfirmCodeResendError</source>
         <translation>Вы можете отправить письма раз в 60 минут</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="186"/>
+        <location filename="../views/ProfileView.qml" line="200"/>
         <source>EmailAddress</source>
         <translation>Email-адрес</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="201"/>
+        <location filename="../views/ProfileView.qml" line="213"/>
         <source>Change</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="221"/>
+        <location filename="../views/ProfileView.qml" line="233"/>
         <source>ResendConfirmCode</source>
         <translation>Отправить код заново</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="240"/>
+        <location filename="../views/ProfileView.qml" line="252"/>
         <source>YourTariff</source>
         <translation>Ваш тариф</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="306"/>
+        <location filename="../views/ProfileView.qml" line="318"/>
         <source>ExpiresAt</source>
         <translation>Действителен до</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="326"/>
+        <location filename="../views/ProfileView.qml" line="338"/>
         <source>SelectTariff</source>
         <translation>Выбрать тариф</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="343"/>
+        <location filename="../views/ProfileView.qml" line="355"/>
         <source>ChangePassword</source>
         <comment>as title</comment>
         <translation>Смена пароля</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="365"/>
+        <location filename="../views/ProfileView.qml" line="377"/>
         <source>PasswordChangeError</source>
         <translation>Не удалось изменить пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="372"/>
+        <location filename="../views/ProfileView.qml" line="384"/>
         <source>PasswordChanged</source>
         <translation>Пароль успешно изменён</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="393"/>
+        <location filename="../views/ProfileView.qml" line="405"/>
         <source>CurrentPassword</source>
         <translation>Текущий пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="402"/>
+        <location filename="../views/ProfileView.qml" line="414"/>
         <source>NewPassword</source>
         <translation>Новый пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="411"/>
+        <location filename="../views/ProfileView.qml" line="423"/>
         <source>NewPasswordRepeat</source>
         <translation>Повторите новый пароль</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="421"/>
+        <location filename="../views/ProfileView.qml" line="433"/>
         <source>Apply</source>
         <translation>Подтвердить</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="443"/>
+        <location filename="../views/ProfileView.qml" line="455"/>
         <source>YourReferrals</source>
         <translation>Ваши рефералы</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="443"/>
+        <location filename="../views/ProfileView.qml" line="455"/>
         <source>YouHaveNoReferrals</source>
         <translation>У Вас не рефералов</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="111"/>
+        <location filename="../views/ProfileView.qml" line="123"/>
         <source>SignOut</source>
         <comment>as action</comment>
         <translation>Выйти</translation>
@@ -461,14 +461,24 @@
     <name>SettingsView</name>
     <message>
         <location filename="../views/SettingsView.qml" line="20"/>
-        <location filename="../views/SettingsView.qml" line="93"/>
+        <location filename="../views/SettingsView.qml" line="94"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="109"/>
+        <location filename="../views/SettingsView.qml" line="110"/>
         <source>SelectLanguage</source>
         <translation>Выберите язык</translation>
+    </message>
+    <message>
+        <location filename="../views/SettingsView.qml" line="156"/>
+        <source>AutoGenerateCertificates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../views/SettingsView.qml" line="157"/>
+        <source>AutoGenerateCertificatesDescription</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SafeDisconnection</source>
@@ -565,19 +575,17 @@
     <name>TariffSelectionView</name>
     <message>
         <location filename="../views/TariffSelectionView.qml" line="17"/>
-        <location filename="../views/TariffSelectionView.qml" line="53"/>
+        <location filename="../views/TariffSelectionView.qml" line="41"/>
         <source>TariffSelection</source>
         <translation>Выбор тарифа</translation>
     </message>
     <message>
-        <location filename="../views/TariffSelectionView.qml" line="32"/>
         <source>AccountIsNotActivatedError</source>
-        <translation>Ваш аккаунт не подтверждён</translation>
+        <translation type="vanished">Ваш аккаунт не подтверждён</translation>
     </message>
     <message>
-        <location filename="../views/TariffSelectionView.qml" line="34"/>
         <source>TariffLinkGenerationError</source>
-        <translation>Невозможно сгенерировать ссылку</translation>
+        <translation type="vanished">Невозможно сгенерировать ссылку</translation>
     </message>
 </context>
 <context>
@@ -611,6 +619,19 @@
     <message>
         <source>Disconnected</source>
         <translation type="vanished">Не подключено</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../main.qml" line="76"/>
+        <source>AccountIsNotActivatedError</source>
+        <translation type="unfinished">Ваш аккаунт не подтверждён</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="78"/>
+        <source>TariffLinkGenerationError</source>
+        <translation type="unfinished">Невозможно сгенерировать ссылку</translation>
     </message>
 </context>
 </TS>

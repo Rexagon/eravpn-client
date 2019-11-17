@@ -28,13 +28,13 @@ Item {
         }
     }
 
-    ScrollView {
+    Item {
         anchors.fill: parent
         anchors.topMargin: 16
         anchors.leftMargin: 56
         anchors.rightMargin: 16
 
-        clip: true
+        /*clip: true
 
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
@@ -77,6 +77,7 @@ Item {
                 color: scrollBar.pressed ? darkBackgroundColor : lightBackgroundColor
             }
         }
+        */
 
         ColumnLayout {
             anchors.top: parent.top
@@ -140,6 +141,24 @@ Item {
                         BackEnd.translationController.setLanguage("ru");
                     }
                 }
+            }
+
+            Separator {
+                Layout.fillWidth: true
+            }
+
+            SettingsGroup {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 100
+
+                withToggleButton: true
+
+                title: qsTr("AutoGenerateCertificates")
+                description: qsTr("AutoGenerateCertificatesDescription")
+            }
+
+            Item {
+                Layout.fillHeight: true
             }
 
             /*
