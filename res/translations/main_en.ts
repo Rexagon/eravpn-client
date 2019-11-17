@@ -317,12 +317,12 @@ and safest way to connect to the internet</translation>
         <translation>Apply</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="441"/>
+        <location filename="../views/ProfileView.qml" line="443"/>
         <source>YourReferrals</source>
         <translation>Your referrals</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="441"/>
+        <location filename="../views/ProfileView.qml" line="443"/>
         <source>YouHaveNoReferrals</source>
         <translation>You have no referrals</translation>
     </message>

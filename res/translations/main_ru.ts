@@ -317,12 +317,12 @@
         <translation>Подтвердить</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="441"/>
+        <location filename="../views/ProfileView.qml" line="443"/>
         <source>YourReferrals</source>
         <translation>Ваши рефералы</translation>
     </message>
     <message>
-        <location filename="../views/ProfileView.qml" line="441"/>
+        <location filename="../views/ProfileView.qml" line="443"/>
         <source>YouHaveNoReferrals</source>
         <translation>У Вас не рефералов</translation>
     </message>

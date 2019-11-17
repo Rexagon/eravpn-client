@@ -433,6 +433,8 @@ Item {
             }
 
             Group {
+                id: referralsGroup
+
                 readonly property int referralCount: BackEnd.referralClientListModel.referralClientCount
 
                 Layout.fillWidth: true
@@ -443,7 +445,7 @@ Item {
                 contentItem: ColumnLayout {
                     anchors.fill: parent
 
-                    visible: parent.referralCount > 0
+                    visible: referralsGroup.referralCount > 0
 
                     Item {
                         Layout.fillWidth: true
