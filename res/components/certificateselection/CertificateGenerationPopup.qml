@@ -22,6 +22,10 @@ Popup {
     width: 500
     height: 200
 
+    Overlay.modal: Rectangle {
+        color: "#55000000"
+    }
+
     modal: true
     focus: true
     closePolicy: isGenerating ? 0 : Popup.CloseOnEscape | Popup.CloseOnPressOutside

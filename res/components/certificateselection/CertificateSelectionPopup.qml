@@ -27,6 +27,10 @@ Popup {
     focus: true
     closePolicy: isLoading ? 0 : Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
+    Overlay.modal: Rectangle {
+        color: "#55000000"
+    }
+
     contentItem: Item {
         state: BackEnd.certificateListModel.certificateCount < 1 ? "initial" : ""
 

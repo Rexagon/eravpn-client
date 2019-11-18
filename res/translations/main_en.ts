@@ -43,7 +43,7 @@
 <context>
     <name>CertificateGenerationPopup</name>
     <message>
-        <location filename="../components/certificateselection/CertificateGenerationPopup.qml" line="52"/>
+        <location filename="../components/certificateselection/CertificateGenerationPopup.qml" line="56"/>
         <source>CertificateGeneration</source>
         <translation>Initial config generation</translation>
     </message>
@@ -59,22 +59,22 @@
 <context>
     <name>CertificateSelectionPopup</name>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="48"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="52"/>
         <source>UserIsNotVerified</source>
         <translation>User is not verified</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="50"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="54"/>
         <source>CertificateCreationError</source>
         <translation>Unable to create configuration file</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="62"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="66"/>
         <source>ConfigurationFiles</source>
         <translation>Configuration files</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="143"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="147"/>
         <source>Generate</source>
         <translation>Generate</translation>
     </message>
@@ -207,7 +207,7 @@ and safest way to connect to the internet</translation>
         <translation>Unable to get countries list</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="105"/>
+        <location filename="../views/MainView.qml" line="107"/>
         <source>VpnError</source>
         <translation>Connection error occured</translation>
     </message>

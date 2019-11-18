@@ -85,7 +85,9 @@ Item {
         target: BackEnd.vpnController
 
         onCertificateNotFound: {
-            if (BackEnd.applicationSettings.isCertificateAutoGenerationEnabled && certificateCount < 5) {
+            if (BackEnd.applicationSettings.isCertificateAutoGenerationEnabled &&
+                BackEnd.profile.status !== Profile.New &&
+                certificateCount < 5) {
                 BackEnd.certificateController.createNew(countryId);
                 showCertificateGenerationPopup(countryId);
             } else {
