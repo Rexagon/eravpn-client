@@ -37,6 +37,9 @@ public:
                                const std::optional<QString> &certificateId);
     std::optional<CertificateData> countryCertificate(const QString &userId, const QString &countryId) const;
 
+    void setCertificateAutoGenerationEnabled(const QString &userId, bool enabled);
+    bool isCertificateAutoGenerationEnabled(const QString &userId) const;
+
     void setLanguage(const QString &language);
     std::optional<QString> getLanguage() const;
 

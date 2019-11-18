@@ -189,17 +189,17 @@
 <context>
     <name>MainView</name>
     <message>
-        <location filename="../views/MainView.qml" line="36"/>
+        <location filename="../views/MainView.qml" line="38"/>
         <source>Title</source>
         <translation>EraVPN</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="71"/>
+        <location filename="../views/MainView.qml" line="73"/>
         <source>CountriesRequestError</source>
         <translation>Невозможно обновить список стран</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="95"/>
+        <location filename="../views/MainView.qml" line="97"/>
         <source>VpnError</source>
         <translation>Ошибка во время работы VPN</translation>
     </message>
@@ -471,14 +471,14 @@
         <translation>Выберите язык</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="156"/>
+        <location filename="../views/SettingsView.qml" line="162"/>
         <source>AutoGenerateCertificates</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически генерировать конфиги</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="157"/>
+        <location filename="../views/SettingsView.qml" line="163"/>
         <source>AutoGenerateCertificatesDescription</source>
-        <translation type="unfinished"></translation>
+        <translation>Создавать новый конфигурационный файл при первом подключении к серверу с нового устройства</translation>
     </message>
     <message>
         <source>SafeDisconnection</source>
@@ -591,17 +591,17 @@
 <context>
     <name>app::ApplicationController</name>
     <message>
-        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="64"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="85"/>
         <source>Quit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="88"/>
         <source>Connected</source>
         <translation>Подключено</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="88"/>
         <source>Disconnected</source>
         <translation>Не подключено</translation>
     </message>
@@ -626,12 +626,12 @@
     <message>
         <location filename="../main.qml" line="76"/>
         <source>AccountIsNotActivatedError</source>
-        <translation type="unfinished">Ваш аккаунт не подтверждён</translation>
+        <translation>Ваш аккаунт не подтверждён</translation>
     </message>
     <message>
         <location filename="../main.qml" line="78"/>
         <source>TariffLinkGenerationError</source>
-        <translation type="unfinished">Невозможно сгенерировать ссылку</translation>
+        <translation>Невозможно сгенерировать ссылку</translation>
     </message>
 </context>
 </TS>

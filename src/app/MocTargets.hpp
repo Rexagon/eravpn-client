@@ -14,6 +14,7 @@
 #include "Controllers/TranslationController.hpp"
 #include "Controllers/VpnController.hpp"
 
+#include "Models/ApplicationSettings.hpp"
 #include "Models/CertificateListModel.hpp"
 #include "Models/CountryListModel.hpp"
 #include "Models/Location.hpp"

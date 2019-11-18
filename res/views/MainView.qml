@@ -22,6 +22,8 @@ Item {
     }
 
     Component.onCompleted: {
+        BackEnd.applicationController.refreshSettings();
+
         BackEnd.locationController.updateCurrentLocation();
 
         BackEnd.tariffController.refreshTariffs();
@@ -76,7 +78,7 @@ Item {
         target: BackEnd.vpnController
 
         onCertificateNotFound: {
-            if (certificateCount < 5) {
+            if (BackEnd.applicationSettings.isCertificateAutoGenerationEnabled && certificateCount < 5) {
                 BackEnd.certificateController.createNew(countryId);
             }
 

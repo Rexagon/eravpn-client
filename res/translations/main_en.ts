@@ -189,17 +189,17 @@ and safest way to connect to the internet</translation>
 <context>
     <name>MainView</name>
     <message>
-        <location filename="../views/MainView.qml" line="36"/>
+        <location filename="../views/MainView.qml" line="38"/>
         <source>Title</source>
         <translation>EraVPN</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="71"/>
+        <location filename="../views/MainView.qml" line="73"/>
         <source>CountriesRequestError</source>
         <translation>Unable to get countries list</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="95"/>
+        <location filename="../views/MainView.qml" line="97"/>
         <source>VpnError</source>
         <translation>Connection error occured</translation>
     </message>
@@ -471,14 +471,14 @@ and safest way to connect to the internet</translation>
         <translation>Select language</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="156"/>
+        <location filename="../views/SettingsView.qml" line="162"/>
         <source>AutoGenerateCertificates</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto generate configs</translation>
     </message>
     <message>
-        <location filename="../views/SettingsView.qml" line="157"/>
+        <location filename="../views/SettingsView.qml" line="163"/>
         <source>AutoGenerateCertificatesDescription</source>
-        <translation type="unfinished"></translation>
+        <translation>Create new config file on first connection to server from device</translation>
     </message>
     <message>
         <source>SafeDisconnection</source>
@@ -590,17 +590,17 @@ once every</translation>
 <context>
     <name>app::ApplicationController</name>
     <message>
-        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="64"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="85"/>
         <source>Quit</source>
         <translation>Quit</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="88"/>
         <source>Connected</source>
         <translation>Connected</translation>
     </message>
     <message>
-        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="67"/>
+        <location filename="../../src/app/Controllers/ApplicationController.cpp" line="88"/>
         <source>Disconnected</source>
         <translation>Disconnected</translation>
     </message>
@@ -625,12 +625,12 @@ once every</translation>
     <message>
         <location filename="../main.qml" line="76"/>
         <source>AccountIsNotActivatedError</source>
-        <translation type="unfinished">Account is not activated</translation>
+        <translation>Account is not activated</translation>
     </message>
     <message>
         <location filename="../main.qml" line="78"/>
         <source>TariffLinkGenerationError</source>
-        <translation type="unfinished">Tariff link generation error</translation>
+        <translation>Tariff link generation error</translation>
     </message>
 </context>
 </TS>

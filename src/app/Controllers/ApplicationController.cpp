@@ -3,6 +3,8 @@
 
 #include "ApplicationController.hpp"
 
+#include "../Stuff/Settings.hpp"
+
 namespace
 {
 constexpr auto APPLICATION_TRAY_ICON = ":images/icon.ico";
@@ -12,10 +14,15 @@ constexpr auto APPLICATION_TRAY_TOOLTIP = "EraVPN (%1)";
 
 namespace app
 {
-ApplicationController::ApplicationController(VpnConnection &vpnConnection, Translation &translation)
+ApplicationController::ApplicationController(ApplicationSettings &applicationSettings,
+                                             Profile &profile,
+                                             Translation &translation,
+                                             VpnConnection &vpnConnection)
     : QObject{nullptr}
-    , m_vpnConnection{vpnConnection}
+    , m_applicationSettings{applicationSettings}
+    , m_profile{profile}
     , m_translation{translation}
+    , m_vpnConnection{vpnConnection}
 {
     m_menu.addAction(&m_quitAction);
 
@@ -40,6 +47,20 @@ ApplicationController::~ApplicationController()
 void ApplicationController::setTrayIconVisible(bool visible)
 {
     m_systemTrayIcon.setVisible(visible);
+}
+
+
+void ApplicationController::refreshSettings()
+{
+    auto &settings = Settings::instance();
+    setCertificateAutoGenerationEnabled(settings.isCertificateAutoGenerationEnabled(m_profile.id()));
+}
+
+
+void ApplicationController::setCertificateAutoGenerationEnabled(bool enabled)
+{
+    Settings::instance().setCertificateAutoGenerationEnabled(m_profile.id(), enabled);
+    m_applicationSettings.setCertificateAutoGenerationEnabled(enabled);
 }
 
 

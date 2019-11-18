@@ -148,6 +148,12 @@ Item {
             }
 
             SettingsGroup {
+                id: group
+
+                function updateState() {
+                    group.activated =  BackEnd.applicationSettings.isCertificateAutoGenerationEnabled;
+                }
+
                 Layout.fillWidth: true
                 Layout.minimumHeight: 100
 
@@ -155,6 +161,22 @@ Item {
 
                 title: qsTr("AutoGenerateCertificates")
                 description: qsTr("AutoGenerateCertificatesDescription")
+
+                onActivatedChanged: {
+                    BackEnd.applicationController.setCertificateAutoGenerationEnabled(activated);
+                }
+
+                Component.onCompleted: {
+                    group.updateState();
+                }
+
+                Connections {
+                    target: BackEnd.applicationSettings
+
+                    onIsCertificateAutoGenerationEnabledChanged: {
+                        group.updateState();
+                    }
+                }
             }
 
             Item {

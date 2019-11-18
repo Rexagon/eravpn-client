@@ -3,6 +3,8 @@
 
 #include "CertificateListModel.hpp"
 
+#include "../Stuff/Settings.hpp"
+
 namespace app
 {
 CertificateListModel::CertificateListModel()

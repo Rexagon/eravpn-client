@@ -15,6 +15,7 @@ constexpr auto COUNTRY_CERTIFICATE_ID = "vpn/%1/certificate/%2/id";
 constexpr auto COUNTRY_CERTIFICATE_PATH = "vpn/%1/certificate/%2/path";
 
 constexpr auto APPLICATION_LANGUAGE = "language";
+constexpr auto CERTIFICATE_AUTO_GENERATION = "vpn/%1/autogeneration";
 
 constexpr auto CONFIG_FILE = "/%1.ovpn";
 
@@ -118,6 +119,18 @@ std::optional<Settings::CertificateData> Settings::countryCertificate(const QStr
 }
 
 
+void Settings::setCertificateAutoGenerationEnabled(const QString &userId, bool enabled)
+{
+    set<bool>(m_settings, QString{CERTIFICATE_AUTO_GENERATION}.arg(userId), enabled);
+}
+
+
+bool Settings::isCertificateAutoGenerationEnabled(const QString &userId) const
+{
+    return get<bool>(m_settings, QString{CERTIFICATE_AUTO_GENERATION}.arg(userId)).value_or(true);
+}
+
+
 void Settings::setLanguage(const QString &language)
 {
     set<QString>(m_settings, APPLICATION_LANGUAGE, language);
@@ -129,11 +142,11 @@ std::optional<QString> Settings::getLanguage() const
     return get<QString>(m_settings, APPLICATION_LANGUAGE);
 }
 
-
 QString Settings::createCertificatePath(const QString &certificateId)
 {
     return m_configsDirectory + QString{CONFIG_FILE}.arg(certificateId);
 }
+
 
 const QString &Settings::configsDirectory() const
 {

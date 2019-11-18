@@ -17,6 +17,7 @@ set(SRC
         Controllers/TranslationController.cpp
         Controllers/VpnController.cpp
 
+        Models/ApplicationSettings.cpp
         Models/Certificate.cpp
         Models/CertificateListModel.cpp
         Models/Country.cpp

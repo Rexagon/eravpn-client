@@ -34,6 +34,7 @@ class BackEnd : public QObject
     Q_PROPERTY(TranslationController *translationController READ translationController CONSTANT)
     Q_PROPERTY(VpnController *vpnController READ vpnController CONSTANT)
 
+    Q_PROPERTY(ApplicationSettings *applicationSettings READ applicationSettings CONSTANT)
     Q_PROPERTY(CountryListModel *freeServersList READ freeServersList CONSTANT)
     Q_PROPERTY(CountryListModel *premiumServersList READ premiumServersList CONSTANT)
     Q_PROPERTY(CertificateListModel *certificateListModel READ certificateListModel CONSTANT)
@@ -66,6 +67,7 @@ public:
     TranslationController *translationController();
     VpnController *vpnController();
 
+    ApplicationSettings *applicationSettings();
     CountryListModel *freeServersList();
     CountryListModel *premiumServersList();
     CertificateListModel *certificateListModel();
@@ -80,6 +82,7 @@ public:
 private:
     Connection m_connection;
 
+    ApplicationSettings m_applicationSettings{};
     CountryListModel m_freeServersList{};
     CountryListModel m_premiumServersList{};
     CertificateListModel m_certificateListModel{};

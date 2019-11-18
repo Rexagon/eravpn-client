@@ -8,7 +8,7 @@ namespace app
 BackEnd::BackEnd()
     : QObject{nullptr}
     , m_connection{API_URL}
-    , m_applicationController{m_vpnConnection, m_translation}
+    , m_applicationController{m_applicationSettings, m_profile, m_translation, m_vpnConnection}
     , m_certificateController{m_connection, m_profile, m_certificateListModel}
     , m_countriesController{m_connection, m_freeServersList, m_premiumServersList}
     , m_locationController{IPSTACK_KEY, m_location, m_translation}
@@ -85,6 +85,12 @@ TranslationController *BackEnd::translationController()
 VpnController *BackEnd::vpnController()
 {
     return &m_vpnController;
+}
+
+
+ApplicationSettings *BackEnd::applicationSettings()
+{
+    return &m_applicationSettings;
 }
 
 
