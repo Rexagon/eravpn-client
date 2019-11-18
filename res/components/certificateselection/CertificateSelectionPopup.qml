@@ -25,7 +25,7 @@ Popup {
 
     modal: true
     focus: true
-    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+    closePolicy: isLoading ? 0 : Popup.CloseOnEscape | Popup.CloseOnPressOutside
 
     contentItem: Item {
         state: BackEnd.certificateListModel.certificateCount < 1 ? "initial" : ""

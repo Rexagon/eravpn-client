@@ -14,6 +14,7 @@
         <file>views/TariffSelectionView.qml</file>
     </qresource>
     <qresource>
+        <file>components/certificateselection/CertificateGenerationPopup.qml</file>
         <file>components/certificateselection/CertificateListView.qml</file>
         <file>components/certificateselection/CertificateSelectionPopup.qml</file>
 

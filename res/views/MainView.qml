@@ -21,6 +21,13 @@ Item {
         certificateSelectionPopup.open();
     }
 
+    function showCertificateGenerationPopup(countryId) {
+        BackEnd.certificateController.refreshCertificates(countryId);
+        certificateGenerationPopup.countryId = countryId;
+        certificateGenerationPopup.connectAfterGeneration = true;
+        certificateGenerationPopup.open();
+    }
+
     Component.onCompleted: {
         BackEnd.applicationController.refreshSettings();
 
@@ -80,9 +87,10 @@ Item {
         onCertificateNotFound: {
             if (BackEnd.applicationSettings.isCertificateAutoGenerationEnabled && certificateCount < 5) {
                 BackEnd.certificateController.createNew(countryId);
+                showCertificateGenerationPopup(countryId);
+            } else {
+                showCertificateSelectionPopup(countryId, true);
             }
-
-            showCertificateSelectionPopup(countryId, true);
         }
     }
 
@@ -164,5 +172,9 @@ Item {
 
     CertificateSelectionPopup {
         id: certificateSelectionPopup
+    }
+
+    CertificateGenerationPopup {
+        id: certificateGenerationPopup
     }
 }

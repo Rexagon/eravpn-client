@@ -41,6 +41,14 @@
     </message>
 </context>
 <context>
+    <name>CertificateGenerationPopup</name>
+    <message>
+        <location filename="../components/certificateselection/CertificateGenerationPopup.qml" line="52"/>
+        <source>CertificateGeneration</source>
+        <translation>Initial config generation</translation>
+    </message>
+</context>
+<context>
     <name>CertificateListView</name>
     <message>
         <location filename="../components/certificateselection/CertificateListView.qml" line="64"/>
@@ -189,17 +197,17 @@ and safest way to connect to the internet</translation>
 <context>
     <name>MainView</name>
     <message>
-        <location filename="../views/MainView.qml" line="38"/>
+        <location filename="../views/MainView.qml" line="45"/>
         <source>Title</source>
         <translation>EraVPN</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="73"/>
+        <location filename="../views/MainView.qml" line="80"/>
         <source>CountriesRequestError</source>
         <translation>Unable to get countries list</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="97"/>
+        <location filename="../views/MainView.qml" line="105"/>
         <source>VpnError</source>
         <translation>Connection error occured</translation>
     </message>

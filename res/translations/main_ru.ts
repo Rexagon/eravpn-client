@@ -41,6 +41,14 @@
     </message>
 </context>
 <context>
+    <name>CertificateGenerationPopup</name>
+    <message>
+        <location filename="../components/certificateselection/CertificateGenerationPopup.qml" line="52"/>
+        <source>CertificateGeneration</source>
+        <translation type="unfinished">Генерация файла конфигурации</translation>
+    </message>
+</context>
+<context>
     <name>CertificateListView</name>
     <message>
         <location filename="../components/certificateselection/CertificateListView.qml" line="64"/>
@@ -189,17 +197,17 @@
 <context>
     <name>MainView</name>
     <message>
-        <location filename="../views/MainView.qml" line="38"/>
+        <location filename="../views/MainView.qml" line="45"/>
         <source>Title</source>
         <translation>EraVPN</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="73"/>
+        <location filename="../views/MainView.qml" line="80"/>
         <source>CountriesRequestError</source>
         <translation>Невозможно обновить список стран</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="97"/>
+        <location filename="../views/MainView.qml" line="105"/>
         <source>VpnError</source>
         <translation>Ошибка во время работы VPN</translation>
     </message>
@@ -324,7 +332,7 @@
     <message>
         <location filename="../views/ProfileView.qml" line="455"/>
         <source>YouHaveNoReferrals</source>
-        <translation>У Вас не рефералов</translation>
+        <translation>У Вас нет рефералов</translation>
     </message>
     <message>
         <location filename="../views/ProfileView.qml" line="123"/>
