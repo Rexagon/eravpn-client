@@ -39,6 +39,7 @@ void VpnConnection::start(const QString &countryId, const QString &password, con
     openvpn::ClientAPI::Config ovpnConfig;
     ovpnConfig.content = config.toUtf8().data();
     ovpnConfig.privateKeyPassword = password.toStdString();
+    ovpnConfig.connTimeout = 5;
 
     openvpn::ClientAPI::EvalConfig eval = client->eval_config(ovpnConfig);
 
