@@ -215,7 +215,7 @@ and safest way to connect to the internet</translation>
         <translation>Unable to create configuration file</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="125"/>
+        <location filename="../views/MainView.qml" line="120"/>
         <source>VpnError</source>
         <translation>Connection error occured</translation>
     </message>
@@ -639,12 +639,12 @@ once every</translation>
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="76"/>
+        <location filename="../main.qml" line="75"/>
         <source>AccountIsNotActivatedError</source>
         <translation>Account is not activated</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="78"/>
+        <location filename="../main.qml" line="77"/>
         <source>TariffLinkGenerationError</source>
         <translation>Tariff link generation error</translation>
     </message>

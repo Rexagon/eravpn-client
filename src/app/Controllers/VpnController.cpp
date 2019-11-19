@@ -50,6 +50,11 @@ void VpnController::start(const QString &countryId)
 {
     auto &settings = Settings::instance();
 
+    const auto start = [this, countryId](const QString &config) {
+        Settings::instance().setLastConnectedCountry(m_profile.id(), countryId);
+        m_vpnConnection.start(countryId, m_profile.ovpnConfigPassword(), config);
+    };
+
     auto savedCertificate = settings.countryCertificate(m_profile.id(), countryId);
     if (savedCertificate.has_value())
     {
@@ -57,7 +62,7 @@ void VpnController::start(const QString &countryId)
 
         if (file.open(QIODevice::ReadOnly | QIODevice::ExistingOnly))
         {
-            m_vpnConnection.start(countryId, m_profile.ovpnConfigPassword(), file.readAll());
+            start(file.readAll());
             return;
         }
     }
@@ -66,8 +71,8 @@ void VpnController::start(const QString &countryId)
 
     const auto errorHandler = [this](const QNetworkReply &) { emit m_vpnConnection.connectionErrorOccurred(); };
 
-    const auto downloadedConfigHandlerFactory = [this, countryId](const QString &id) {
-        return [this, id, countryId](QNetworkReply &reply) {
+    const auto downloadedConfigHandlerFactory = [this, start](const QString &id) {
+        return [this, id, start](QNetworkReply &reply) {
             QFile file{Settings::instance().createCertificatePath(id)};
 
             if (!file.open(QIODevice::WriteOnly))
@@ -80,7 +85,7 @@ void VpnController::start(const QString &countryId)
             file.write(data);
             file.close();
 
-            m_vpnConnection.start(countryId, m_profile.ovpnConfigPassword(), data);
+            start(data);
         };
     };
 
@@ -120,6 +125,18 @@ void VpnController::start(const QString &countryId)
     };
 
     m_connection.post(query::getCountryCertificates.prepare(countryId), configsRequestHandler, errorHandler);
+}
+
+
+void VpnController::startLastSaved()
+{
+    const auto lastConnectedCountry = Settings::instance().lastConnectedCountry(m_profile.id());
+    if (!lastConnectedCountry.has_value())
+    {
+        return;
+    }
+
+    start(*lastConnectedCountry);
 }
 
 

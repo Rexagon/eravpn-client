@@ -37,6 +37,9 @@ public:
                                const std::optional<QString> &certificateId);
     std::optional<CertificateData> countryCertificate(const QString &userId, const QString &countryId) const;
 
+    void setLastConnectedCountry(const QString &userId, const QString &countryId);
+    std::optional<QString> lastConnectedCountry(const QString &userId);
+
     void setCertificateAutoGenerationEnabled(const QString &userId, bool enabled);
     bool isCertificateAutoGenerationEnabled(const QString &userId) const;
 

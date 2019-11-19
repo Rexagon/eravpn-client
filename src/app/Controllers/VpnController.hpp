@@ -14,6 +14,7 @@ public:
     explicit VpnController(Connection &connection, Profile &profile, VpnConnection &vpnConnection);
 
     Q_INVOKABLE void start(const QString &countryId);
+    Q_INVOKABLE void startLastSaved();
     Q_INVOKABLE void stop();
 
 signals:

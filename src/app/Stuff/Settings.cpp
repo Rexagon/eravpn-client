@@ -14,6 +14,8 @@ constexpr auto REFRESH_TOKEN = "user/refreshToken";
 constexpr auto COUNTRY_CERTIFICATE_ID = "vpn/%1/certificate/%2/id";
 constexpr auto COUNTRY_CERTIFICATE_PATH = "vpn/%1/certificate/%2/path";
 
+constexpr auto LAST_CONNECTED_COUNTRY_ID = "vpn/%1/last";
+
 constexpr auto APPLICATION_LANGUAGE = "language";
 constexpr auto CERTIFICATE_AUTO_GENERATION = "vpn/%1/autogeneration";
 
@@ -119,6 +121,18 @@ std::optional<Settings::CertificateData> Settings::countryCertificate(const QStr
 }
 
 
+void Settings::setLastConnectedCountry(const QString &userId, const QString &countryId)
+{
+    set<QString>(m_settings, QString{LAST_CONNECTED_COUNTRY_ID}.arg(userId), countryId);
+}
+
+
+std::optional<QString> Settings::lastConnectedCountry(const QString &userId)
+{
+    return get<QString>(m_settings, QString{LAST_CONNECTED_COUNTRY_ID}.arg(userId));
+}
+
+
 void Settings::setCertificateAutoGenerationEnabled(const QString &userId, bool enabled)
 {
     set<bool>(m_settings, QString{CERTIFICATE_AUTO_GENERATION}.arg(userId), enabled);
@@ -136,11 +150,11 @@ void Settings::setLanguage(const QString &language)
     set<QString>(m_settings, APPLICATION_LANGUAGE, language);
 }
 
-
 std::optional<QString> Settings::getLanguage() const
 {
     return get<QString>(m_settings, APPLICATION_LANGUAGE);
 }
+
 
 QString Settings::createCertificatePath(const QString &certificateId)
 {

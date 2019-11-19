@@ -105,7 +105,7 @@ Item {
         hoverEnabled: true
 
         property bool mouseInCircle: {
-            if (!containsMouse || !component.activated) {
+            if (!containsMouse || BackEnd.vpnConnection.busy) {
                 return false;
             }
 
@@ -115,8 +115,14 @@ Item {
         }
 
         onClicked: {
-            if (mouseInCircle && BackEnd.vpnConnection.running) {
+            if (!mouseInCircle || BackEnd.vpnConnection.busy) {
+                return;
+            }
+
+            if (BackEnd.vpnConnection.running) {
                 BackEnd.vpnController.stop();
+            } else {
+                BackEnd.vpnController.startLastSaved();
             }
         }
     }
