@@ -31,7 +31,6 @@ ApplicationWindow
     width: 900
     height: 640
 
-    minimumWidth: 300
     flags: Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint | Qt.Window
 
     background: Rectangle {
@@ -249,7 +248,7 @@ ApplicationWindow
 
         z: 1000
 
-        width: 300
+        width: 0
         height: 0
 
         anchors.right: parent.right

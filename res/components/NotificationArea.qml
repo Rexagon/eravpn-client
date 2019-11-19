@@ -29,7 +29,6 @@ ListView {
     delegate: Notification {
         id: notification
 
-        Layout.fillWidth: true
         Layout.alignment: Qt.AlignTop
 
         uniqueId: modelUniqueId

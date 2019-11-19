@@ -2,7 +2,7 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.13
 
-Rectangle {
+Item {
     readonly property string darkRedColor: "#ee252e"
     readonly property string greenColor: "#0ed079"
 
@@ -16,60 +16,68 @@ Rectangle {
 
     id: notification
 
-    radius: 3
-    width: 300
     height: 40
 
-    color: success ? greenColor : darkRedColor
+    Rectangle {
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
 
-    Text {
-        anchors.fill: parent
-        anchors.margins: 10
+        radius: 3
 
-        verticalAlignment: Text.AlignVCenter
+        color: success ? greenColor : darkRedColor
 
-        id: titleLabel
+        width: titleLabel.width + 20
 
-        color: "white"
+        Text {
+            verticalAlignment: Text.AlignVCenter
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
 
-        font.family: rootUiFontRegular.name
-        font.pointSize: 12
-    }
+            id: titleLabel
 
-    MouseArea {
-        hoverEnabled: true
-        anchors.fill: parent
+            color: "white"
 
-        cursorShape: Qt.PointingHandCursor
-
-        onEntered: {
-            animation.stop();
-            notification.opacity = 100;
+            font.family: rootUiFontRegular.name
+            font.pointSize: 12
         }
 
-        onExited: {
-            animation.start();
-        }
-    }
+        MouseArea {
+            hoverEnabled: true
+            anchors.fill: parent
 
-    SequentialAnimation {
-        id: animation
+            cursorShape: Qt.PointingHandCursor
 
-        running: true
+            onEntered: {
+                animation.stop();
+                notification.opacity = 100;
+            }
 
-        PauseAnimation {
-            id: animationPause
-            duration: 1000
-        }
-
-        NumberAnimation {
-            target: notification
-            property: "opacity"
-
-            to: 0
-            duration: 500
+            onExited: {
+                animation.start();
+            }
         }
 
-        onFinished: destroyRequested()
+        SequentialAnimation {
+            id: animation
+
+            running: true
+
+            PauseAnimation {
+                id: animationPause
+                duration: 1000
+            }
+
+            NumberAnimation {
+                target: notification
+                property: "opacity"
+
+                to: 0
+                duration: 500
+            }
+
+            onFinished: destroyRequested()
+        }
     }
 }

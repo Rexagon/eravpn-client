@@ -44,18 +44,6 @@ Popup {
             }
         ]
 
-        Connections {
-            target: BackEnd.certificateController
-
-            onCertificateCreationError: {
-                if (BackEnd.profile.status === Profile.New) {
-                    notificationArea.notify(qsTr("UserIsNotVerified"))
-                } else {
-                    notificationArea.notify(qsTr("CertificateCreationError"))
-                }
-            }
-        }
-
         Text {
             id: titleLabel
 

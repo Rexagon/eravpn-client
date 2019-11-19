@@ -45,7 +45,7 @@
     <message>
         <location filename="../components/certificateselection/CertificateGenerationPopup.qml" line="56"/>
         <source>CertificateGeneration</source>
-        <translation type="unfinished">Генерация файла конфигурации</translation>
+        <translation>Генерация файла конфигурации</translation>
     </message>
 </context>
 <context>
@@ -59,22 +59,20 @@
 <context>
     <name>CertificateSelectionPopup</name>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="52"/>
         <source>UserIsNotVerified</source>
-        <translation>Пользователь не подтверждён</translation>
+        <translation type="vanished">Пользователь не подтверждён</translation>
+    </message>
+    <message>
+        <source>CertificateCreationError</source>
+        <translation type="vanished">Невозможно создать файл конфигурации</translation>
     </message>
     <message>
         <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="54"/>
-        <source>CertificateCreationError</source>
-        <translation>Невозможно создать файл конфигурации</translation>
-    </message>
-    <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="66"/>
         <source>ConfigurationFiles</source>
         <translation>Файлы конфигурации</translation>
     </message>
     <message>
-        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="147"/>
+        <location filename="../components/certificateselection/CertificateSelectionPopup.qml" line="135"/>
         <source>Generate</source>
         <translation>Сгенерировать</translation>
     </message>
@@ -207,7 +205,17 @@
         <translation>Невозможно обновить список стран</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="107"/>
+        <location filename="../views/MainView.qml" line="90"/>
+        <source>UserIsNotVerified</source>
+        <translation>Пользователь не подтверждён</translation>
+    </message>
+    <message>
+        <location filename="../views/MainView.qml" line="92"/>
+        <source>CertificateCreationError</source>
+        <translation>Невозможно создать файл конфигурации</translation>
+    </message>
+    <message>
+        <location filename="../views/MainView.qml" line="125"/>
         <source>VpnError</source>
         <translation>Ошибка во время работы VPN</translation>
     </message>

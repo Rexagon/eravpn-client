@@ -105,6 +105,7 @@ void VpnController::start(const QString &countryId)
             if (!configIdData.isString() || !configLinkData.isString() || !configCommentData.isString())
             {
                 emit m_vpnConnection.connectionErrorOccurred();
+                return;
             }
 
             if ((savedCertificate.has_value() && savedCertificate->id == configIdData.toString()) ||

@@ -82,6 +82,19 @@ Item {
     }
 
     Connections {
+        target: BackEnd.certificateController
+
+        onCertificateCreationError: {
+            certificateGenerationPopup.connectAfterGeneration = false;
+            if (BackEnd.profile.status === Profile.New) {
+                notificationArea.notify(qsTr("UserIsNotVerified"))
+            } else {
+                notificationArea.notify(qsTr("CertificateCreationError"))
+            }
+        }
+    }
+
+    Connections {
         target: BackEnd.vpnController
 
         onCertificateNotFound: {
