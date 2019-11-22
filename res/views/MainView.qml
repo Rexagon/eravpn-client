@@ -99,7 +99,6 @@ Item {
 
         onCertificateNotFound: {
             if (BackEnd.applicationSettings.isCertificateAutoGenerationEnabled &&
-                BackEnd.profile.status !== Profile.New &&
                 certificateCount < 5) {
                 BackEnd.certificateController.createNew(countryId);
                 showCertificateGenerationPopup(countryId);
@@ -171,17 +170,19 @@ Item {
                 }
             }
 
-            /*Item {
+            Item {
                 Layout.fillWidth: true
                 Layout.minimumHeight: 30
+
+                visible: BackEnd.profile.status === Profile.New
 
                 EraLabel {
                     anchors.fill: parent
                     anchors.leftMargin: 10
 
-                    text: "3651 человек онлайн на 350 серверах"
+                    text: qsTr("ConfirmYourEmail")
                 }
-            }*/
+            }
         }
     }
 

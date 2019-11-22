@@ -207,7 +207,7 @@
     <message>
         <location filename="../views/MainView.qml" line="90"/>
         <source>UserIsNotVerified</source>
-        <translation>Пользователь не подтверждён</translation>
+        <translation>Почта не подтверждена</translation>
     </message>
     <message>
         <location filename="../views/MainView.qml" line="92"/>
@@ -215,9 +215,14 @@
         <translation>Невозможно создать файл конфигурации</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="120"/>
+        <location filename="../views/MainView.qml" line="119"/>
         <source>VpnError</source>
         <translation>Ошибка во время работы VPN</translation>
+    </message>
+    <message>
+        <location filename="../views/MainView.qml" line="183"/>
+        <source>ConfirmYourEmail</source>
+        <translation>Подтвердите вашу почту</translation>
     </message>
 </context>
 <context>

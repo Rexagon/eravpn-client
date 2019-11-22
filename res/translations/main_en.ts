@@ -207,7 +207,7 @@ and safest way to connect to the internet</translation>
     <message>
         <location filename="../views/MainView.qml" line="90"/>
         <source>UserIsNotVerified</source>
-        <translation>User is not verified</translation>
+        <translation>Email is not verified</translation>
     </message>
     <message>
         <location filename="../views/MainView.qml" line="92"/>
@@ -215,9 +215,14 @@ and safest way to connect to the internet</translation>
         <translation>Unable to create configuration file</translation>
     </message>
     <message>
-        <location filename="../views/MainView.qml" line="120"/>
+        <location filename="../views/MainView.qml" line="119"/>
         <source>VpnError</source>
         <translation>Connection error occured</translation>
+    </message>
+    <message>
+        <location filename="../views/MainView.qml" line="183"/>
+        <source>ConfirmYourEmail</source>
+        <translation>Confirm your email</translation>
     </message>
 </context>
 <context>
