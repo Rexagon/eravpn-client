@@ -84,10 +84,14 @@ ListView {
                     return false;
                 }
 
+                if (BackEnd.certificateListModel.isGenerating || BackEnd.vpnConnection.busy) {
+                    return false;
+                }
+
                 const running = BackEnd.vpnConnection.running;
 
                 if (running && button.isCurrent) {
-                    return !BackEnd.vpnConnection.busy;
+                    return true;
                 } else {
                     return !running;
                 }

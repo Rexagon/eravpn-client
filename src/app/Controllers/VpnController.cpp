@@ -48,11 +48,24 @@ VpnController::VpnController(Connection &connection, Profile &profile, VpnConnec
 
 void VpnController::start(const QString &countryId)
 {
+    if (m_isStarting)
+    {
+        return;
+    }
+
+    m_isStarting = true;
+
     auto &settings = Settings::instance();
 
     const auto start = [this, countryId](const QString &config) {
+        m_isStarting = false;
         Settings::instance().setLastConnectedCountry(m_profile.id(), countryId);
         m_vpnConnection.start(countryId, m_profile.ovpnConfigPassword(), config);
+    };
+
+    const auto emitError = [this] {
+        m_isStarting = false;
+        emit m_vpnConnection.connectionErrorOccurred();
     };
 
     auto savedCertificate = settings.countryCertificate(m_profile.id(), countryId);
@@ -69,15 +82,15 @@ void VpnController::start(const QString &countryId)
 
     const auto hostName = QSysInfo::machineHostName();
 
-    const auto errorHandler = [this](const QNetworkReply &) { emit m_vpnConnection.connectionErrorOccurred(); };
+    const auto errorHandler = [emitError](const QNetworkReply &) { emitError(); };
 
-    const auto downloadedConfigHandlerFactory = [this, start](const QString &id) {
-        return [this, id, start](QNetworkReply &reply) {
+    const auto downloadedConfigHandlerFactory = [this, start, emitError](const QString &id) {
+        return [this, id, start, emitError](QNetworkReply &reply) {
             QFile file{Settings::instance().createCertificatePath(id)};
 
             if (!file.open(QIODevice::WriteOnly))
             {
-                emit m_vpnConnection.connectionErrorOccurred();
+                emitError();
                 return;
             }
 
@@ -89,14 +102,13 @@ void VpnController::start(const QString &countryId)
         };
     };
 
-    const auto configsRequestHandler = [this, hostName, countryId, savedCertificate,
+    const auto configsRequestHandler = [this, hostName, countryId, savedCertificate, emitError,
                                         downloadedConfigHandlerFactory](const QJsonDocument &reply) {
         const auto ovpnConfigFilesData = reply["data"]["client"]["getData"]["client"]["ovpnConfigFiles"]["data"];
 
         if (!ovpnConfigFilesData.isArray())
         {
-            emit m_vpnConnection.connectionErrorOccurred();
-            return;
+            emitError();
         }
 
         const auto ovpnConfigFiles = ovpnConfigFilesData.toArray();
@@ -109,7 +121,7 @@ void VpnController::start(const QString &countryId)
 
             if (!configIdData.isString() || !configLinkData.isString() || !configCommentData.isString())
             {
-                emit m_vpnConnection.connectionErrorOccurred();
+                emitError();
                 return;
             }
 
@@ -121,6 +133,7 @@ void VpnController::start(const QString &countryId)
             }
         }
 
+        m_isStarting = false;
         emit certificateNotFound(countryId, ovpnConfigFiles.size());
     };
 

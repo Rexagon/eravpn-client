@@ -24,6 +24,8 @@ private:
     Connection &m_connection;
     Profile &m_profile;
     VpnConnection &m_vpnConnection;
+
+    bool m_isStarting{false};
 };
 
 }  // namespace app
