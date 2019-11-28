@@ -3,7 +3,7 @@
 
 #include "VpnConnection.hpp"
 
-#include "../../Vpn/Client.hpp"
+#include "../../vpn/Client.hpp"
 
 namespace app
 {

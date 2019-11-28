@@ -8,7 +8,7 @@
 #include <QObject>
 #include <QTimer>
 
-#include "../../Vpn/Event.hpp"
+#include "../../vpn/Event.hpp"
 #include "Country.hpp"
 
 namespace app

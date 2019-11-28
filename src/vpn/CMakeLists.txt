@@ -61,3 +61,36 @@ if (WIN32)
         target_compile_options(vpn PRIVATE /bigobj)
     endif()
 endif ()
+
+if (APPLE)
+    find_library(corefoundation_lib CoreFoundation)
+    find_library(systemconfiguration_lib SystemConfiguration)
+    find_library(iokit_lib IOKit)
+
+    set(OPENVPN_INCLUDE_DIRS
+            $ENV{MBEDTLS_INCLUDE_DIR}
+            $ENV{ASIO_INCLUDE_DIR}
+            $ENV{LZ4_INCLUDE_DIR}
+            $ENV{OPENVPN_INCLUDE_DIR})
+
+    target_include_directories(vpn PUBLIC
+            ${OPENVPN_INCLUDE_DIRS}
+            ${CMAKE_CURRENT_SOURCE_DIR})
+
+    set(OPENVPN_LIBRARIES
+            $ENV{MBEDTLS_LIBRARY}
+            $ENV{LZ4_LIBRARY})
+
+    target_link_libraries(vpn PUBLIC
+            ${OPENVPN_LIBRARIES}
+            ${corefoundation_lib}
+            ${systemconfiguration_lib}
+            ${iokit_lib})
+
+    target_compile_definitions(vpn PUBLIC
+            USE_ASIO
+            ASIO_STANDALONE
+            USE_MBEDTLS
+            HAVE_LZ4
+            USE_TUN_BUILDER)
+endif()

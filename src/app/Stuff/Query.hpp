@@ -7,6 +7,7 @@
 #include <QString>
 
 #include "Helpers.hpp"
+#include "StringHelpers.hpp"
 
 namespace app
 {
