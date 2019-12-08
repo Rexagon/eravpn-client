@@ -41,7 +41,8 @@ set(SRC
 set(SRC_MOC MocTargets.hpp)
 
 qt5_add_resources(RESOURCES
-        ${CMAKE_SOURCE_DIR}/res/app.qrc)
+        ${CMAKE_SOURCE_DIR}/res/app.qrc
+        ${CMAKE_SOURCE_DIR}/res/flags.qrc)
 
 # Specific resource files
 if (WIN32)

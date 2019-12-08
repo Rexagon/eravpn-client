@@ -60,17 +60,6 @@
         <file>fonts/PT Root UI_Regular.ttf</file>
     </qresource>
     <qresource>
-        <file>images/flags/can.png</file>
-        <file>images/flags/deu.png</file>
-        <file>images/flags/est.png</file>
-        <file>images/flags/fin.png</file>
-        <file>images/flags/fra.png</file>
-        <file>images/flags/irl.png</file>
-        <file>images/flags/nld.png</file>
-        <file>images/flags/rus.png</file>
-        <file>images/flags/usa.png</file>
-    </qresource>
-    <qresource>
         <file>images/icon_arrow_left.png</file>
         <file>images/icon_alert.png</file>
         <file>images/icon_house.png</file>

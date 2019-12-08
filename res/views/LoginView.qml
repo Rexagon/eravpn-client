@@ -43,7 +43,7 @@ Item {
         const password = passwordInput.text;
 
         return identificatorInput.text.length > 0 &&
-                password.length > 0 && password.length <= 16;
+                password.length > 0 && password.length <= 32;
     }
 
     StackView.onActivating: {
