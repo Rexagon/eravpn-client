@@ -3,8 +3,6 @@
 
 #include "ProfileController.hpp"
 
-#include <iostream>
-
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -17,8 +15,10 @@ using namespace app;
 // clang-format off
 const auto checkAccessToken = QueryBuilder::createMutation()
     .addObject("accessToken")
-        .addUnion("checkAccessToken")
-            .addUnionVariant("Result")
+        .addUnion("refreshToken")
+            .addUnionVariant("ClientRefreshAccessToken")
+                .addItem<QString>("accessToken")
+                .addItem<QString>("refreshToken")
                 .addItem<bool>("success")
     .build();
 
@@ -145,7 +145,10 @@ void ProfileController::signInRemembered()
         emit signInErrorOccurred();
     };
 
-    const auto errorHandler = [emitConnectionError](const QNetworkReply &) { emitConnectionError(); };
+    const auto errorHandler = [this, emitConnectionError](const QNetworkReply &) {
+        m_connection.setRefreshTokenHeaderActive(false);
+        emitConnectionError();
+    };
 
     const auto clientDataHandler = [this, emitConnectionError](const QJsonDocument &reply) {
         const auto clientData = reply["data"]["client"]["getData"]["client"];
@@ -159,17 +162,25 @@ void ProfileController::signInRemembered()
         m_profile.signIn();
     };
 
+    m_connection.setRefreshTokenHeaderActive(true);
+
     m_connection.post(
         query::checkAccessToken.prepare(),
         [this, emitConnectionError, clientDataHandler, errorHandler](const QJsonDocument &reply) {
-            const auto resultData = reply["data"]["accessToken"]["checkAccessToken"];
+            const auto resultData = reply["data"]["accessToken"]["refreshToken"];
+            const auto accessTokenData = resultData["success"];
+            const auto refreshTokenData = resultData["success"];
             const auto success = resultData["success"].toBool(false);
 
-            if (!success)
+            if (!success || accessTokenData.isString() || refreshTokenData.isString())
             {
                 emitConnectionError();
                 return;
             }
+
+            m_connection.setRefreshTokenHeaderActive(false);
+            m_connection.setAuthorizationData(
+                Connection::AuthorizationData{accessTokenData.toString(), refreshTokenData.toString()});
 
             m_connection.post(query::getClientData.prepare(), clientDataHandler, errorHandler);
         },

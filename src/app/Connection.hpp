@@ -41,9 +41,13 @@ public:
     void setAuthorizationData(const AuthorizationData &data);
     void resetAuthorizationData();
 
+    void setRefreshTokenHeaderActive(bool active);
+
 private:
     QNetworkRequest m_baseRequest;
     std::optional<AuthorizationData> m_authorizationData{};
+
+    bool m_isRefreshTokenHeaderActive{false};
 
     QNetworkAccessManager m_networkManager{};
 };

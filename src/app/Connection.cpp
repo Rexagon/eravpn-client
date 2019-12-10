@@ -10,6 +10,9 @@ namespace
 {
 constexpr auto QUERY_CONTAINER = R"({"query":"%1","variables":{},"operationName":null})";
 
+constexpr auto ACCESS_TOKEN_HEADER = "AccessToken";
+constexpr auto REFRESH_TOKEN_HEADER = "RefreshToken";
+
 }  // namespace
 
 
@@ -101,14 +104,29 @@ void Connection::get(const QString &url,
 void Connection::setAuthorizationData(const Connection::AuthorizationData &data)
 {
     m_authorizationData = data;
-    m_baseRequest.setRawHeader("AccessToken", data.accessToken.toUtf8());
+    m_baseRequest.setRawHeader(ACCESS_TOKEN_HEADER, data.accessToken.toUtf8());
 }
 
 
 void Connection::resetAuthorizationData()
 {
     m_authorizationData.reset();
-    m_baseRequest.setRawHeader("AccessToken", "");
+    m_baseRequest.setRawHeader(ACCESS_TOKEN_HEADER, "");
+}
+
+
+void Connection::setRefreshTokenHeaderActive(bool active)
+{
+    m_isRefreshTokenHeaderActive = active;
+
+    if (active && m_authorizationData.has_value())
+    {
+        m_baseRequest.setRawHeader(REFRESH_TOKEN_HEADER, m_authorizationData->refreshToken.toUtf8());
+    }
+    else
+    {
+        m_baseRequest.setRawHeader(REFRESH_TOKEN_HEADER, "");
+    }
 }
 
 }  // namespace app
